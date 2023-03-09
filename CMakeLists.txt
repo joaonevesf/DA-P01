@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.23)
 project(P1)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 23)
 
-add_executable(P1 main.cpp)
+include_directories(include)
+
+add_executable(P1 main.cpp src/RailwayNetwork.cpp include/RailwayNetwork.h
+        src/FileManager.cpp include/FileManager.h src/RailwayManager.cpp include/RailwayManager.h
+        src/StationTrack.cpp include/StationTrack.h)
