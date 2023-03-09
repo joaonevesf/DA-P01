@@ -9,9 +9,6 @@ std::unordered_set<std::shared_ptr<Station>,StationHash,StationHashEquality> Rai
 }
 
 bool RailwayNetwork::addStation(std::shared_ptr<Station> station) {
-    if (station != nullptr)
-        return false;
-
     stationSet.insert(station);
     return true;
 }

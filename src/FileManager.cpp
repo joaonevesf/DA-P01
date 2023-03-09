@@ -5,6 +5,8 @@
 #include <sstream>
 #include <utility>
 
+#include <iostream>
+
 FileManager::FileManager(std::shared_ptr<RailwayNetwork> railwayNetwork)
     : railwayNetwork(std::move(railwayNetwork))
 {
@@ -29,7 +31,7 @@ bool FileManager::readStations(std::string filepath) {
     std::string line;
 
     while(std::getline(file_reader, current_line)) {
-        if (stations_read.find(current_line) == stations_read.end() || current_line.empty()) {
+        if (stations_read.find(current_line) != stations_read.end() || current_line.empty()) {
             continue;
         }
 

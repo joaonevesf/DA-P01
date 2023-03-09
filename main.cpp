@@ -11,6 +11,7 @@ int main() {
     FileManager fm(rm);
 
     std::cout << fm.readStations("../Project1Data/stations.csv");
+    std::cout << rm->getStationSet().size() << std::endl;
 
     return 0;
 }
