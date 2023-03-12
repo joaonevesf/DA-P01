@@ -27,7 +27,8 @@ public:
     void setVisited(bool visited);
     void setDist(double dist);
     void setPath(std::shared_ptr<Track>path);
-    std::shared_ptr<Track> addTrack(std::shared_ptr<Station> dest, double w);
+
+    std::shared_ptr<Track> addTrack(std::shared_ptr<Station> dest, std::string service, double w);
     bool removeTrack(std::shared_ptr<Station> station_dest);
 
     const std::string &getName() const;
@@ -70,14 +71,15 @@ protected:
 
 class Track {
 public:
-    Track(Station* orig, std::shared_ptr<Station> dest, int c);
+    Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity);
 
     std::shared_ptr<Station> getDest() const;
-    int getCapacity() const;
+    double getCapacity() const;
     bool isSelected() const;
     std::shared_ptr<Station> getOrig() const;
     std::shared_ptr<Track> getReverse() const;
     double getFlow() const;
+    std::string getService() const;
 
     void setSelected(bool selected);
     void setReverse(std::shared_ptr<Track> reverse);
@@ -86,7 +88,7 @@ public:
 protected:
     std::string service;
     std::shared_ptr<Station> dest;
-    int capacity;
+    double capacity;
 
     bool selected = false;
 

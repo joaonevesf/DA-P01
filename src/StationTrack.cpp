@@ -8,10 +8,12 @@ Station::Station(std::string name, std::string district, std::string municipalit
         : name(std::move(name)), district(std::move(district)), municipality(std::move(municipality)),
           township(std::move(township)), line(std::move(line)) {}
 
-std::shared_ptr<Track> Station::addTrack(std::shared_ptr<Station> dest, double w) {
-    auto newTrack = std::make_shared<Track>(this, dest, w);
+std::shared_ptr<Track> Station::addTrack(std::shared_ptr<Station> dest, std::string service, double w) {
+    auto newTrack = std::make_shared<Track>(this, dest, service, w);
+
     adj.push_back(newTrack);
     dest->incoming.push_back(newTrack);
+
     return newTrack;
 }
 
@@ -116,13 +118,17 @@ void Station::setLine(const std::string &line) {
 
 // ********************************* Track *********************************
 
-Track::Track(Station* orig, std::shared_ptr<Station> dest, int c): orig(std::shared_ptr<Station>(orig)), dest(dest), capacity(c) {}
+Track::Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity)
+    : orig(std::shared_ptr<Station>(orig)), dest(dest), service(service), capacity(capacity) 
+{
+
+}
 
 std::shared_ptr<Station> Track::getDest() const {
     return this->dest;
 }
 
-int Track::getCapacity() const {
+double Track::getCapacity() const {
     return this->capacity;
 }
 
@@ -140,6 +146,10 @@ bool Track::isSelected() const {
 
 double Track::getFlow() const {
     return flow;
+}
+
+std::string Track::getService() const {
+    return service;
 }
 
 void Track::setSelected(bool selected) {

@@ -13,20 +13,20 @@ bool RailwayNetwork::addStation(std::shared_ptr<Station> station) {
     return true;
 }
 
-bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, double w) {
+bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w) {
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
-    station_src->addTrack(station_dest, w);
+    station_src->addTrack(station_dest, service, w);
     return true;
 }
 
-bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, double w) {
+bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w) {
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
-    auto e1 = station_src->addTrack(station_dest, w);
-    auto e2 = station_dest->addTrack(station_src, w);
+    auto e1 = station_src->addTrack(station_dest, service, w);
+    auto e2 = station_dest->addTrack(station_src, service, w);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;

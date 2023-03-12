@@ -92,7 +92,7 @@ bool FileManager::readNetworkEdges(std::string filepath) {
         std::shared_ptr<Station> station_left = *(this->railwayNetwork->getStationSet().find(station_left_mock));
         std::shared_ptr<Station> station_right = *(this->railwayNetwork->getStationSet().find(station_right_mock));
 
-        this->railwayNetwork->addTrack(station_left, station_right, std::stoi(capacity_string));
+        this->railwayNetwork->addTrack(station_left, station_right, service, std::stod(capacity_string));
     }
 
     return true;
