@@ -13,7 +13,7 @@ bool RailwayNetwork::addStation(std::shared_ptr<Station> station) {
     return true;
 }
 
-bool RailwayNetwork::addEdge(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, double w) {
+bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, double w) {
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
@@ -21,7 +21,7 @@ bool RailwayNetwork::addEdge(std::shared_ptr<Station> station_src, std::shared_p
     return true;
 }
 
-bool RailwayNetwork::addBidirectionalEdge(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, double w) {
+bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, double w) {
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 

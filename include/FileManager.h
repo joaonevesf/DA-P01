@@ -12,6 +12,8 @@ public:
 
     bool readStations(std::string filepath);
     bool readNetworkEdges(std::string filepath);
+
+    bool readAll(std::string stations_file, std::string network_file);
 private:
     std::shared_ptr<RailwayNetwork> railwayNetwork;
 };
