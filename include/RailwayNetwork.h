@@ -35,12 +35,16 @@ public:
 
     int getNumVertex() const;
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> getStationSet() const;
+
+    bool bfs(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    void edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+
 protected:
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
 
+    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
 };
 
 void deleteMatrix(int **m, int n);

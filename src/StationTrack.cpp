@@ -164,6 +164,6 @@ void Track::setFlow(double flow) {
     this->flow = flow;
 }
 
-void Track::setCapacity(int c) {
+void Track::setCapacity(double c) {
     this->capacity = capacity;
 }

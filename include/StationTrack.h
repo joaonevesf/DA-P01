@@ -84,7 +84,7 @@ public:
     void setSelected(bool selected);
     void setReverse(std::shared_ptr<Track> reverse);
     void setFlow(double flow);
-    void setCapacity(int capacity);
+    void setCapacity(double capacity);
 protected:
     std::string service;
     std::shared_ptr<Station> dest;

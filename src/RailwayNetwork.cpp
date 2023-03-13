@@ -75,32 +75,32 @@ void RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, co
             reverse->setFlow(0);
             track->setReverse(reverse);
             reverse->setReverse(track);
-            reverse->setIsReverse(true);
+            reverse->setSelected(true);
         }
     }
-    while(bfs(source,target)) {
+    while(bfs(station_src,station_dest)) {
         double minRes = INF;
-        Vertex* currVertex = findVertex(target);
-        while(currVertex->getId() != source) {
-            Edge* path = currVertex->getPath();
-            minRes = std::min(minRes,path->getWeight()-path->getFlow());
-            currVertex = path->getOrig();
+        std::shared_ptr<Station> currStation = station_dest;
+        while(currStation != station_src) {
+            std::shared_ptr<Track> path = currStation->getPath();
+            minRes = std::min(minRes, path->getCapacity() - path->getFlow());
+            currStation = path->getOrig();
         }
-        currVertex = findVertex(target);
-        while(currVertex->getId() != source) {
-            Edge* path = currVertex->getPath();
-            if(path->isReverse()) {
+        currStation = station_dest;
+        while(currStation != station_src) {
+            std::shared_ptr<Track> path = currStation->getPath();
+            if(path->isSelected()) {
                 auto originalEdge = path->getReverse();
                 originalEdge->setFlow(originalEdge->getFlow() - minRes);
-                path->setWeight(path->getWeight() - minRes);
+                path->setCapacity(path->getCapacity() - minRes);
                 path->setFlow(0);
             }
             else {
                 auto reverse = path->getReverse();
                 path->setFlow((path->getFlow() + minRes));
-                reverse->setWeight(reverse->getWeight() + minRes);
+                reverse->setCapacity(reverse->getCapacity() + minRes);
             }
-            currVertex = path->getOrig();
+            currStation = path->getOrig();
         }
     }
 }
