@@ -67,7 +67,7 @@ bool RailwayNetwork::bfs(const std::shared_ptr<Station>& station_src, const std:
     return false;
 }
 
-void RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
+double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
     for(auto station : stationSet) {
         for(auto track : station->getAdj()) {
             track->setFlow(0);
@@ -78,6 +78,7 @@ void RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, co
             reverse->setSelected(true);
         }
     }
+
     while(bfs(station_src,station_dest)) {
         double minRes = INF;
         std::shared_ptr<Station> currStation = station_dest;
@@ -103,4 +104,12 @@ void RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, co
             currStation = path->getOrig();
         }
     }
+
+    double result = 0;
+
+    for(const std::shared_ptr<Track> &t: station_dest->getIncoming()) {
+        result += t->getFlow();
+    }
+
+    return result;
 }
