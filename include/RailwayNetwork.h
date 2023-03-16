@@ -26,8 +26,6 @@ struct StationHashEquality {
 
 class RailwayNetwork {
 public:
-    ~RailwayNetwork();
-
     bool addStation(std::shared_ptr<Station> station);
 
     bool addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w);
@@ -44,14 +42,10 @@ public:
     static void updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
 protected:
-
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
 };
-
-void deleteMatrix(int **m, int n);
-void deleteMatrix(double **m, int n);
 
 #endif
