@@ -62,7 +62,7 @@ bool FileManager::readNetworkEdges(std::string filepath) {
         return false;
     }
 
-    std::set<std::string> edges_read;
+    std::set<std::string> tracks_read;
 
     std::string current_line;
     std::getline(file_reader, current_line);
@@ -73,18 +73,17 @@ bool FileManager::readNetworkEdges(std::string filepath) {
     std::string service;
 
     while (std::getline(file_reader, current_line)) {
-        if (current_line.empty()) {
+        if (tracks_read.find(current_line) != tracks_read.end() || current_line.empty()) {
             continue;
         }
 
+        tracks_read.insert(current_line);
         std::istringstream iss(current_line);
 
         std::getline(iss, station_a, ',');
         std::getline(iss, station_b, ',');
         std::getline(iss, capacity_string, ',');
         std::getline(iss, service, ',');
-
-        std::cout << current_line << std::endl;
 
         std::shared_ptr<Station> station_left_mock = std::make_shared<Station>(station_a, "", "", "", "");
         std::shared_ptr<Station> station_right_mock = std::make_shared<Station>(station_b, "", "", "", "");

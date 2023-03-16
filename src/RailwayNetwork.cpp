@@ -103,8 +103,8 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
         double minRes = findMinResidual(station_src, station_dest);
         updatePath(station_src, station_dest, minRes);
     }
-    double result = 0;
 
+    double result = 0;
     for(const std::shared_ptr<Track> &t: station_dest->getIncoming()) {
         result += t->getFlow();
     }
