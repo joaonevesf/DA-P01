@@ -9,6 +9,7 @@
 #include <memory>
 #include <tuple>
 #include <unordered_set>
+#include <stack>
 
 #include "StationTrack.h"
 
@@ -41,11 +42,16 @@ public:
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
     static void updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
+    void deactivateTrack(const std::shared_ptr<Track> &track);
+    void deactivateStation(const std::shared_ptr<Station> &station);
+    void undoLastDeletion();
+    void undoAllDeletions();
 protected:
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
-    double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
+    std::stack<std::shared_ptr<Track>> inactiveTracks;
+    std::stack<std::shared_ptr<Station>> inactiveStations;
+    std::stack<char> deletionRecord;
 };
 
 #endif

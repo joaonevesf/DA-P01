@@ -28,8 +28,8 @@ public:
     void setDist(double dist);
     void setPath(std::shared_ptr<Track>path);
 
-    std::shared_ptr<Track> addTrack(std::shared_ptr<Station> dest, std::string service, double w);
-    bool removeTrack(std::shared_ptr<Station> station_dest);
+    std::shared_ptr<Track> addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w);
+    bool removeTrack(const std::shared_ptr<Station>& station_dest);
 
     const std::string &getName() const;
 
@@ -61,6 +61,13 @@ protected:
     std::vector<std::shared_ptr<Track>> adj;
 
     bool visited = false;
+    bool active = true;
+public:
+    bool isActive() const;
+
+    void setActive(bool active);
+
+protected:
     double dist = 0;
     std::shared_ptr<Track>parent_path = nullptr;
 
@@ -91,6 +98,13 @@ protected:
     double capacity;
 
     bool selected = false;
+    bool active = true;
+public:
+    bool isActive() const;
+
+    void setActive(bool active);
+
+protected:
 
     // used for bidirectional edges
     std::shared_ptr<Station> orig;

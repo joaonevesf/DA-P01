@@ -33,7 +33,7 @@ bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src,
 }
 
 void RailwayNetwork::testAndVisit(std::queue<std::shared_ptr<Station>> &queue,std::shared_ptr<Track> track, const std::shared_ptr<Station>& station, double residual) {
-    if(!station->isVisited() && residual > 0) {
+    if(!station->isVisited() && residual > 0 && track->isActive() && station->isActive()) {
         station->setVisited(true);
         station->setPath(std::move(track));
         queue.push(station);
@@ -94,7 +94,7 @@ void RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std
 }
 
 double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
-    if(station_src == nullptr || station_dest == nullptr || station_src == station_dest) {
+    if(station_src == nullptr || station_dest == nullptr || station_src == station_dest || !station_src->isActive() || !station_dest->isActive()) {
         throw std::logic_error("Invalid source and/or target station");
     }
     for(const auto& station : stationSet) {
@@ -112,3 +112,49 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
     }
     return result;
 }
+
+void RailwayNetwork::deactivateTrack(const std::shared_ptr<Track>& track) {
+    if(track == nullptr) {
+        throw std::logic_error("Invalid track");
+    }
+    track->setActive(false);
+    inactiveTracks.push(track);
+    deletionRecord.push(0);
+}
+
+void RailwayNetwork::deactivateStation(const std::shared_ptr<Station>& station) {
+    if(station == nullptr) {
+        throw std::logic_error("Invalid station");
+    }
+    station->setActive(false);
+    inactiveStations.push(station);
+    deletionRecord.push(1);
+}
+
+void RailwayNetwork::undoLastDeletion() {
+    if(deletionRecord.empty()) return;
+    if(deletionRecord.top()) {
+        inactiveStations.pop();
+        inactiveStations.top()->setActive(true);
+    }
+    else {
+        inactiveTracks.top()->setActive(true);
+        inactiveTracks.pop();
+    }
+    deletionRecord.pop();
+}
+
+void RailwayNetwork::undoAllDeletions() {
+    while(!inactiveTracks.empty()) {
+        inactiveTracks.top()->setActive(true);
+        inactiveTracks.pop();
+    }
+    while(!inactiveStations.empty()) {
+        inactiveStations.pop();
+        inactiveStations.top()->setActive(true);
+    }
+    while(!deletionRecord.empty())
+        deletionRecord.pop();
+}
+
+
