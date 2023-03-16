@@ -93,7 +93,7 @@ void RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std
     }
 }
 
-void RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
+double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
     for(const auto& station : stationSet) {
         for(const auto& track : station->getAdj()) {
             track->setFlow(0);
@@ -103,4 +103,11 @@ void RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, co
         double minRes = findMinResidual(station_src, station_dest);
         updatePath(station_src, station_dest, minRes);
     }
+    double result = 0;
+
+    for(const std::shared_ptr<Track> &t: station_dest->getIncoming()) {
+        result += t->getFlow();
+    }
+
+    return result;
 }

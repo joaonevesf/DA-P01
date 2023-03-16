@@ -37,7 +37,7 @@ public:
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> getStationSet() const;
 
     bool findAugmentingPath(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
-    void edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, std::shared_ptr<Track> track,
                       const std::shared_ptr<Station>& station, double residual);
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
