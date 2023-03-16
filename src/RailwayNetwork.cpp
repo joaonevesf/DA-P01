@@ -94,6 +94,9 @@ void RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std
 }
 
 double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
+    if(station_src == nullptr || station_dest == nullptr || station_src == station_dest) {
+        throw std::logic_error("Invalid source and/or target vertex");
+    }
     for(const auto& station : stationSet) {
         for(const auto& track : station->getAdj()) {
             track->setFlow(0);
@@ -103,11 +106,9 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
         double minRes = findMinResidual(station_src, station_dest);
         updatePath(station_src, station_dest, minRes);
     }
-
     double result = 0;
     for(const std::shared_ptr<Track> &t: station_dest->getIncoming()) {
         result += t->getFlow();
     }
-
     return result;
 }
