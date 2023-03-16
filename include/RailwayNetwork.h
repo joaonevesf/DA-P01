@@ -36,14 +36,18 @@ public:
     int getNumVertex() const;
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> getStationSet() const;
 
-    bool bfs(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    bool findAugmentingPath(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     void edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, std::shared_ptr<Track> track,
+                      const std::shared_ptr<Station>& station, double residual);
+    static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
+    static void updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
 protected:
+
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
 };
 
