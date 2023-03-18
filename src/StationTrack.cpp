@@ -8,13 +8,22 @@ Station::Station(std::string name, std::string district, std::string municipalit
         : name(std::move(name)), district(std::move(district)), municipality(std::move(municipality)),
           township(std::move(township)), line(std::move(line)) {}
 
-std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w) {
-    auto newTrack = std::make_shared<Track>(this, dest, service, w);
+std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost) {
+    auto newTrack = std::make_shared<Track>(this, dest, service, w, cost);
 
     adj.push_back(newTrack);
     dest->incoming.push_back(newTrack);
 
     return newTrack;
+}
+
+
+std::vector<Station *> Station::getMultipleParentsPath() const {
+    return this->multiple_parents_path;
+}
+
+void Station::clearMultipleParentsPath() {
+    this->multiple_parents_path.clear();
 }
 
 bool Station::removeTrack(const std::shared_ptr<Station>& station_dest) {
@@ -126,8 +135,8 @@ void Station::setActive(bool active) {
 
 // ********************************* Track *********************************
 
-Track::Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity)
-    : orig(std::shared_ptr<Station>(orig)), dest(dest), service(service), capacity(capacity)
+Track::Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost)
+    : orig(std::shared_ptr<Station>(orig)), dest(dest), service(service), capacity(capacity), cost(cost)
 {
 
 }
@@ -182,4 +191,12 @@ bool Track::isActive() const {
 
 void Track::setActive(bool active) {
     Track::active = active;
+}
+
+int Track::getCost() const {
+    return cost;
+}
+
+void Track::setCost(int cost) {
+    Track::cost = cost;
 }

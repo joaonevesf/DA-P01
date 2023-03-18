@@ -29,23 +29,31 @@ class RailwayNetwork {
 public:
     bool addStation(std::shared_ptr<Station> station);
 
-    bool addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w);
-    bool addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w);
+    bool addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost);
+    bool addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost);
 
     int getNumVertex() const;
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> getStationSet() const;
 
-    bool findAugmentingPath(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    bool findAugmentingPathBFS(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    bool findAugmentingPathDijkstra(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, std::shared_ptr<Track> track,
                       const std::shared_ptr<Station>& station, double residual);
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
-    static void updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
+    static int updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
     void deactivateTrack(const std::shared_ptr<Track> &track);
     void deactivateStation(const std::shared_ptr<Station> &station);
     void undoLastDeletion();
     void undoAllDeletions();
+
+    void clearNetworkUtils();
+
+    void stationsInConnectedPath(Station *station_src, Station *station_dest);
+    int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest);
+
+    void resetFlow();
 protected:
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 

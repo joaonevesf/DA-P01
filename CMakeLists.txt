@@ -7,4 +7,5 @@ include_directories(include)
 
 add_executable(P1 main.cpp src/RailwayNetwork.cpp include/RailwayNetwork.h
         src/FileManager.cpp include/FileManager.h src/RailwayManager.cpp include/RailwayManager.h
-        src/StationTrack.cpp include/StationTrack.h)
+        src/StationTrack.cpp include/StationTrack.h
+        include/MutablePriorityQueue.h)

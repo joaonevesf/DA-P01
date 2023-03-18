@@ -1,4 +1,10 @@
 #include "RailwayNetwork.h"
+#include "MutablePriorityQueue.h"
+
+bool operator<(const std::shared_ptr<Station> &s1, const std::shared_ptr<Station> &s2) {
+    return s1->getDist() < s2->getDist();
+}
+
 
 int RailwayNetwork::getNumVertex() const {
     return stationSet.size();
@@ -13,20 +19,20 @@ bool RailwayNetwork::addStation(std::shared_ptr<Station> station) {
     return true;
 }
 
-bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w) {
+bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost) {
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
-    station_src->addTrack(station_dest, service, w);
+    station_src->addTrack(station_dest, service, w, cost);
     return true;
 }
 
-bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w) {
+bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost) {
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
-    auto e1 = station_src->addTrack(station_dest, service, w);
-    auto e2 = station_dest->addTrack(station_src, service, w);
+    auto e1 = station_src->addTrack(station_dest, service, w, cost);
+    auto e2 = station_dest->addTrack(station_src, service, w, cost);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
@@ -40,10 +46,11 @@ void RailwayNetwork::testAndVisit(std::queue<std::shared_ptr<Station>> &queue,st
     }
 }
 
-bool RailwayNetwork::findAugmentingPath(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
+bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
     for(const auto& station : stationSet) {
         station->setVisited(false);
     }
+
     std::queue<std::shared_ptr<Station>> queue;
     queue.push(station_src);
     station_src->setVisited(true);
@@ -58,6 +65,90 @@ bool RailwayNetwork::findAugmentingPath(const std::shared_ptr<Station>& station_
         }
     }
     return station_dest->isVisited();
+}
+
+void RailwayNetwork::clearNetworkUtils() {
+    for(const auto &station: this->stationSet) {
+        station->setVisited(false);
+        station->setDist(INF);
+        
+        if(station->getMultipleParentsPath().size() > 0) {
+            station->clearMultipleParentsPath();
+        }
+    }
+}
+
+
+
+void RailwayNetwork::stationsInConnectedPath(Station *station_src, Station *station_dest) {
+    this->clearNetworkUtils();
+
+    std::queue<Station *> stations;
+    stations.push(station_src);
+    while(!stations.empty()) {
+        Station *u = stations.front();
+        stations.pop();
+
+        for(std::shared_ptr<Track> &t: u->getAdj()) {
+            Station *v = t->getDest().get();
+            if(!v->isVisited()) {
+                stations.push(v);
+                
+                v->setVisited(true);
+                v->getMultipleParentsPath().push_back(u);
+            }
+        }
+    }
+}
+
+bool RailwayNetwork::findAugmentingPathDijkstra(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest) {
+    MutablePriorityQueue<Station> stations_per_dist;
+
+    this->stationsInConnectedPath(station_src.get(), station_dest.get());
+
+    // Encontrar os nós do componente ligado entre source e sink
+    std::queue<Station *> stations;
+    stations.push(station_dest.get());
+
+    while(!stations.empty()) {
+        Station *s = stations.front();
+
+        if(s != station_src.get()) {
+            s->setDist(INF);
+        } else {
+            s->setDist(0);
+        }
+        stations_per_dist.insert(s);
+
+        for(Station *v: s->getMultipleParentsPath()) {
+            if(!v->isVisited()) {
+                stations.push(v);
+            } 
+        }
+        
+        stations.pop();
+    }
+
+    while(!stations_per_dist.empty()) {
+        Station *u = stations_per_dist.extractMin();
+        u->setVisited(true);
+
+        if(u == station_dest.get()) {
+            return true;
+        }
+
+        for(std::shared_ptr<Track> &t: u->getAdj()) {
+            Station *v = t->getDest().get();
+            if(!v->isVisited() && v->getDist() > u->getDist() + t->getCost()) {
+                v->setDist(u->getDist() + t->getCost());
+                v->setPath(t);
+                stations_per_dist.decreaseKey(t->getDest().get());
+            }
+        }
+
+    }
+
+    return false;
 }
 
 double RailwayNetwork::findMinResidual(const std::shared_ptr<Station>& station_src, std::shared_ptr<Station> station_dest) {
@@ -77,11 +168,15 @@ double RailwayNetwork::findMinResidual(const std::shared_ptr<Station>& station_s
     return minRes;
 }
 
-void RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std::shared_ptr<Station> station_dest, double minRes) {
+int RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std::shared_ptr<Station> station_dest, double minRes) {
+    int cost = 0;
+
     std::shared_ptr<Station> currStation = std::move(station_dest);
     while(currStation != station_src) {
         std::shared_ptr<Track> path = currStation->getPath();
         double flow = path->getFlow();
+        cost += (path->getCost()) * minRes;
+
         if(path->getDest() == currStation) {
             path->setFlow(flow + minRes);
             currStation = path->getOrig();
@@ -91,32 +186,56 @@ void RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std
             currStation = path->getDest();
         }
     }
+
+    return cost;
+}
+
+void RailwayNetwork::resetFlow() {
+    for(const auto& station : stationSet) {
+        for(const auto& track : station->getAdj()) {
+            track->setFlow(0);
+        }
+    }
 }
 
 double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
     if(station_src == nullptr || station_dest == nullptr || station_src == station_dest || !station_src->isActive() || !station_dest->isActive()) {
         throw std::logic_error("Invalid source and/or target station");
     }
-    for(const auto& station : stationSet) {
-        for(const auto& track : station->getAdj()) {
-            track->setFlow(0);
-        }
-    }
-    while(findAugmentingPath(station_src, station_dest)) {
+
+    this->resetFlow();
+
+    while(findAugmentingPathBFS(station_src, station_dest)) {
         double minRes = findMinResidual(station_src, station_dest);
         updatePath(station_src, station_dest, minRes);
     }
+
     double result = 0;
     for(const std::shared_ptr<Track> &t: station_dest->getIncoming()) {
         result += t->getFlow();
     }
+
     return result;
+}
+
+int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest) {
+    int cost = 0;
+
+    this->resetFlow();
+
+    while(findAugmentingPathDijkstra(src, dest)) {
+        double minFlow = findMinResidual(src, dest);
+        int cost = updatePath(src, dest, minFlow);
+    }
+
+    return cost;
 }
 
 void RailwayNetwork::deactivateTrack(const std::shared_ptr<Track>& track) {
     if(track == nullptr) {
         throw std::logic_error("Invalid track");
     }
+
     track->setActive(false);
     inactiveTracks.push(track);
     deletionRecord.push(0);
@@ -126,6 +245,7 @@ void RailwayNetwork::deactivateStation(const std::shared_ptr<Station>& station) 
     if(station == nullptr) {
         throw std::logic_error("Invalid station");
     }
+
     station->setActive(false);
     inactiveStations.push(station);
     deletionRecord.push(1);
@@ -133,6 +253,7 @@ void RailwayNetwork::deactivateStation(const std::shared_ptr<Station>& station) 
 
 void RailwayNetwork::undoLastDeletion() {
     if(deletionRecord.empty()) return;
+
     if(deletionRecord.top()) {
         inactiveStations.pop();
         inactiveStations.top()->setActive(true);
@@ -141,6 +262,7 @@ void RailwayNetwork::undoLastDeletion() {
         inactiveTracks.top()->setActive(true);
         inactiveTracks.pop();
     }
+
     deletionRecord.pop();
 }
 
@@ -149,10 +271,12 @@ void RailwayNetwork::undoAllDeletions() {
         inactiveTracks.top()->setActive(true);
         inactiveTracks.pop();
     }
+
     while(!inactiveStations.empty()) {
         inactiveStations.pop();
         inactiveStations.top()->setActive(true);
     }
+
     while(!deletionRecord.empty())
         deletionRecord.pop();
 }
