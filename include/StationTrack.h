@@ -18,17 +18,23 @@ class Station {
 public:
     Station(std::string name, std::string district, std::string municipality, std::string township, std::string line);
 
+    bool operator<(const Station &s2) const {
+        return this->dist < s2.getDist();
+    }
+
     std::vector<std::shared_ptr<Track>> getAdj() const;
     bool isVisited() const;
     double getDist() const;
     std::shared_ptr<Track>getPath() const;
     std::vector<std::shared_ptr<Track>> getIncoming() const;
 
+    unsigned int queueIndex;
+
     void setVisited(bool visited);
     void setDist(double dist);
     void setPath(std::shared_ptr<Track>path);
 
-    std::shared_ptr<Track> addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w);
+    std::shared_ptr<Track> addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost);
     bool removeTrack(const std::shared_ptr<Station>& station_dest);
 
     const std::string &getName() const;
@@ -50,7 +56,13 @@ public:
     const std::string &getLine() const;
 
     void setLine(const std::string &line);
+    
+    bool isActive() const;
 
+    void setActive(bool active);
+
+    std::vector<Station *> getMultipleParentsPath() const;
+    void clearMultipleParentsPath();
 protected:
     std::string name;
     std::string district;
@@ -59,15 +71,8 @@ protected:
     std::string line;
 
     std::vector<std::shared_ptr<Track>> adj;
+    std::vector<std::shared_ptr<Track>> incoming;
 
-    bool visited = false;
-    bool active = true;
-public:
-    bool isActive() const;
-
-    void setActive(bool active);
-
-protected:
     double dist = 0;
     int originalConectivity;
 public:
@@ -78,14 +83,17 @@ public:
 protected:
     std::shared_ptr<Track>parent_path = nullptr;
 
-    std::vector<std::shared_ptr<Track>> incoming;
+    std::vector<Station *> multiple_parents_path;
+
+    bool visited = false;
+    bool active = true;
 };
 
 // ********************************* Track *********************************
 
 class Track {
 public:
-    Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity);
+    Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost);
 
     std::shared_ptr<Station> getDest() const;
     double getCapacity() const;
@@ -99,10 +107,15 @@ public:
     void setReverse(std::shared_ptr<Track> reverse);
     void setFlow(double flow);
     void setCapacity(double capacity);
+
+    int getCost() const;
+    void setCost(int cost);
+
 protected:
     std::string service;
     std::shared_ptr<Station> dest;
     double capacity;
+    int cost;
 
     bool selected = false;
     bool active = true;

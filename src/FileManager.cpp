@@ -71,6 +71,7 @@ bool FileManager::readNetworkEdges(std::string filepath) {
     std::string station_b;
     std::string capacity_string;
     std::string service;
+    int cost;
 
     while (std::getline(file_reader, current_line)) {
         if (tracks_read.find(current_line) != tracks_read.end() || current_line.empty()) {
@@ -85,13 +86,15 @@ bool FileManager::readNetworkEdges(std::string filepath) {
         std::getline(iss, capacity_string, ',');
         std::getline(iss, service, ',');
 
+        cost = (service == "STANDARD") ? 2 : 4;
+
         std::shared_ptr<Station> station_left_mock = std::make_shared<Station>(station_a, "", "", "", "");
         std::shared_ptr<Station> station_right_mock = std::make_shared<Station>(station_b, "", "", "", "");
 
         std::shared_ptr<Station> station_left = *(this->railwayNetwork->getStationSet().find(station_left_mock));
         std::shared_ptr<Station> station_right = *(this->railwayNetwork->getStationSet().find(station_right_mock));
 
-        this->railwayNetwork->addTrack(station_left, station_right, service, std::stod(capacity_string));
+        this->railwayNetwork->addTrack(station_left, station_right, service, std::stod(capacity_string), cost);
     }
 
     return true;
