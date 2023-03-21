@@ -74,11 +74,11 @@ protected:
     std::vector<std::shared_ptr<Track>> incoming;
 
     double dist = 0;
-    int originalConectivity;
+    int totalCapacity;
 public:
-    int getOriginalConectivity() const;
+    int getTotalCapacity() const;
 
-    void setOriginalConectivity(int originalConectivity);
+    void setTotalCapacity(int totalCapacity);
 
 protected:
     std::shared_ptr<Track>parent_path = nullptr;

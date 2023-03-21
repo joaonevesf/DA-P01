@@ -286,17 +286,18 @@ std::shared_ptr<Station> RailwayNetwork::mostAffectedStation() {
     double minCon = INF;
     for (auto station : stationSet) {
         if(station->isActive()) {
-            int connectivity = 0;
+            double capacity = 0;
             for (auto edge : station->getAdj()) {
                 if(edge->isActive() && edge->getDest()->isActive())
-                    connectivity++;
+                    capacity += edge->getCapacity();
             }
             for (auto edge : station->getIncoming()) {
                 if(edge->isActive() && edge->getOrig()->isActive())
-                    connectivity++;
+                    capacity += edge->getCapacity();
             }
-            if(((double)connectivity)/station->getOriginalConectivity() < minCon) {
+            if(capacity/station->getTotalCapacity() < minCon) {
                 minConStation = station;
+                minCon = capacity/station->getTotalCapacity();
             }
         }
     }

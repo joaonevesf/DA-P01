@@ -13,8 +13,8 @@ std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, c
 
     adj.push_back(newTrack);
     dest->incoming.push_back(newTrack);
-    originalConectivity = originalConectivity+1;
-    dest->originalConectivity = dest->originalConectivity+1;
+    originalTotalCapacity += cost;
+    dest->originalTotalCapacity += cost;
     return newTrack;
 }
 
@@ -134,13 +134,15 @@ void Station::setActive(bool active) {
     Station::active = active;
 }
 
-int Station::getOriginalConectivity() const {
-    return originalConectivity;
+int Station::getTotalCapacity() const {
+    return totalCapacity;
 }
 
-void Station::setOriginalConectivity(int originalConectivity) {
-    Station::originalConectivity = originalConectivity;
+void Station::setTotalCapacity(int totalCapacity) {
+    Station::totalCapacity = totalCapacity;
 }
+
+
 
 // ********************************* Track *********************************
 
