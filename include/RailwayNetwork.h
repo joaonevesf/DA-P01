@@ -46,11 +46,14 @@ public:
     void deactivateStation(const std::shared_ptr<Station> &station);
     void undoLastDeletion();
     void undoAllDeletions();
-protected:
-    std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
+    std::shared_ptr<Station> mostAffectedStation();
+protected:
+
+    std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
     std::stack<std::shared_ptr<Track>> inactiveTracks;
     std::stack<std::shared_ptr<Station>> inactiveStations;
+
     std::stack<char> deletionRecord;
 };
 

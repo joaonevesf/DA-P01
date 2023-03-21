@@ -69,6 +69,13 @@ public:
 
 protected:
     double dist = 0;
+    int originalConectivity;
+public:
+    int getOriginalConectivity() const;
+
+    void setOriginalConectivity(int originalConectivity);
+
+protected:
     std::shared_ptr<Track>parent_path = nullptr;
 
     std::vector<std::shared_ptr<Track>> incoming;
