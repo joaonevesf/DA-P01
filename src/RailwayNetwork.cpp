@@ -322,3 +322,24 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
     return res;
 }
 
+std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> RailwayNetwork::mostUsedPairsStations() {
+    std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> res;
+    double maxFlow = -1;
+    for (const auto & stationA : stationSet)
+        for (const auto & stationB : stationSet) {
+            if (stationA == stationB)
+                continue;
+
+            std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>> stationPair {stationA, stationB};
+            double currentFlow = edmondsKarp(stationA, stationB);
+            if (currentFlow > maxFlow) {
+                maxFlow = currentFlow;
+                res.clear();
+                res.insert(stationPair);
+            }
+            else if (currentFlow == maxFlow && res.find(stationPair) == res.end())
+                res.insert(stationPair);
+        }
+    return res;
+}
+
