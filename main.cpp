@@ -13,6 +13,8 @@ int main() {
     fm.readAll("../Project1Data/stations.csv", "../Project1Data/network.csv");
     //std::cout << rm->getStationSet().size() << std::endl;
 
+    //auto test = rm->mostUsedPairsStations();
+
     auto stationSet = rm->getStationSet();
     auto viana = std::make_shared<Station>("Viana do Castelo","","","","");
     auto station = stationSet.find(viana);

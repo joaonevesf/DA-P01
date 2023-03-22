@@ -325,9 +325,12 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
 std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> RailwayNetwork::mostUsedPairsStations() {
     std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> res;
     double maxFlow = -1;
-    for (const auto & stationA : stationSet)
-        for (const auto & stationB : stationSet) {
-            if (stationA == stationB)
+    for (const auto & stationA : stationSet) {
+        if (!stationA->isActive())
+            continue;
+
+        for (const auto& stationB : stationSet) {
+            if (!stationB->isActive() || stationA == stationB)
                 continue;
 
             std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>> stationPair {stationA, stationB};
@@ -340,6 +343,7 @@ std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> RailwayN
             else if (currentFlow == maxFlow && res.find(stationPair) == res.end())
                 res.insert(stationPair);
         }
+    }
     return res;
 }
 
