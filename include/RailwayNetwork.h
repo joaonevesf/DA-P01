@@ -55,7 +55,7 @@ public:
 
     void resetFlow();
 
-    std::shared_ptr<Station> mostAffectedStation();
+    std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
 protected:
 
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;

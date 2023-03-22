@@ -13,8 +13,8 @@ std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, c
 
     adj.push_back(newTrack);
     dest->incoming.push_back(newTrack);
-    originalTotalCapacity += cost;
-    dest->originalTotalCapacity += cost;
+    totalCapacity += w;
+    dest->totalCapacity += w;
     return newTrack;
 }
 
@@ -140,6 +140,15 @@ int Station::getTotalCapacity() const {
 
 void Station::setTotalCapacity(int totalCapacity) {
     Station::totalCapacity = totalCapacity;
+}
+
+double Station::getLostRatio() const {
+    return lostRatio;
+}
+
+
+void Station::setLostRatio(double lostRatio) {
+    Station::lostRatio = lostRatio;
 }
 
 

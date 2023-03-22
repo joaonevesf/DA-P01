@@ -56,29 +56,37 @@ public:
     const std::string &getLine() const;
 
     void setLine(const std::string &line);
-    
+
     bool isActive() const;
 
     void setActive(bool active);
 
     std::vector<Station *> getMultipleParentsPath() const;
     void clearMultipleParentsPath();
+
+    int getTotalCapacity() const;
+    void setTotalCapacity(int totalCapacity);
+
+    double getLostRatio() const;
+    void setLostRatio(double lostRatio);
 protected:
     std::string name;
     std::string district;
     std::string municipality;
     std::string township;
+
     std::string line;
-
     std::vector<std::shared_ptr<Track>> adj;
-    std::vector<std::shared_ptr<Track>> incoming;
 
+    std::vector<std::shared_ptr<Track>> incoming;
     double dist = 0;
     int totalCapacity;
-public:
-    int getTotalCapacity() const;
 
-    void setTotalCapacity(int totalCapacity);
+    double lostRatio;
+public:
+
+public:
+
 
 protected:
     std::shared_ptr<Track>parent_path = nullptr;

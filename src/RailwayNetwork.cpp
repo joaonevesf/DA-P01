@@ -281,26 +281,44 @@ void RailwayNetwork::undoAllDeletions() {
         deletionRecord.pop();
 }
 
-std::shared_ptr<Station> RailwayNetwork::mostAffectedStation() {
-    std::shared_ptr<Station> minConStation;
-    double minCon = INF;
-    for (auto station : stationSet) {
+class Compare {
+public:
+    bool operator()(const std::shared_ptr<Station>& a, const std::shared_ptr<Station>& b)
+    {
+        return a->getLostRatio() > b->getLostRatio();
+    }
+};
+
+
+
+std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k) {
+    std::priority_queue<std::shared_ptr<Station>,std::vector<std::shared_ptr<Station>>,Compare> queue;
+    for (const auto& station : stationSet) {
         if(station->isActive()) {
-            double capacity = 0;
-            for (auto edge : station->getAdj()) {
-                if(edge->isActive() && edge->getDest()->isActive())
-                    capacity += edge->getCapacity();
+            double lostCapacity = 0;
+            for (const auto& edge : station->getAdj()) {
+                if(!edge->isActive() || !edge->getDest()->isActive())
+                    lostCapacity += edge->getCapacity();
             }
-            for (auto edge : station->getIncoming()) {
-                if(edge->isActive() && edge->getOrig()->isActive())
-                    capacity += edge->getCapacity();
+            for (const auto& edge : station->getIncoming()) {
+                if(!edge->isActive() || !edge->getOrig()->isActive())
+                    lostCapacity += edge->getCapacity();
             }
-            if(capacity/station->getTotalCapacity() < minCon) {
-                minConStation = station;
-                minCon = capacity/station->getTotalCapacity();
+            station->setLostRatio(((double)lostCapacity)/station->getTotalCapacity());
+            if(queue.size() < k) {
+                queue.push(station);
+            }
+            else if (queue.top()->getLostRatio() < station->getLostRatio()) {
+                queue.pop();
+                queue.push(station);
             }
         }
     }
-    return minConStation;
+    std::vector<std::shared_ptr<Station>> res(k);
+    for(int i = 0; i < k; i++) {
+        res[k - i - 1] = queue.top();
+        queue.pop();
+    }
+    return res;
 }
 
