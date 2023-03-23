@@ -80,15 +80,10 @@ protected:
 
     std::vector<std::shared_ptr<Track>> incoming;
     double dist = 0;
-    int totalCapacity;
+
 
     double lostRatio;
-public:
 
-public:
-
-
-protected:
     std::shared_ptr<Track>parent_path = nullptr;
 
     std::vector<Station *> multiple_parents_path;

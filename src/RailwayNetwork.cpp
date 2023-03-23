@@ -296,15 +296,18 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
     for (const auto& station : stationSet) {
         if(station->isActive()) {
             double lostCapacity = 0;
+            double totalCapacity = 0;
             for (const auto& edge : station->getAdj()) {
+                totalCapacity += edge->getCapacity();
                 if(!edge->isActive() || !edge->getDest()->isActive())
                     lostCapacity += edge->getCapacity();
             }
             for (const auto& edge : station->getIncoming()) {
+                totalCapacity += edge->getCapacity();
                 if(!edge->isActive() || !edge->getOrig()->isActive())
                     lostCapacity += edge->getCapacity();
             }
-            station->setLostRatio(((double)lostCapacity)/station->getTotalCapacity());
+            station->setLostRatio(lostCapacity/totalCapacity);
             if(queue.size() < k) {
                 queue.push(station);
             }
