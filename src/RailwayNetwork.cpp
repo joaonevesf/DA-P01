@@ -1,6 +1,8 @@
 #include "RailwayNetwork.h"
 #include "MutablePriorityQueue.h"
 
+#include <iostream>
+
 bool operator<(const std::shared_ptr<Station> &s1, const std::shared_ptr<Station> &s2) {
     return s1->getDist() < s2->getDist();
 }
@@ -95,7 +97,7 @@ void RailwayNetwork::stationsInConnectedPath(Station *station_src, Station *stat
                 stations.push(v);
                 
                 v->setVisited(true);
-                v->getMultipleParentsPath().push_back(u);
+                v->addToMultipleParents(u);
             }
         }
     }
@@ -239,6 +241,36 @@ void RailwayNetwork::deactivateTrack(const std::shared_ptr<Track>& track) {
     track->setActive(false);
     inactiveTracks.push(track);
     deletionRecord.push(0);
+}
+
+double RailwayNetwork::maxTrainsTo(const std::shared_ptr<Station> &dest) {
+    double result = 0; 
+    std::shared_ptr<Station> mockSource = std::make_shared<Station>();
+
+    connectSourceNodesTo(mockSource.get());
+    result = edmondsKarp(mockSource, dest);
+
+    mockSource->getAdj().clear();
+
+    return result;
+}
+
+void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
+    for(auto station: this->stationSet) {
+        if(station->getIncoming().size() == 0) {
+            mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0);
+            continue;
+        }
+
+        if(station->getIncoming().size() == 1) {
+            Track *reverse_track = station->getIncoming().at(0).get();
+            for(auto track: station->getAdj()) {
+                if(track->getDest().get() == reverse_track->getOrig().get() && track->getOrig().get() == reverse_track->getDest().get()) {
+                    mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0);
+                }
+            }
+        }
+    }
 }
 
 void RailwayNetwork::deactivateStation(const std::shared_ptr<Station>& station) {
