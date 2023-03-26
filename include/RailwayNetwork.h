@@ -43,6 +43,11 @@ public:
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
     static int updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
+    double maxTrainsTo(const std::shared_ptr<Station> &dest);
+    void connectSourceNodesTo(Station *mock_source);
+
+    void eraseEdgesFromMockSource(Station *mock_source);
+
     void deactivateTrack(const std::shared_ptr<Track> &track);
     void deactivateStation(const std::shared_ptr<Station> &station);
     void undoLastDeletion();

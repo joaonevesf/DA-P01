@@ -17,6 +17,7 @@ class Track;
 class Station {
 public:
     Station(std::string name, std::string district, std::string municipality, std::string township, std::string line);
+    Station() = default;
 
     bool operator<(const Station &s2) const {
         return this->dist < s2.getDist();
@@ -61,7 +62,7 @@ public:
 
     void setActive(bool active);
 
-    std::vector<Station *> getMultipleParentsPath() const;
+    [[nodiscard]] std::vector<Station *> getMultipleParentsPath() const;
     void clearMultipleParentsPath();
 
     int getTotalCapacity() const;
@@ -69,6 +70,8 @@ public:
 
     double getLostRatio() const;
     void setLostRatio(double lostRatio);
+
+    void addToMultipleParents(Station *newStationToAdd);
 protected:
     std::string name;
     std::string district;
@@ -83,7 +86,6 @@ protected:
 
 
     double lostRatio;
-
     std::shared_ptr<Track>parent_path = nullptr;
 
     std::vector<Station *> multiple_parents_path;
