@@ -1,0 +1,1 @@
+/usr/bin/clang++ -g CMakeFiles/P1.dir/main.cpp.o CMakeFiles/P1.dir/src/RailwayNetwork.cpp.o CMakeFiles/P1.dir/src/FileManager.cpp.o CMakeFiles/P1.dir/src/RailwayManager.cpp.o CMakeFiles/P1.dir/src/StationTrack.cpp.o -o P1 

@@ -12,6 +12,7 @@
 #include <stack>
 
 #include "StationTrack.h"
+#include "MutablePriorityQueue.h"
 
 struct StationHash {
     std::size_t operator()(std::shared_ptr<Station> const& station) const noexcept {
@@ -59,6 +60,8 @@ public:
     int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest);
 
     void resetFlow();
+
+    bool testAndVisitDijkstra(std::queue<Station *> &queue, std::shared_ptr<Track> track, Station* u, Station* v, double residual, bool isDest = false);
 
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
 protected:

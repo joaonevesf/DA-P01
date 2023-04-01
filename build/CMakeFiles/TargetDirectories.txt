@@ -1,0 +1,3 @@
+/home/tomaspalma/DA-P01/build/CMakeFiles/P1.dir
+/home/tomaspalma/DA-P01/build/CMakeFiles/edit_cache.dir
+/home/tomaspalma/DA-P01/build/CMakeFiles/rebuild_cache.dir

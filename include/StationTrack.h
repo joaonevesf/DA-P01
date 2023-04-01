@@ -84,12 +84,26 @@ protected:
     std::vector<std::shared_ptr<Track>> incoming;
     double dist = 0;
 
+    bool inPath = false;
+public:
+    bool isInPath() const;
+
+    void setInPath(bool inPath);
+
+protected:
 
     double lostRatio;
     std::shared_ptr<Track>parent_path = nullptr;
 
     std::vector<Station *> multiple_parents_path;
 
+    bool considered = false;
+public:
+    bool isConsidered() const;
+
+    void setConsidered(bool considered);
+
+protected:
     bool visited = false;
     bool active = true;
 };
@@ -107,6 +121,12 @@ public:
     std::shared_ptr<Track> getReverse() const;
     double getFlow() const;
     std::string getService() const;
+
+    bool visited = false;
+
+    bool isVisited() const;
+
+    void setVisited(bool visited);
 
     void setSelected(bool selected);
     void setReverse(std::shared_ptr<Track> reverse);

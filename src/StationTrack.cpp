@@ -145,7 +145,21 @@ void Station::setLostRatio(double lostRatio) {
     Station::lostRatio = lostRatio;
 }
 
+bool Station::isInPath() const {
+    return inPath;
+}
 
+void Station::setInPath(bool inPath) {
+    Station::inPath = inPath;
+}
+
+bool Station::isConsidered() const {
+    return considered;
+}
+
+void Station::setConsidered(bool considered) {
+    Station::considered = considered;
+}
 
 // ********************************* Track *********************************
 
@@ -213,4 +227,12 @@ int Track::getCost() const {
 
 void Track::setCost(int cost) {
     Track::cost = cost;
+}
+
+bool Track::isVisited() const {
+    return visited;
+}
+
+void Track::setVisited(bool visited) {
+    Track::visited = visited;
 }

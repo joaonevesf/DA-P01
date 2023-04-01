@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/tomaspalma/DA-P01/build",
+  "command": "/usr/bin/clang++  -I/home/tomaspalma/DA-P01/include -g -std=gnu++2b -o CMakeFiles/P1.dir/main.cpp.o -c /home/tomaspalma/DA-P01/main.cpp",
+  "file": "/home/tomaspalma/DA-P01/main.cpp",
+  "output": "CMakeFiles/P1.dir/main.cpp.o"
+},
+{
+  "directory": "/home/tomaspalma/DA-P01/build",
+  "command": "/usr/bin/clang++  -I/home/tomaspalma/DA-P01/include -g -std=gnu++2b -o CMakeFiles/P1.dir/src/RailwayNetwork.cpp.o -c /home/tomaspalma/DA-P01/src/RailwayNetwork.cpp",
+  "file": "/home/tomaspalma/DA-P01/src/RailwayNetwork.cpp",
+  "output": "CMakeFiles/P1.dir/src/RailwayNetwork.cpp.o"
+},
+{
+  "directory": "/home/tomaspalma/DA-P01/build",
+  "command": "/usr/bin/clang++  -I/home/tomaspalma/DA-P01/include -g -std=gnu++2b -o CMakeFiles/P1.dir/src/FileManager.cpp.o -c /home/tomaspalma/DA-P01/src/FileManager.cpp",
+  "file": "/home/tomaspalma/DA-P01/src/FileManager.cpp",
+  "output": "CMakeFiles/P1.dir/src/FileManager.cpp.o"
+},
+{
+  "directory": "/home/tomaspalma/DA-P01/build",
+  "command": "/usr/bin/clang++  -I/home/tomaspalma/DA-P01/include -g -std=gnu++2b -o CMakeFiles/P1.dir/src/RailwayManager.cpp.o -c /home/tomaspalma/DA-P01/src/RailwayManager.cpp",
+  "file": "/home/tomaspalma/DA-P01/src/RailwayManager.cpp",
+  "output": "CMakeFiles/P1.dir/src/RailwayManager.cpp.o"
+},
+{
+  "directory": "/home/tomaspalma/DA-P01/build",
+  "command": "/usr/bin/clang++  -I/home/tomaspalma/DA-P01/include -g -std=gnu++2b -o CMakeFiles/P1.dir/src/StationTrack.cpp.o -c /home/tomaspalma/DA-P01/src/StationTrack.cpp",
+  "file": "/home/tomaspalma/DA-P01/src/StationTrack.cpp",
+  "output": "CMakeFiles/P1.dir/src/StationTrack.cpp.o"
+}
+]
