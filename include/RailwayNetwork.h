@@ -61,6 +61,8 @@ public:
     void stationsInConnectedPath(Station *station_src, Station *station_dest);
     int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest);
 
+    bool testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* u, Station* v, double residual, bool isDest);
+
     void resetFlow();
 
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);

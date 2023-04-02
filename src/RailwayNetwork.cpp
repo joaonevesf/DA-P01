@@ -70,33 +70,13 @@ bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& stati
 }
 
 void RailwayNetwork::clearNetworkUtils() {
-    for(const auto &station: this->stationSet) {
+    for(auto &station: this->stationSet) {
         station->setVisited(false);
         station->setDist(INF);
-        
+        station->setIsInPath(false);
+
         if(station->getMultipleParentsPath().size() > 0) {
             station->clearMultipleParentsPath();
-        }
-    }
-}
-
-void RailwayNetwork::stationsInConnectedPath(Station *station_src, Station *station_dest) {
-    this->clearNetworkUtils();
-
-    std::queue<Station *> stations;
-    stations.push(station_src);
-    while(!stations.empty()) {
-        Station *u = stations.front();
-        stations.pop();
-
-        for(std::shared_ptr<Track> &t: u->getAdj()) {
-            Station *v = t->getDest().get();
-            if(!v->isVisited()) {
-                stations.push(v);
-                
-                v->setVisited(true);
-                v->addToMultipleParents(u);
-            }
         }
     }
 }
@@ -104,31 +84,42 @@ void RailwayNetwork::stationsInConnectedPath(Station *station_src, Station *stat
 bool RailwayNetwork::findAugmentingPathDijkstra(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest) {
     MutablePriorityQueue<Station> stations_per_dist;
 
-    this->stationsInConnectedPath(station_src.get(), station_dest.get());
+    this->clearNetworkUtils();
 
-    // Encontrar os nós do componente ligado entre source e sink
+    station_src->setDist(0); station_src->setVisited(true); station_src->setIsInPath(true);
+
     std::queue<Station *> stations;
-    stations.push(station_dest.get());
+    stations.push(station_src.get());
+    stations_per_dist.insert(station_src.get());
 
+    // Encontrar os nós que vão poder ser encontrados no caminho
     while(!stations.empty()) {
-        Station *s = stations.front();
-
-        if(s != station_src.get()) {
-            s->setDist(INF);
-        } else {
-            s->setDist(0);
-        }
-        stations_per_dist.insert(s);
-
-        for(Station *v: s->getMultipleParentsPath()) {
-            if(!v->isVisited()) {
-                stations.push(v);
-            } 
-        }
-        
+        Station *currStation = stations.front();
         stations.pop();
+
+        for (const auto &track: currStation->getAdj()) {
+            if (testAndVisitDijkstra(stations, track, currStation, track->getDest().get(),
+                                     track->getCapacity() - track->getFlow(), track->getDest().get() == station_dest.get())) {
+                stations_per_dist.insert(track->getDest().get());
+                track->getDest().get()->setIsInPath(true);
+            }
+        }
+
+        for (const auto &track: currStation->getIncoming()) {
+            if (testAndVisitDijkstra(stations, track, currStation, track->getOrig().get(), track->getFlow(), track->getOrig().get() == station_dest.get())) {
+                stations_per_dist.insert(track->getOrig().get());
+                track->getOrig()->setIsInPath(true);
+            }
+        }
     }
 
+    if(!station_dest->isInPath()) return false;
+
+    for(auto &s: this->stationSet) {
+        s->setVisited(false);
+    }
+
+    // Encontrar o caminho mais curto
     while(!stations_per_dist.empty()) {
         Station *u = stations_per_dist.extractMin();
         u->setVisited(true);
@@ -137,18 +128,29 @@ bool RailwayNetwork::findAugmentingPathDijkstra(const std::shared_ptr<Station> &
             return true;
         }
 
-        for(std::shared_ptr<Track> &t: u->getAdj()) {
+        for(auto &t: u->getAdj()) {
+            if(t->getCapacity() - t->getFlow() == 0) continue;
             Station *v = t->getDest().get();
+            if(!v->isInPath()) continue;
+
             if(!v->isVisited() && v->getDist() > u->getDist() + t->getCost()) {
                 v->setDist(u->getDist() + t->getCost());
                 v->setPath(t);
-                stations_per_dist.decreaseKey(t->getDest().get());
+                stations_per_dist.decreaseKey(v);
             }
         }
 
-    }
+        for(auto &t: u->getIncoming()) {
+            Station *v = t->getOrig().get();
+            if(v->isInPath() && t->getFlow() > 0 && v->getDist() > u->getDist() + t->getCost()) {
+                v->setPath(t);
+                v->setDist(u->getDist() + t->getCost());
+                stations_per_dist.decreaseKey(v);
+            }
+        }
+    }    
 
-    return false;
+    return true;
 }
 
 double RailwayNetwork::findMinResidual(const std::shared_ptr<Station>& station_src, std::shared_ptr<Station> station_dest) {
@@ -221,11 +223,36 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
 int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest) {
     int cost = 0;
 
+    std::shared_ptr<Station> real_src = *(this->stationSet.find(src));
+    std::shared_ptr<Station> real_dest = *(this->stationSet.find(dest));
+
+    this->clearNetworkUtils();
     this->resetFlow();
 
-    while(findAugmentingPathDijkstra(src, dest)) {
-        double minFlow = findMinResidual(src, dest);
-        int cost = updatePath(src, dest, minFlow);
+    while(findAugmentingPathDijkstra(real_src, real_dest)) {
+        std::cout << "jiofwsfig\n";
+        double minFlow = findMinResidual(real_src, real_dest);
+        updatePath(real_src, real_dest, minFlow);
+    }
+
+    for(auto &s: this->stationSet) {
+        s->setVisited(false);
+    }
+
+    std::queue<Station *> stations;
+    stations.push(real_src.get());
+
+    while(!stations.empty()) {
+        Station* currStation = stations.front();
+        stations.pop();
+
+        for(const auto& track : currStation->getAdj()) {
+            cost += (track->getCost() * track->getFlow());
+            if(!track->getDest()->isVisited()) {
+                stations.push(track->getDest().get());
+                track->getDest()->setVisited(true);
+            }
+        }
     }
 
     return cost;
@@ -269,6 +296,22 @@ void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
             }
         }
     }
+}
+
+bool RailwayNetwork::testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* u, Station* v, double residual, bool isDest) {
+
+    if((!v->isVisited() && !v->isInPath() && residual > 0 && track->isActive())) {
+        queue.push(v);
+        v->setVisited(true);
+
+        return true;
+    } else if(isDest && residual > 0) {
+        if(!v->isVisited()) queue.push(v);
+
+        return true;
+    }
+
+    return false;
 }
 
 void RailwayNetwork::connectSinkNodesTo(Station *mock_sink) {

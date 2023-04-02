@@ -145,6 +145,14 @@ void Station::setLostRatio(double lostRatio) {
     Station::lostRatio = lostRatio;
 }
 
+bool Station::isInPath() const {
+    return inPath;
+}
+
+void Station::setIsInPath(bool isInPath) {
+    Station::inPath = isInPath;
+}
+
 
 
 // ********************************* Track *********************************

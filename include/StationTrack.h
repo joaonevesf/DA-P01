@@ -76,6 +76,12 @@ protected:
     std::string name;
     std::string district;
     std::string municipality;
+public:
+    bool isInPath() const;
+
+    void setIsInPath(bool isInPath);
+
+protected:
     std::string township;
 
     std::string line;
@@ -91,6 +97,7 @@ protected:
 
     std::vector<Station *> multiple_parents_path;
 
+    bool inPath = false;
     bool visited = false;
     bool active = true;
 };
