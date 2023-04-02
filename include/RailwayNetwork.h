@@ -10,6 +10,8 @@
 #include <tuple>
 #include <unordered_set>
 #include <stack>
+#include <set>
+#include <map>
 
 #include "StationTrack.h"
 
@@ -43,6 +45,12 @@ public:
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
     static int updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
+    double maxTrainsTo(const std::shared_ptr<Station> &dest);
+    void connectSourceNodesTo(Station *mock_source);
+    void connectSinkNodesTo(Station *mock_sink);
+
+    void eraseEdgesFromMockSource(Station *mock_source);
+
     void deactivateTrack(const std::shared_ptr<Track> &track);
     void deactivateStation(const std::shared_ptr<Station> &station);
     void undoLastDeletion();
@@ -56,6 +64,8 @@ public:
     void resetFlow();
 
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
+    std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> mostUsedPairsStations();
+    std::vector<std::pair<std::string, double>> topRegionsByNeeds(int k, bool isDistrict);
 protected:
 
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;

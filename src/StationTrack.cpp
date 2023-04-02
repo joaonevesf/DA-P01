@@ -25,6 +25,10 @@ void Station::clearMultipleParentsPath() {
     this->multiple_parents_path.clear();
 }
 
+void Station::addToMultipleParents(Station *newStationToAdd) {
+    this->multiple_parents_path.push_back(newStationToAdd);
+}
+
 bool Station::removeTrack(const std::shared_ptr<Station>& station_dest) {
     bool removeTrack = false;
     auto it = adj.begin();
