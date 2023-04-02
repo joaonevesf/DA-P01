@@ -117,6 +117,10 @@ public:
     int getCost() const;
     void setCost(int cost);
 
+    bool isActive() const;
+
+    void setActive(bool active);
+
 protected:
     std::string service;
     std::shared_ptr<Station> dest;
@@ -125,12 +129,6 @@ protected:
 
     bool selected = false;
     bool active = true;
-public:
-    bool isActive() const;
-
-    void setActive(bool active);
-
-protected:
 
     // used for bidirectional edges
     std::shared_ptr<Station> orig;

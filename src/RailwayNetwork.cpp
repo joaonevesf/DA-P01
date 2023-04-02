@@ -2,6 +2,7 @@
 #include "MutablePriorityQueue.h"
 
 #include <iostream>
+#include <map>
 
 bool operator<(const std::shared_ptr<Station> &s1, const std::shared_ptr<Station> &s2) {
     return s1->getDist() < s2->getDist();
@@ -52,7 +53,6 @@ bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& stati
     for(const auto& station : stationSet) {
         station->setVisited(false);
     }
-
     std::queue<std::shared_ptr<Station>> queue;
     queue.push(station_src);
     station_src->setVisited(true);
@@ -79,8 +79,6 @@ void RailwayNetwork::clearNetworkUtils() {
         }
     }
 }
-
-
 
 void RailwayNetwork::stationsInConnectedPath(Station *station_src, Station *station_dest) {
     this->clearNetworkUtils();
@@ -273,6 +271,13 @@ void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
     }
 }
 
+void RailwayNetwork::connectSinkNodesTo(Station *mock_sink) {
+    for (auto station : this->stationSet) {
+        if (station->getAdj().size() == 0)
+            mock_sink->addTrack(station, "", std::numeric_limits<double>::max(), 0);
+    }
+}
+
 void RailwayNetwork::deactivateStation(const std::shared_ptr<Station>& station) {
     if(station == nullptr) {
         throw std::logic_error("Invalid station");
@@ -313,7 +318,7 @@ void RailwayNetwork::undoAllDeletions() {
         deletionRecord.pop();
 }
 
-class Compare {
+class CompareByLostRatio {
 public:
     bool operator()(const std::shared_ptr<Station>& a, const std::shared_ptr<Station>& b)
     {
@@ -321,10 +326,8 @@ public:
     }
 };
 
-
-
 std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k) {
-    std::priority_queue<std::shared_ptr<Station>,std::vector<std::shared_ptr<Station>>,Compare> queue;
+    std::priority_queue<std::shared_ptr<Station>,std::vector<std::shared_ptr<Station>>,CompareByLostRatio> queue;
     for (const auto& station : stationSet) {
         if(station->isActive()) {
             double lostCapacity = 0;
@@ -379,3 +382,69 @@ std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> RailwayN
     return res;
 }
 
+class CompareByFlowCapacityRatio {
+public:
+    bool operator()(const std::pair<std::string,std::pair<double,double>>& a, const std::pair<std::string,std::pair<double,double>>& b)
+    {
+        return (a.second.first / a.second.second) > (b.second.first / b.second.first);
+    }
+};
+
+std::vector<std::pair<std::string, double>> RailwayNetwork::topRegionsByNeeds(int k, bool isDistrict) {
+    std::map<std::string, std::pair<double, double>> region_by_flow_and_weight;
+    std::vector<std::pair<std::string, double>> result;
+
+    std::shared_ptr<Station> mock_source = std::make_shared<Station>();
+    std::shared_ptr<Station> mock_sink = std::make_shared<Station>();
+
+    connectSourceNodesTo(mock_source.get());
+    connectSinkNodesTo(mock_sink.get());
+
+    edmondsKarp(mock_source, mock_sink);
+
+    for (const auto &station : stationSet) {
+        for(const auto &track : station->getAdj()) {
+            Station *u = track->getDest().get();
+            std::string r = isDistrict ? u->getDistrict() : u->getMunicipality();
+            std::string s = isDistrict ? station->getDistrict() : station->getMunicipality();
+            if(r != s) {
+                if(region_by_flow_and_weight.find(s) == region_by_flow_and_weight.end()) {
+                    region_by_flow_and_weight.insert({ s,  { track->getFlow(), track->getCapacity() } });
+                } else {
+                    region_by_flow_and_weight[s].first += track->getFlow();
+                    region_by_flow_and_weight[s].second += track->getCapacity();
+                }
+            }
+
+            if(region_by_flow_and_weight.find(r) == region_by_flow_and_weight.end()) {
+                region_by_flow_and_weight.insert({ r, { track->getFlow(), track->getCapacity() } });
+            } else {
+                region_by_flow_and_weight[r].first += track->getFlow();
+                region_by_flow_and_weight[r].second += track->getCapacity();
+            }
+
+        }
+    }
+
+    std::priority_queue<std::pair<std::string, std::pair<double, double>>, std::vector<std::pair<std::string, std::pair<double, double>>>, CompareByFlowCapacityRatio> pq;
+
+    for(const auto & p: region_by_flow_and_weight) {
+        double ratio = (p.second.first / p.second.second);
+
+        if(pq.size() < k) {
+            pq.emplace(p);
+        } else if((pq.top().second.first / pq.top().second.second) < ratio) {
+            pq.pop();
+            pq.emplace(p);
+        }
+    }
+
+    for(int i = 0; i < k; i++) {
+        std::pair<std::string, std::pair<double, double>> p = pq.top();
+        double ratio = (p.second.first / p.second.second);
+
+        result.emplace_back(p.first, ratio);
+    }
+
+    return result;
+}

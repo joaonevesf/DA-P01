@@ -11,6 +11,7 @@
 #include <unordered_set>
 #include <stack>
 #include <set>
+#include <map>
 
 #include "StationTrack.h"
 
@@ -39,7 +40,6 @@ public:
     bool findAugmentingPathBFS(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     bool findAugmentingPathDijkstra(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
-    std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> mostUsedPairsStations();
     static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, std::shared_ptr<Track> track,
                       const std::shared_ptr<Station>& station, double residual);
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
@@ -47,6 +47,7 @@ public:
 
     double maxTrainsTo(const std::shared_ptr<Station> &dest);
     void connectSourceNodesTo(Station *mock_source);
+    void connectSinkNodesTo(Station *mock_sink);
 
     void eraseEdgesFromMockSource(Station *mock_source);
 
@@ -63,6 +64,8 @@ public:
     void resetFlow();
 
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
+    std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> mostUsedPairsStations();
+    std::vector<std::pair<std::string, double>> topRegionsByNeeds(int k, bool isDistrict);
 protected:
 
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
