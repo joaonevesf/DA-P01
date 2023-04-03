@@ -13,13 +13,14 @@ public:
 
     virtual bool execute() = 0;
 protected:
-    std::weak_ptr<RailwayManager> railwayManager_;
+    static std::weak_ptr<RailwayManager> railwayManager_;
 
     void printDashes(int length);
 
     static bool getNumericalInput(int &selectedOption);
     static bool getStringInput(std::string &s);
     static int readOption(int numberOfOptions);
+    static std::shared_ptr<Station> getStation(const std::string& name);
 };
 
 #endif
