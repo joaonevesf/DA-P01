@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "FileManager.h"
 #include "MainMenu.h"
+#include "OperationCostOptimizationMenu.h"
 
 ReadFileMenu::ReadFileMenu(std::weak_ptr<RailwayManager> railwayManager)
     : Menu(std::move(railwayManager))
@@ -73,7 +74,7 @@ bool ReadFileMenu::execute() {
 
     if (option == 1) {
         if(!this->showFileReadOptions(fm)) return false;
-        rm->setMenu(std::make_shared<MainMenu>(railwayManager_));
+        rm->setMenu(std::make_shared<OperationCostOptimizationMenu>(railwayManager_));
         return true;
     }
 

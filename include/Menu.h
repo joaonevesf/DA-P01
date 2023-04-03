@@ -6,6 +6,7 @@
 #include "RailwayManager.h"
 
 class RailwayManager;
+class Station;
 
 class Menu {
 public:
@@ -13,14 +14,14 @@ public:
 
     virtual bool execute() = 0;
 protected:
-    static std::weak_ptr<RailwayManager> railwayManager_;
+    std::weak_ptr<RailwayManager> railwayManager_;
 
     void printDashes(int length);
 
     static bool getNumericalInput(int &selectedOption);
     static bool getStringInput(std::string &s);
     static int readOption(int numberOfOptions);
-    static std::shared_ptr<Station> getStation(const std::string& name);
+    std::shared_ptr<Station> getStation(const std::string& name);
 };
 
 #endif

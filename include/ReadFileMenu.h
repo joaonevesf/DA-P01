@@ -11,9 +11,9 @@
 class ReadFileMenu : public Menu {
 public:
     ReadFileMenu(std::weak_ptr<RailwayManager> railwayManager);
-protected:
-    bool execute() override;
 
+    bool execute() override;
+protected:
     bool showFileReadOptions(FileManager &fm);
 
     bool chooseFiles(FileManager &fm);

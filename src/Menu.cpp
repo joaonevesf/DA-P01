@@ -70,15 +70,3 @@ std::shared_ptr<Station> Menu::getStation(const std::string& name) {
     }
     else return *res;
 }
-
-std::shared_ptr<Station> Menu::getStation(const std::string& name) {
-    std::shared_ptr<Station> station = std::make_shared<Station>(name,"","","","");
-    std::shared_ptr<RailwayManager> rm = railwayManager_.lock();
-    auto stationSet = rm->getRailwayNetwork()->getStationSet();
-    auto res = stationSet.find(station);
-    if(res == stationSet.end()) {
-        std::cout << "\nStation not found. Please try again.\n";
-        return nullptr;
-    }
-    else return *res;
-}
