@@ -21,6 +21,12 @@ bool Menu::getNumericalInput(int &selectedOption) {
     return true;
 }
 
+void Menu::printDashes(int length) {
+    for(int i = 0; i < length; i++) {
+        std::cout << "-";
+    }
+}
+
 bool Menu::getStringInput(std::string &s) {
     std::cout << "> ";
 
@@ -32,8 +38,10 @@ bool Menu::getStringInput(std::string &s) {
     if(std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        exit(1);
+        return false;
     }
+
+    if(s == "quit") return false;
 
     return true;
 }
