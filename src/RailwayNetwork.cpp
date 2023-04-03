@@ -220,7 +220,9 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
     return result;
 }
 
-int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest) {
+int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result) {
+    if(src->getName() == dest->getName()) return 0;
+
     int cost = 0;
 
     std::shared_ptr<Station> real_src = *(this->stationSet.find(src));
@@ -230,7 +232,6 @@ int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, cons
     this->resetFlow();
 
     while(findAugmentingPathDijkstra(real_src, real_dest)) {
-        std::cout << "jiofwsfig\n";
         double minFlow = findMinResidual(real_src, real_dest);
         updatePath(real_src, real_dest, minFlow);
     }
@@ -253,6 +254,10 @@ int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, cons
                 track->getDest()->setVisited(true);
             }
         }
+    }
+
+    for(auto &t: real_dest->getIncoming()) {
+        flow_result += t->getFlow();
     }
 
     return cost;
