@@ -37,6 +37,9 @@ public:
     int getNumVertex() const;
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> getStationSet() const;
 
+    void setPathBFS(Station *src, Station *dest, double flow_min_limit);
+    void constructPath(Track *finish_track, std::vector<std::deque<Track *>> &paths, std::deque<Track *> &current_path);
+
     bool findAugmentingPathBFS(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     bool findAugmentingPathDijkstra(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
     double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);

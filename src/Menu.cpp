@@ -21,6 +21,24 @@ bool Menu::getNumericalInput(int &selectedOption) {
     return true;
 }
 
+void Menu::printPaths(std::vector<std::deque<Track *>> paths) {
+    int counter = 1;
+
+    for(auto &path: paths) {
+        std::cout << counter << ". ";
+        counter++;
+
+        for(int i = 0; i < path.size(); i++) {
+            Track *t = path.at(i);
+            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "-> ";
+
+            if(i == path.size() - 1) std::cout << t->getDest()->getName();
+        }
+
+        std::cout << std::endl; 
+    }
+}
+
 void Menu::printDashes(int length) {
     for(int i = 0; i < length; i++) {
         std::cout << "-";

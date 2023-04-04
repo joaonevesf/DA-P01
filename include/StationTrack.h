@@ -62,7 +62,7 @@ public:
 
     void setActive(bool active);
 
-    [[nodiscard]] std::vector<Station *> getMultipleParentsPath() const;
+    [[nodiscard]] std::vector<Track *> getMultipleParentsPath() const;
     void clearMultipleParentsPath();
 
     int getTotalCapacity() const;
@@ -71,7 +71,7 @@ public:
     double getLostRatio() const;
     void setLostRatio(double lostRatio);
 
-    void addToMultipleParents(Station *newStationToAdd);
+    void addToMultipleParents(Track *t);
 protected:
     std::string name;
     std::string district;
@@ -95,7 +95,7 @@ protected:
 
     std::shared_ptr<Track>parent_path = nullptr;
 
-    std::vector<Station *> multiple_parents_path;
+    std::vector<Track *> multiple_parents_path;
 
     bool inPath = false;
     bool visited = false;

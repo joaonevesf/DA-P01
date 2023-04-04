@@ -260,6 +260,8 @@ int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, cons
         flow_result += t->getFlow();
     }
 
+    this->setPathBFS(real_src.get(), real_dest.get(), 0);
+
     return cost;
 }
 
@@ -373,6 +375,52 @@ public:
         return a->getLostRatio() > b->getLostRatio();
     }
 };
+
+void RailwayNetwork::setPathBFS(Station *src, Station *dest, double flow_min_limit) {
+    this->clearNetworkUtils();
+
+    std::queue<Station *> stations;
+    stations.push(src); 
+    src->setVisited(true);
+
+    while(!stations.empty()) {
+        Station *u = stations.front();
+        stations.pop();
+
+        for(auto &t: u->getAdj()) {
+            if(t->getFlow() <= flow_min_limit) continue;
+
+            Station *v = t->getDest().get();
+
+            if(v == dest || !v->isVisited()) {
+                v->addToMultipleParents(t.get());
+
+                if(v == dest && v->isVisited()) continue;
+
+                stations.push(v);
+            }
+        }
+
+    }
+}
+
+void RailwayNetwork::constructPath(Track *finish_track, std::vector<std::deque<Track *>> &paths, std::deque<Track *> &current_path) {
+
+    current_path.push_front(finish_track);
+
+    if(finish_track->getOrig()->getMultipleParentsPath().empty()) {
+        if (!current_path.empty())
+            paths.push_back(current_path);
+
+        return;
+    }
+
+    for (auto &t: finish_track->getOrig()->getMultipleParentsPath()) {
+        constructPath(t, paths, current_path);
+        current_path.pop_front();
+    }
+
+}
 
 std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k) {
     std::priority_queue<std::shared_ptr<Station>,std::vector<std::shared_ptr<Station>>,CompareByLostRatio> queue;
