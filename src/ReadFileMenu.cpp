@@ -57,8 +57,8 @@ bool ReadFileMenu::showFileReadOptions(FileManager &fm) {
     std::cout << "While the second one is the file with the connections between them and other metadata"
         << "from those tracks" << std::endl;
     this->printDashes(100); std::cout << std::endl;
-
     this->chooseFiles(fm);
+    return true;
 }
 
 bool ReadFileMenu::execute() {

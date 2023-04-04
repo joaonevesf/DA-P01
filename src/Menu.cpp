@@ -53,7 +53,7 @@ int Menu::readOption(int numberOfOptions) {
             if(option <= numberOfOptions && option > 0) break;
         }
 
-        std::cout << std::endl << "Numero invalido, por favor tente novamente." << std::endl;
+        std::cout << "Invalid number. Please try again." << std::endl;
     }
 
     return option;
@@ -65,8 +65,8 @@ std::shared_ptr<Station> Menu::getStation(const std::string& name) {
     auto stationSet = rm->getRailwayNetwork()->getStationSet();
     auto res = stationSet.find(station);
     if(res == stationSet.end()) {
-        std::cout << "\nStation not found. Please try again.\n";
+        std::cout << "Station not found. Please try again.\n";
         return nullptr;
     }
-    else return *res;
+    return *res;
 }
