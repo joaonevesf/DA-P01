@@ -1,7 +1,46 @@
 #include "MainMenu.h"
+#include "BasicServicesMenu.h"
+#include "OperationCostOptimizationMenu.h"
 
-MainMenu::MainMenu(std::weak_ptr<RailwayManager> railwayManager) : Menu(railwayManager) {}
+#include <utility>
+
+MainMenu::MainMenu(std::weak_ptr<RailwayManager> railwayManager) : ReadFileMenu(std::move(railwayManager)) {}
 
 bool MainMenu::execute() {
-    return false;
+    std::shared_ptr<RailwayManager> rm = railwayManager_.lock();
+
+    printDashes(100); std::cout << std::endl;
+    std::cout << "Choose an option:" << std::endl;
+    printDashes(100); std::cout << std::endl;
+    std::cout << "1. Load and parse railway network" << std::endl
+              << "2. Basic Serivces Menu" << std::endl
+              << "3. Operation Cost Menu" << std::endl
+              << "4. Reliability and Sensibility to Line Failures Menu" << std::endl
+              << "5. Exit" << std::endl;
+
+    int option = Menu::readOption(5);
+
+    if (option == 1) {
+        std::shared_ptr<RailwayNetwork> newRn;
+        rm->setRailwayNetwork(newRn);
+        FileManager fm(rm->getRailwayNetwork());
+        if(!this->showFileReadOptions(fm)) return false;
+        return true;
+    }
+    else {
+        switch (option) {
+            case 2:
+                rm->setMenu(std::make_shared<BasicServicesMenu>(rm));
+                return true;
+            case 3:
+                rm->setMenu(std::make_shared<OperationCostOptimizationMenu>(rm));
+                return true;
+            case 4:
+                rm->setMenu(std::make_shared<BasicServicesMenu>(rm)); // placeholder for actual reliability menu
+                return true;
+            case 5:
+            default:
+                return false;
+        }
+    }
 }
