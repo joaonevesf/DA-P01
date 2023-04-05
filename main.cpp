@@ -19,7 +19,11 @@ int main() {
 
     rm->run();
 
+    //FileManager fm(rn);
+    //fm.readAll("../Project1Data/s.csv", "../Project1Data/n.csv");
 
+    //std::shared_ptr<Station> dest = std::make_shared<Station>("Porto Campanhã", "", "", "", "");
+    //std::cout << rn->maxTrainsTo(dest);
 
     /*std::shared_ptr<RailwayNetwork> rm = std::make_shared<RailwayNetwork>();
     FileManager fm(rm);
