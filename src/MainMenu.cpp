@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "BasicServicesMenu.h"
 #include "OperationCostOptimizationMenu.h"
+#include "LineFailuresMenu.h"
 
 #include <utility>
 
@@ -15,7 +16,7 @@ bool MainMenu::execute() {
     std::cout << "1. Load and parse railway network" << std::endl
               << "2. Basic Serivces Menu" << std::endl
               << "3. Operation Cost Menu" << std::endl
-              << "4. Reliability and Sensibility to Line Failures Menu" << std::endl
+              << "4. Line Failure Menu" << std::endl
               << "5. Exit" << std::endl;
 
     int option = Menu::readOption(5);
@@ -36,7 +37,7 @@ bool MainMenu::execute() {
                 rm->setMenu(std::make_shared<OperationCostOptimizationMenu>(rm));
                 return true;
             case 4:
-                rm->setMenu(std::make_shared<BasicServicesMenu>(rm)); // placeholder for actual reliability menu
+                rm->setMenu(std::make_shared<LineFailuresMenu>(rm));
                 return true;
             case 5:
             default:

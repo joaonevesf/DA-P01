@@ -13,12 +13,13 @@ bool BasicServicesMenu::execute() {
     printDashes(100); std::cout << std::endl;
     std::cout << "Basic Services Menu" << std::endl;
     printDashes(100); std::cout << std::endl;
-    std::cout << "1. Determine the maximum number of trains that can simultaneously travel between two specified stations" << std::endl
+    std::cout << "Choose an option:" << std::endl
+              << "1. Determine the maximum number of trains that can simultaneously travel between two specified stations" << std::endl
               << "2. Determine which pairs of stations can have the most trains travelling between them simultaneously" << std::endl
               << "3. Determine the top-k municipalities by transportation needs (i.e. flow by capacity ratio)" << std::endl
               << "4. Determine the top-k districts by transportation needs (i.e. flow by capacity ratio)" << std::endl
               << "5. Determine the maximum number of trains that can arrive at a specified station simultaneously" << std::endl
-              << "6. Go back to the main menu" << std::endl;
+              << "6. Go back" << std::endl;
 
     int option = Menu::readOption(6);
 
@@ -89,8 +90,9 @@ bool BasicServicesMenu::execute() {
 
             return true;
         case 6:
-        default:
             rm->setMenu(std::make_shared<MainMenu>(rm));
+            return true;
+        default:
             return false;
     }
 }
