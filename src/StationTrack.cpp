@@ -8,11 +8,11 @@ Station::Station(std::string name, std::string district, std::string municipalit
         : name(std::move(name)), district(std::move(district)), municipality(std::move(municipality)),
           township(std::move(township)), line(std::move(line)) {}
 
-std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost) {
+std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost, bool noIncoming) {
     auto newTrack = std::make_shared<Track>(this, dest, service, w, cost);
 
     adj.push_back(newTrack);
-    dest->incoming.push_back(newTrack);
+    if(!noIncoming) dest->incoming.push_back(newTrack);
     return newTrack;
 }
 
@@ -173,6 +173,17 @@ void Station::removeTrackIncoming(Track *track) {
     }
 }
 
+void Station::clearAdj() {
+    adj.clear();
+}
+
+bool Station::isMock1() const {
+    return isMock;
+}
+
+void Station::setIsMock(bool isMock) {
+    Station::isMock = isMock;
+}
 
 // ********************************* Track *********************************
 
@@ -249,3 +260,5 @@ bool Track::isVisited() const {
 void Track::setVisited(bool visited) {
     Track::visited = visited;
 }
+
+

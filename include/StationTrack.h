@@ -35,7 +35,7 @@ public:
     void setDist(double dist);
     void setPath(std::shared_ptr<Track> path);
 
-    std::shared_ptr<Track> addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost);
+    std::shared_ptr<Track> addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost, bool noIncoming);
     bool removeTrack(const std::shared_ptr<Station>& station_dest);
 
     const std::string &getName() const;
@@ -75,16 +75,18 @@ public:
     void removeTrackIncoming(Track *track);
 
     void addToMultipleParents(Track *t);
+    void clearAdj();
+    bool isInPath() const;
+
+    void setIsInPath(bool isInPath);
+    bool isMock1() const;
+
+    void setIsMock(bool isMock);
 protected:
     std::string name;
     std::string district;
     std::string municipality;
-public:
-    bool isInPath() const;
 
-    void setIsInPath(bool isInPath);
-
-protected:
     std::string township;
 
     std::string line;
@@ -93,6 +95,7 @@ protected:
     std::vector<std::shared_ptr<Track>> incoming;
     double dist = 0;
 
+    bool isMock = false;
 
     double lostRatio;
 

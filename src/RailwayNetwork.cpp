@@ -26,7 +26,7 @@ bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
-    station_src->addTrack(station_dest, service, w, cost);
+    station_src->addTrack(station_dest, service, w, cost, false);
     return true;
 }
 
@@ -34,8 +34,8 @@ bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src,
     if (station_src == nullptr || station_dest == nullptr)
         return false;
 
-    auto e1 = station_src->addTrack(station_dest, service, w, cost);
-    auto e2 = station_dest->addTrack(station_src, service, w, cost);
+    auto e1 = station_src->addTrack(station_dest, service, w, cost, false);
+    auto e2 = station_dest->addTrack(station_src, service, w, cost, false);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
@@ -53,7 +53,7 @@ bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& stati
     for(const auto& station : stationSet) {
         station->setVisited(false);
     }
-
+    station_dest->setVisited(false);
     std::queue<std::shared_ptr<Station>> queue;
     queue.push(station_src);
     station_src->setVisited(true);
@@ -216,6 +216,7 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
 
     this->resetFlow();
 
+
     while(findAugmentingPathBFS(station_src, station_dest)) {
         double minRes = findMinResidual(station_src, station_dest);
         updatePath(station_src, station_dest, minRes);
@@ -306,7 +307,7 @@ double RailwayNetwork::maxTrainsTo(const std::shared_ptr<Station> &dest) {
 void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
     for(auto station: this->stationSet) {
         if(station->getIncoming().size() == 0) {
-            mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0);
+            mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0, true);
             continue;
         }
 
@@ -315,7 +316,7 @@ void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
 
             for(auto track: station->getAdj()) {
                 if(track->getDest().get() == reverse_track->getOrig().get() && track->getOrig().get() == reverse_track->getDest().get()) {
-                    mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0);
+                    mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0, true);
                 }
             }
         }
@@ -338,11 +339,10 @@ bool RailwayNetwork::testAndVisitDijkstra(std::queue<Station*> &queue, std::shar
     return false;
 }
 
-void RailwayNetwork::connectSinkNodesTo(Station *mock_sink) {
+void RailwayNetwork::connectSinkNodesTo(std::shared_ptr<Station> mock_sink) {
     for (auto station : this->stationSet) {
         if (station->getAdj().size() == 0) {
-            std::shared_ptr<Station> mock{mock_sink};
-            station->addTrack(mock, "", std::numeric_limits<double>::max(), 0);
+            station->addTrack(mock_sink, "", std::numeric_limits<double>::max(), 0,true);
         }
     }
 }
@@ -508,25 +508,30 @@ class CompareByFlowCapacityRatio {
 public:
     bool operator()(const std::pair<std::string,std::pair<double,double>>& a, const std::pair<std::string,std::pair<double,double>>& b)
     {
-        return (a.second.first / a.second.second) > (b.second.first / b.second.first);
+        if ((a.second.first / a.second.second) == (b.second.first / b.second.second))
+            return a.second.first > b.second.first;
+        return (a.second.first / a.second.second) > (b.second.first / b.second.second);
     }
 };
 
-std::vector<std::pair<std::string, double>> RailwayNetwork::topRegionsByNeeds(int k, bool isDistrict) {
+std::vector<std::pair<std::string, std::pair<double,double>>> RailwayNetwork::topRegionsByNeeds(int k, bool isDistrict) {
     std::map<std::string, std::pair<double, double>> region_by_flow_and_weight;
-    std::vector<std::pair<std::string, double>> result;
+    std::vector<std::pair<std::string, std::pair<double,double>>> result(k);
 
     std::shared_ptr<Station> mock_source = std::make_shared<Station>();
     std::shared_ptr<Station> mock_sink = std::make_shared<Station>();
+    mock_source->setIsMock(true);
+    mock_sink->setIsMock(true);
 
     connectSourceNodesTo(mock_source.get());
-    connectSinkNodesTo(mock_sink.get());
+    connectSinkNodesTo(mock_sink);
 
     edmondsKarp(mock_source, mock_sink);
 
     for (const auto &station : stationSet) {
         for(const auto &track : station->getAdj()) {
             Station *u = track->getDest().get();
+            if(u->isMock1()) continue;
             std::string r = isDistrict ? u->getDistrict() : u->getMunicipality();
             std::string s = isDistrict ? station->getDistrict() : station->getMunicipality();
             if(r != s) {
@@ -563,9 +568,9 @@ std::vector<std::pair<std::string, double>> RailwayNetwork::topRegionsByNeeds(in
 
     for(int i = 0; i < k; i++) {
         std::pair<std::string, std::pair<double, double>> p = pq.top();
-        double ratio = (p.second.first / p.second.second);
+        pq.pop();
 
-        result.emplace_back(p.first, ratio);
+        result[k-i-1] = {p.first, {p.second.first, p.second.second}};
     }
 
     return result;

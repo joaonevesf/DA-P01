@@ -28,20 +28,22 @@ bool OperationCostOptimizationMenu::execute() {
 
     std::cout << "1. Source station" << std::endl;
 
-    while(true) {
-        if(!getStringInput(station_name)) break;
-
-        if((station_src = this->getStation(station_name)) == nullptr) continue;
-        else break;
+    while (true) {
+        if (!getStringInput(station_name)) {
+            this->railwayManager_.lock()->setMenu(std::make_shared<MainMenu>(railwayManager_));
+            return true;
+        }
+        if ((station_src = this->getStation(station_name)) != nullptr) break;
     }
 
     std::cout << "2. Destination station" << std::endl;
 
-    while(true) {
-        if(!getStringInput(station_name)) break;
-
-        if((station_dest = this->getStation(station_name)) == nullptr) continue;
-        else break;
+    while (true) {
+        if (!getStringInput(station_name)) {
+            this->railwayManager_.lock()->setMenu(std::make_shared<MainMenu>(railwayManager_));
+            return true;
+        }
+        if ((station_dest = this->getStation(station_name)) != nullptr) break;
     }
 
     int total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, flow_result);

@@ -1,4 +1,5 @@
 #include "LineFailuresMenu.h"
+#include "MainMenu.h"
 
 LineFailuresMenu::LineFailuresMenu(std::weak_ptr <RailwayManager> railwayManager): Menu(std::move(railwayManager)){}
 
@@ -16,6 +17,7 @@ bool LineFailuresMenu::execute() {
               "3. Undo action" << std::endl <<
               "4. Go back" << std::endl;
     int option = LineFailuresMenu::readOption(4);
+    std::shared_ptr rm = railwayManager_.lock();
     switch (option) {
         case 1:
             while(deleteTrackStationMenu());
@@ -27,7 +29,7 @@ bool LineFailuresMenu::execute() {
             while(undoActionsMenu());
             return true;
         case 4:
-            return false;
+            rm->setMenu(std::make_shared<MainMenu>(rm));
         default:
             return true;
     }
@@ -133,10 +135,16 @@ void LineFailuresMenu::listAffectedStations() {
     auto rm = railwayManager_.lock();
     std::vector<std::shared_ptr<Station>> affectedStations = rm->getRailwayNetwork()->mostAffectedStations(k);
 
-    std::cout << std::endl << "Top " << k << " most affected stations:" << std::endl;
-    for(int i = 0; i < k; i++) {
-        auto currStation = affectedStations.at(i);
-        std::cout << i+1 << ". " << currStation->getName() << " lost " << currStation->getLostRatio() * 100 << "% of its capacity" << std::endl;
+    if(affectedStations.at(0)->getLostRatio() == 0.0) {
+        std::cout << std::endl << "There are no failures in this graph" << std::endl;
+    }
+    else {
+        std::cout << std::endl << "Top " << k << " most affected stations:" << std::endl;
+        for (int i = 0; i < k; i++) {
+            auto currStation = affectedStations.at(i);
+            std::cout << i + 1 << ". " << currStation->getName() << " lost " << currStation->getLostRatio() * 100
+                      << "% of its capacity" << std::endl;
+        }
     }
 }
 

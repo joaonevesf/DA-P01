@@ -28,24 +28,20 @@ bool BasicServicesMenu::execute() {
     std::shared_ptr<Station> station_src;
     std::shared_ptr<Station> station_dest;
     std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> pairs;
-    std::vector<std::pair<std::string, double>> topkRegions;
+    std::vector<std::pair<std::string, std::pair<double,double>>> topkRegions;
 
     switch (option) {
         case 1:
             std::cout << "1. Source station" << std::endl;
-            while(true) {
-                if(!getStringInput(station_name)) break;
-
-                if((station_src = this->getStation(station_name)) == nullptr) continue;
-                else break;
+            while (true) {
+                if (!getStringInput(station_name)) return true;
+                if ((station_src = this->getStation(station_name)) != nullptr) break;
             }
 
             std::cout << "2. Destination station" << std::endl;
-            while(true) {
-                if(!getStringInput(station_name)) break;
-
-                if((station_dest = this->getStation(station_name)) == nullptr) continue;
-                else break;
+            while (true) {
+                if (!getStringInput(station_name)) return true;
+                if ((station_dest = this->getStation(station_name)) != nullptr) break;
             }
 
             std::cout << "The maximum number of trains that can simultaneously travel between those stations is "
@@ -63,27 +59,25 @@ bool BasicServicesMenu::execute() {
             std::cout << "Number of municipalities:" << std::endl;
             while (!getNumericalInput(kNumber));
             topkRegions = rm->getRailwayNetwork()->topRegionsByNeeds(kNumber, false);
-            std::cout << "The top-" << kNumber << " municipalities by transportation needs and their respective flows are:" << std::endl;
+            std::cout << "The top-" << kNumber << " municipalities by transportation needs and their respective ratio of flow/capacity are:" << std::endl;
             for (const auto &region: topkRegions)
-                std::cout << region.first << " - " << region.second << std::endl;
+                std::cout << region.first << " - Flow: " << region.second.first << " Capacity: "<< region.second.second << std::endl;
 
             return true;
         case 4:
             std::cout << "Number of districts:" << std::endl;
             while (!getNumericalInput(kNumber));
             topkRegions = rm->getRailwayNetwork()->topRegionsByNeeds(kNumber, false);
-            std::cout << "The top-" << kNumber << " districts by transportation needs and their respective flows are:" << std::endl;
+            std::cout << "The top-" << kNumber << " districts by transportation needs and their respective ratio of flow/capacity flows are:" << std::endl;
             for (const auto &region: topkRegions)
-                std::cout << region.first << " - " << region.second << std::endl;
+                std::cout << region.first << " - Flow: " << region.second.first << " Capacity: "<< region.second.second << std::endl;
 
             return true;
         case 5:
             std::cout << "Destination station" << std::endl;
-            while(true) {
-                if(!getStringInput(station_name)) break;
-
-                if((station_dest = this->getStation(station_name)) == nullptr) continue;
-                else break;
+            while (true) {
+                if (!getStringInput(station_name)) return true;
+                if ((station_dest = this->getStation(station_name)) != nullptr) break;
             }
             std::cout << "The maximum number of trains that can arrive simultaneously at " << station_name << " is "
                       << rm->getRailwayNetwork()->maxTrainsTo(station_dest) << std::endl;
