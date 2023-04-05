@@ -14,7 +14,7 @@ class Track;
 
 // ********************************* Station *********************************
 
-class Station {
+class Station: public std::enable_shared_from_this<Station> {
 public:
     Station(std::string name, std::string district, std::string municipality, std::string township, std::string line);
     Station() = default;
@@ -112,7 +112,7 @@ protected:
 
 class Track {
 public:
-    Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost);
+    Track(std::shared_ptr<Station> orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost);
 
     std::shared_ptr<Station> getDest() const;
     double getCapacity() const;
@@ -136,7 +136,7 @@ public:
 
 protected:
     std::string service;
-    std::shared_ptr<Station> dest;
+    std::weak_ptr<Station> dest;
     double capacity;
     int cost;
 
@@ -152,7 +152,7 @@ public:
 protected:
 
     // used for bidirectional edges
-    std::shared_ptr<Station> orig;
+    std::weak_ptr<Station> orig;
     std::shared_ptr<Track> reverse = nullptr;
 
     double flow;

@@ -9,7 +9,7 @@ Station::Station(std::string name, std::string district, std::string municipalit
           township(std::move(township)), line(std::move(line)) {}
 
 std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost, bool noIncoming) {
-    auto newTrack = std::make_shared<Track>(this, dest, service, w, cost);
+    auto newTrack = std::make_shared<Track>(shared_from_this(), dest, service, w, cost);
 
     adj.push_back(newTrack);
     if(!noIncoming) dest->incoming.push_back(newTrack);
@@ -187,14 +187,14 @@ void Station::setIsMock(bool isMock) {
 
 // ********************************* Track *********************************
 
-Track::Track(Station* orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost)
-    : orig(std::shared_ptr<Station>(orig)), dest(dest), service(service), capacity(capacity), cost(cost)
+Track::Track(std::shared_ptr<Station> orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost)
+    : orig(orig), dest(dest), service(service), capacity(capacity), cost(cost)
 {
 
 }
 
 std::shared_ptr<Station> Track::getDest() const {
-    return this->dest;
+    return this->dest.lock();
 }
 
 double Track::getCapacity() const {
@@ -202,7 +202,7 @@ double Track::getCapacity() const {
 }
 
 std::shared_ptr<Station> Track::getOrig() const {
-    return this->orig;
+    return this->orig.lock();
 }
 
 std::shared_ptr<Track> Track::getReverse() const {
