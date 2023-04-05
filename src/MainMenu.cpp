@@ -22,7 +22,7 @@ bool MainMenu::execute() {
     int option = Menu::readOption(5);
 
     if (option == 1) {
-        std::shared_ptr<RailwayNetwork> newRn;
+        std::shared_ptr<RailwayNetwork> newRn = std::make_shared<RailwayNetwork>();
         rm->setRailwayNetwork(newRn);
         FileManager fm(rm->getRailwayNetwork());
         if(!this->showFileReadOptions(fm)) return false;

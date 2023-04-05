@@ -327,8 +327,10 @@ bool RailwayNetwork::testAndVisitDijkstra(std::queue<Station*> &queue, std::shar
 
 void RailwayNetwork::connectSinkNodesTo(Station *mock_sink) {
     for (auto station : this->stationSet) {
-        if (station->getAdj().size() == 0)
-            mock_sink->addTrack(station, "", std::numeric_limits<double>::max(), 0);
+        if (station->getAdj().size() == 0) {
+            std::shared_ptr<Station> mock{mock_sink};
+            station->addTrack(mock, "", std::numeric_limits<double>::max(), 0);
+        }
     }
 }
 
