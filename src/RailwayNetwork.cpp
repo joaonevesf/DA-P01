@@ -398,6 +398,7 @@ void RailwayNetwork::setPathBFS(Station *src, Station *dest, double flow_min_lim
                 if(v == dest && v->isVisited()) continue;
 
                 stations.push(v);
+                v->setVisited(true);
             }
         }
 
