@@ -75,6 +75,10 @@ void RailwayNetwork::clearNetworkUtils() {
         station->setDist(INF);
         station->setIsInPath(false);
 
+        for(auto &track: station->getAdj()) {
+            track->setVisited(false);
+        }
+
         if(station->getMultipleParentsPath().size() > 0) {
             station->clearMultipleParentsPath();
         }
@@ -388,17 +392,18 @@ void RailwayNetwork::setPathBFS(Station *src, Station *dest, double flow_min_lim
         stations.pop();
 
         for(auto &t: u->getAdj()) {
-            if(t->getFlow() <= flow_min_limit) continue;
+            if(t->getFlow() <= flow_min_limit || t->isVisited()) continue;
 
             Station *v = t->getDest().get();
 
-            if(v == dest || !v->isVisited()) {
+            if(!t->isVisited()) {
+                t->setVisited(true);
                 v->addToMultipleParents(t.get());
 
-                if(v == dest && v->isVisited()) continue;
-
-                stations.push(v);
-                v->setVisited(true);
+                if(!v->isVisited())  {
+                    stations.push(v);
+                    v->setVisited(true);
+                }
             }
         }
 
@@ -410,8 +415,10 @@ void RailwayNetwork::constructPath(Track *finish_track, std::vector<std::deque<T
     current_path.push_front(finish_track);
 
     if(finish_track->getOrig()->getMultipleParentsPath().empty()) {
-        if (!current_path.empty())
+        if (!current_path.empty()) {
             paths.push_back(current_path);
+            current_path.clear();
+        }
 
         return;
     }

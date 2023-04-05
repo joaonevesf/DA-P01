@@ -27,7 +27,7 @@ protected:
     static int readOption(int numberOfOptions);
 
 
-    void printPaths(std::vector<std::deque<Track *>> paths);
+    void printPaths(Station *dest);
 
     std::shared_ptr<Station> getStation(const std::string& name);
 };

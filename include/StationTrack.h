@@ -137,6 +137,14 @@ protected:
     bool selected = false;
     bool active = true;
 
+    bool visited = false;
+public:
+    bool isVisited() const;
+
+    void setVisited(bool visited);
+
+protected:
+
     // used for bidirectional edges
     std::shared_ptr<Station> orig;
     std::shared_ptr<Track> reverse = nullptr;

@@ -222,3 +222,11 @@ int Track::getCost() const {
 void Track::setCost(int cost) {
     Track::cost = cost;
 }
+
+bool Track::isVisited() const {
+    return visited;
+}
+
+void Track::setVisited(bool visited) {
+    Track::visited = visited;
+}

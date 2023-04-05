@@ -21,21 +21,29 @@ bool Menu::getNumericalInput(int &selectedOption) {
     return true;
 }
 
-void Menu::printPaths(std::vector<std::deque<Track *>> paths) {
-    int counter = 1;
+void Menu::printPaths(Station *dest) {
+    std::queue<Station *> stations;
+    stations.push(dest);
 
-    for(auto &path: paths) {
-        std::cout << counter << ". ";
-        counter++;
+    for (auto &s: this->railwayManager_.lock()->getRailwayNetwork()->getStationSet()) {
+        s->setVisited(false);
+    }
 
-        for(int i = 0; i < path.size(); i++) {
-            Track *t = path.at(i);
-            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "-> ";
+    while (!stations.empty()) {
+        Station *u = stations.front();
+        stations.pop();
 
-            if(i == path.size() - 1) std::cout << t->getDest()->getName();
+        for (auto &t: u->getMultipleParentsPath()) {
+            if (t->getFlow() == 0) continue;
+
+            Station *v = t->getOrig().get();
+            if(!v->isVisited()) {
+                v->setVisited(true);
+                stations.push(v);
+            }
+
+            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "->" << t->getDest()->getName() << std::endl;
         }
-
-        std::cout << std::endl; 
     }
 }
 
