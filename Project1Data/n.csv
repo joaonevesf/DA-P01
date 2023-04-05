@@ -1,0 +1,7 @@
+Station_A,Station_B,Capacity,Service
+Casa Branca,Monte das Flores,15,STANDARD
+Casa Branca,Funcheira,4,STANDARD
+Monte das Flores,Porto Campanhã,6,STANDARD
+Monte das Flores,Funcheira,30,STANDARD
+Funcheira,Monte das Flores,30,STANDARD
+Funcheira,Porto Campanhã,8,STANDARD

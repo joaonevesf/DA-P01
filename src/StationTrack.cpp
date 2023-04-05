@@ -153,6 +153,25 @@ void Station::setIsInPath(bool isInPath) {
     Station::inPath = isInPath;
 }
 
+void Station::removeTrackAdj(Track *track) {
+    for (auto iterator = adj.begin(); iterator != adj.end(); ++iterator) {
+        if((*iterator).get() == track) {
+            this->adj.erase(iterator);
+            break;
+        }
+    }
+
+    track->getDest()->removeTrackIncoming(track);
+}
+
+void Station::removeTrackIncoming(Track *track) {
+    for (auto iterator = incoming.begin(); iterator != incoming.end(); ++iterator) {
+        if((*iterator).get() == track) {
+            this->incoming.erase(iterator);
+            break;
+        }
+    }
+}
 
 
 // ********************************* Track *********************************
