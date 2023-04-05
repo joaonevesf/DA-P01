@@ -8,6 +8,8 @@
 #include "MainMenu.h"
 #include "OperationCostOptimizationMenu.h"
 
+#define FILE_DEFAULT_ERROR_MSG "File couldn't be open, please try again"
+
 ReadFileMenu::ReadFileMenu(std::weak_ptr<RailwayManager> railwayManager)
     : Menu(std::move(railwayManager))
 {
@@ -22,7 +24,7 @@ bool ReadFileMenu::chooseEdgesFile(FileManager &fm) {
     if(!getStringInput(filename)) return false;
 
     while(!fm.readNetworkEdges(FILES_FOLDER + filename)) {
-        std::cout << "Please, try again";
+        std::cout << FILE_DEFAULT_ERROR_MSG << std::endl;
         if(!getStringInput(filename)) return false;
     }
 
@@ -36,8 +38,8 @@ bool ReadFileMenu::chooseStationsFile(FileManager &fm) {
 
     if(!getStringInput(filename)) return false;
     while(!fm.readStations(FILES_FOLDER + filename)) {
-        std::cout << "Please, try again";
-        if(getStringInput(filename)) return false;
+        std::cout << FILE_DEFAULT_ERROR_MSG << std::endl;
+        if(!getStringInput(filename)) return false;
     }
 
     return true;
@@ -58,7 +60,9 @@ bool ReadFileMenu::showFileReadOptions(FileManager &fm) {
         << "from those tracks" << std::endl;
     this->printDashes(100); std::cout << std::endl;
 
-    this->chooseFiles(fm);
+    while(!this->chooseFiles(fm));
+
+    return true;
 }
 
 bool ReadFileMenu::execute() {

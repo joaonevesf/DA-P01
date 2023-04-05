@@ -17,7 +17,6 @@ bool FileManager::readStations(std::string filepath) {
     std::set<std::string> stations_read;
     std::ifstream file_reader(filepath);
     if(!file_reader.is_open()) {
-        std::cerr << "File " << filepath << " failed to open!" << std::endl;
         return false;
     }
 
@@ -58,7 +57,6 @@ bool FileManager::readNetworkEdges(std::string filepath) {
     std::ifstream file_reader(filepath);
 
     if(!file_reader.is_open()) {
-        std::cerr << "File " << filepath << " failed to open";
         return false;
     }
 

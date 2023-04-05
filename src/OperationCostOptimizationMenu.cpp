@@ -1,4 +1,5 @@
 #include "OperationCostOptimizationMenu.h"
+#include "MainMenu.h"
 
 #include <utility>
 
@@ -10,6 +11,10 @@ OperationCostOptimizationMenu::OperationCostOptimizationMenu(std::weak_ptr<Railw
 
 bool OperationCostOptimizationMenu::execute() {
     int flow_result = 0;
+
+    // Construct and output path utilities
+    std::vector<std::deque<Track *>> paths;
+    std::deque<Track *> current_path;
 
     this->printDashes(100); std::cout << std::endl;
     std::cout << "Operation Cost Menu" << std::endl;
@@ -39,8 +44,35 @@ bool OperationCostOptimizationMenu::execute() {
         else break;
     }
 
-    std::cout << "Results: " << std::endl;
-    std::cout << "1. In the context of transporting cargo, you would need to spend "
-        << this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, flow_result) << "€ "
-        << "to send the maximum number of trains (" << flow_result << ") possible between those two stations" << std::endl;
+    int total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, flow_result);
+
+    /*for(auto &t: station_dest->getMultipleParentsPath()) {
+        current_path.clear();
+        this->railwayManager_.lock()->getRailwayNetwork()->constructPath(t, paths, current_path);
+    }*/
+
+    this->printDashes(100);
+    std::cout << std:: endl << "Results: " << std::endl;
+
+    if(flow_result == 0) {
+        std::cout << "No valid path was found." << std::endl;
+    } else {
+        std::cout << "1. In the context of transporting cargo, you would need to spend "
+                  << total_cost << "€ "
+                  << "to send the maximum number of trains (" << flow_result << ") possible between those two stations" << std::endl;
+
+        this->printDashes(100); std::cout << std::endl;
+
+        std::cout << "Do you want to print the paths and the number of trains of each path?" << std::endl;
+        std::cout << "1. Yes" << std::endl;
+        std::cout << "2. No" << std::endl;
+
+        int option = this->readOption(2);
+
+        if(option == 1) printPaths(station_dest.get());
+    }
+
+
+    this->railwayManager_.lock()->setMenu(std::make_shared<MainMenu>(railwayManager_));
+    return true;
 }

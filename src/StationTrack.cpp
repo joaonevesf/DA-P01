@@ -17,7 +17,7 @@ std::shared_ptr<Track> Station::addTrack(const std::shared_ptr<Station>& dest, c
 }
 
 
-std::vector<Station *> Station::getMultipleParentsPath() const {
+std::vector<Track *> Station::getMultipleParentsPath() const {
     return this->multiple_parents_path;
 }
 
@@ -25,8 +25,8 @@ void Station::clearMultipleParentsPath() {
     this->multiple_parents_path.clear();
 }
 
-void Station::addToMultipleParents(Station *newStationToAdd) {
-    this->multiple_parents_path.push_back(newStationToAdd);
+void Station::addToMultipleParents(Track *t) {
+    this->multiple_parents_path.push_back(t);
 }
 
 bool Station::removeTrack(const std::shared_ptr<Station>& station_dest) {
@@ -221,4 +221,12 @@ int Track::getCost() const {
 
 void Track::setCost(int cost) {
     Track::cost = cost;
+}
+
+bool Track::isVisited() const {
+    return visited;
+}
+
+void Track::setVisited(bool visited) {
+    Track::visited = visited;
 }

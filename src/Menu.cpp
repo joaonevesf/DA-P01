@@ -21,6 +21,32 @@ bool Menu::getNumericalInput(int &selectedOption) {
     return true;
 }
 
+void Menu::printPaths(Station *dest) {
+    std::queue<Station *> stations;
+    stations.push(dest);
+
+    for (auto &s: this->railwayManager_.lock()->getRailwayNetwork()->getStationSet()) {
+        s->setVisited(false);
+    }
+
+    while (!stations.empty()) {
+        Station *u = stations.front();
+        stations.pop();
+
+        for (auto &t: u->getMultipleParentsPath()) {
+            if (t->getFlow() == 0) continue;
+
+            Station *v = t->getOrig().get();
+            if(!v->isVisited()) {
+                v->setVisited(true);
+                stations.push(v);
+            }
+
+            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "->" << t->getDest()->getName() << std::endl;
+        }
+    }
+}
+
 void Menu::printDashes(int length) {
     for(int i = 0; i < length; i++) {
         std::cout << "-";
@@ -53,7 +79,7 @@ int Menu::readOption(int numberOfOptions) {
             if(option <= numberOfOptions && option > 0) break;
         }
 
-        std::cout << std::endl << "Numero invalido, por favor tente novamente." << std::endl;
+        std::cout << "Invalid number. Please try again." << std::endl;
     }
 
     return option;
@@ -65,8 +91,8 @@ std::shared_ptr<Station> Menu::getStation(const std::string& name) {
     auto stationSet = rm->getRailwayNetwork()->getStationSet();
     auto res = stationSet.find(station);
     if(res == stationSet.end()) {
-        std::cout << "\nStation not found. Please try again.\n";
+        std::cout << "Station not found. Please try again.\n";
         return nullptr;
     }
-    else return *res;
+    return *res;
 }

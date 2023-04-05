@@ -8,7 +8,7 @@
 
 class FileManager {
 public:
-    FileManager(std::shared_ptr<RailwayNetwork> railwayManager);
+    FileManager(std::shared_ptr<RailwayNetwork> railwayNetwork);
 
     bool readStations(std::string filepath);
     bool readNetworkEdges(std::string filepath);

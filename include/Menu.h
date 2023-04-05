@@ -3,7 +3,11 @@
 
 #include <string>
 #include <memory>
+#include <vector>
+#include <queue>
+
 #include "RailwayManager.h"
+#include "StationTrack.h"
 
 class RailwayManager;
 class Station;
@@ -21,6 +25,10 @@ protected:
     static bool getNumericalInput(int &selectedOption);
     static bool getStringInput(std::string &s);
     static int readOption(int numberOfOptions);
+
+
+    void printPaths(Station *dest);
+
     std::shared_ptr<Station> getStation(const std::string& name);
 };
 
