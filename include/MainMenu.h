@@ -1,9 +1,9 @@
 #ifndef P1_MAINMENU_H
 #define P1_MAINMENU_H
 
-#include "Menu.h"
+#include "ReadFileMenu.h"
 
-class MainMenu : public Menu {
+class MainMenu : public ReadFileMenu {
 public:
     MainMenu(std::weak_ptr<RailwayManager> railwayManager);
 
