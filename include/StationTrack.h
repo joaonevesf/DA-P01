@@ -33,7 +33,7 @@ public:
 
     void setVisited(bool visited);
     void setDist(double dist);
-    void setPath(std::shared_ptr<Track>path);
+    void setPath(std::shared_ptr<Track> path);
 
     std::shared_ptr<Track> addTrack(const std::shared_ptr<Station>& dest, const std::string& service, double w, int cost);
     bool removeTrack(const std::shared_ptr<Station>& station_dest);
@@ -70,6 +70,9 @@ public:
 
     double getLostRatio() const;
     void setLostRatio(double lostRatio);
+
+    void removeTrackAdj(Track* track);
+    void removeTrackIncoming(Track *track);
 
     void addToMultipleParents(Track *t);
 protected:

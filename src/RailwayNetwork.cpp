@@ -44,7 +44,7 @@ bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src,
 void RailwayNetwork::testAndVisit(std::queue<std::shared_ptr<Station>> &queue,std::shared_ptr<Track> track, const std::shared_ptr<Station>& station, double residual) {
     if(!station->isVisited() && residual > 0 && track->isActive() && station->isActive()) {
         station->setVisited(true);
-        station->setPath(std::move(track));
+        station->setPath(track);
         queue.push(station);
     }
 }
@@ -53,19 +53,24 @@ bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& stati
     for(const auto& station : stationSet) {
         station->setVisited(false);
     }
+
     std::queue<std::shared_ptr<Station>> queue;
     queue.push(station_src);
     station_src->setVisited(true);
+
     while(!queue.empty() && !station_dest->isVisited()) {
         std::shared_ptr<Station> currStation = queue.front();
         queue.pop();
+
         for(const auto& track : currStation->getAdj()) {
             testAndVisit(queue, track, track->getDest(), track->getCapacity() - track->getFlow());
         }
+
         for(const auto& track : currStation->getIncoming()){
             testAndVisit(queue, track, track->getOrig(), track->getFlow());
         }
     }
+
     return station_dest->isVisited();
 }
 
@@ -280,13 +285,20 @@ void RailwayNetwork::deactivateTrack(const std::shared_ptr<Track>& track) {
 }
 
 double RailwayNetwork::maxTrainsTo(const std::shared_ptr<Station> &dest) {
+    this->clearNetworkUtils();
+
     double result = 0; 
     std::shared_ptr<Station> mockSource = std::make_shared<Station>();
 
-    connectSourceNodesTo(mockSource.get());
-    result = edmondsKarp(mockSource, dest);
+    std::shared_ptr<Station> real_dest = *(this->stationSet.find(dest));
 
-    mockSource->getAdj().clear();
+    connectSourceNodesTo(mockSource.get());
+    result = edmondsKarp(mockSource, real_dest);
+
+    std::vector<std::shared_ptr<Track>> mock_source_tracks = mockSource->getAdj();
+    for(auto &t: mock_source_tracks) {
+        mockSource->removeTrackAdj(t.get());
+    }
 
     return result;
 }
@@ -300,6 +312,7 @@ void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
 
         if(station->getIncoming().size() == 1) {
             Track *reverse_track = station->getIncoming().at(0).get();
+
             for(auto track: station->getAdj()) {
                 if(track->getDest().get() == reverse_track->getOrig().get() && track->getOrig().get() == reverse_track->getDest().get()) {
                     mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0);
@@ -557,3 +570,8 @@ std::vector<std::pair<std::string, double>> RailwayNetwork::topRegionsByNeeds(in
 
     return result;
 }
+
+void removeTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest) {
+
+}
+
