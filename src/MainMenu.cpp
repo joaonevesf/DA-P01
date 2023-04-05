@@ -14,7 +14,7 @@ bool MainMenu::execute() {
     std::cout << "Choose an option:" << std::endl;
     printDashes(100); std::cout << std::endl;
     std::cout << "1. Load and parse railway network" << std::endl
-              << "2. Basic Serivces Menu" << std::endl
+              << "2. Basic Services Menu" << std::endl
               << "3. Operation Cost Menu" << std::endl
               << "4. Line Failure Menu" << std::endl
               << "5. Exit" << std::endl;
