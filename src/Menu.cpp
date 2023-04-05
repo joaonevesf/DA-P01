@@ -42,7 +42,9 @@ void Menu::printPaths(Station *dest) {
                 stations.push(v);
             }
 
-            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "->" << t->getDest()->getName() << std::endl;
+            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "->" << t->getDest()->getName();
+            if(t->hasPassengerFlow()) std::cout << " (Passenger context)";
+            std::cout << std::endl;
         }
     }
 }

@@ -82,6 +82,7 @@ void RailwayNetwork::clearNetworkUtils() {
 
         for(auto &track: station->getAdj()) {
             track->setVisited(false);
+            track->setHasPassengerFlow(false);
         }
 
         if(station->getMultipleParentsPath().size() > 0) {
@@ -201,10 +202,10 @@ int RailwayNetwork::updatePath(const std::shared_ptr<Station>& station_src, std:
     return cost;
 }
 
-void RailwayNetwork::resetFlow() {
+void RailwayNetwork::resetFlowTo(double new_flow) {
     for(const auto& station : stationSet) {
         for(const auto& track : station->getAdj()) {
-            track->setFlow(0);
+            track->setFlow(new_flow);
         }
     }
 }
@@ -214,8 +215,7 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
         throw std::logic_error("Invalid source and/or target station");
     }
 
-    this->resetFlow();
-
+    this->resetFlowTo(0);
 
     while(findAugmentingPathBFS(station_src, station_dest)) {
         double minRes = findMinResidual(station_src, station_dest);
@@ -230,7 +230,7 @@ double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, 
     return result;
 }
 
-int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result) {
+int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result, bool passenger) {
     if(src->getName() == dest->getName()) return 0;
 
     int cost = 0;
@@ -239,7 +239,7 @@ int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, cons
     std::shared_ptr<Station> real_dest = *(this->stationSet.find(dest));
 
     this->clearNetworkUtils();
-    this->resetFlow();
+    this->resetFlowTo(passenger ? 1 : 0);
 
     while(findAugmentingPathDijkstra(real_src, real_dest)) {
         double minFlow = findMinResidual(real_src, real_dest);
@@ -251,17 +251,32 @@ int RailwayNetwork::findMaxFlowMinCost(const std::shared_ptr<Station> &src, cons
     }
 
     std::queue<Station *> stations;
-    stations.push(real_src.get());
+
+    stations.push(real_dest.get());
+
+    this->setPathBFS(real_src.get(), real_dest.get(), 0);
+
+    for(auto &station: this->stationSet) {
+        for(auto &track: station->getAdj()) {
+            track->setVisited(false);
+        }
+        station->setVisited(false);
+    }
+
+    real_dest->setVisited(true);
 
     while(!stations.empty()) {
         Station* currStation = stations.front();
         stations.pop();
 
-        for(const auto& track : currStation->getAdj()) {
+        for(const auto &track: currStation->getMultipleParentsPath()) {
             cost += (track->getCost() * track->getFlow());
-            if(!track->getDest()->isVisited()) {
-                stations.push(track->getDest().get());
-                track->getDest()->setVisited(true);
+
+            if(!track->isVisited()) {
+                track->setVisited(true);
+                if(!track->getOrig()->isVisited()) stations.push(track->getOrig().get());
+
+                track->getOrig()->setVisited(true);
             }
         }
     }

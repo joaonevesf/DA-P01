@@ -11,6 +11,7 @@ OperationCostOptimizationMenu::OperationCostOptimizationMenu(std::weak_ptr<Railw
 
 bool OperationCostOptimizationMenu::execute() {
     int flow_result = 0;
+    int passenger_flow_result = 0;
 
     // Construct and output path utilities
     std::vector<std::deque<Track *>> paths;
@@ -47,11 +48,7 @@ bool OperationCostOptimizationMenu::execute() {
     }
 
     int total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, flow_result);
-
-    /*for(auto &t: station_dest->getMultipleParentsPath()) {
-        current_path.clear();
-        this->railwayManager_.lock()->getRailwayNetwork()->constructPath(t, paths, current_path);
-    }*/
+    int passenger_total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, passenger_flow_result, true);
 
     this->printDashes(100);
     std::cout << std:: endl << "Results: " << std::endl;
@@ -63,6 +60,9 @@ bool OperationCostOptimizationMenu::execute() {
                   << total_cost << "€ "
                   << "to send the maximum number of trains (" << flow_result << ") possible between those two stations" << std::endl;
 
+        std::cout << "2. In the context of transporting passengers, you would need to spend "
+                  << passenger_total_cost << "€ "
+                  << "to send the maximum number of trains (" << passenger_flow_result << ") possible between those two stations" << std::endl;
         this->printDashes(100); std::cout << std::endl;
 
         std::cout << "Do you want to print the paths and the number of trains of each path?" << std::endl;
@@ -71,7 +71,9 @@ bool OperationCostOptimizationMenu::execute() {
 
         int option = this->readOption(2);
 
+        std::cout << std::endl;
         if(option == 1) printPaths(station_dest.get());
+        std::cout << std::endl;
     }
 
 

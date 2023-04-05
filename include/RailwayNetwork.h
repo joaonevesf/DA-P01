@@ -62,17 +62,16 @@ public:
     void clearNetworkUtils();
 
     void stationsInConnectedPath(Station *station_src, Station *station_dest);
-    int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result);
+    int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result, bool passenger=false);
 
     bool testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* u, Station* v, double residual, bool isDest);
 
-    void resetFlow();
+    void resetFlowTo(double new_flow);
 
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
     std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> mostUsedPairsStations();
     std::vector<std::pair<std::string, std::pair<double,double>>> topRegionsByNeeds(int k, bool isDistrict);
 protected:
-
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
     std::stack<std::shared_ptr<Track>> inactiveTracks;

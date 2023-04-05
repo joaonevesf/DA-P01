@@ -144,6 +144,13 @@ protected:
     bool active = true;
 
     bool visited = false;
+
+    bool has_passenger_flow = false;
+public:
+    bool hasPassengerFlow() const;
+
+    void setHasPassengerFlow(bool passengerFlow);
+
 public:
     bool isVisited() const;
 

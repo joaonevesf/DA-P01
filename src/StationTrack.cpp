@@ -261,4 +261,12 @@ void Track::setVisited(bool visited) {
     Track::visited = visited;
 }
 
+bool Track::hasPassengerFlow() const {
+    return this->flow == 1;
+}
+
+void Track::setHasPassengerFlow(bool passengerFlow) {
+    has_passenger_flow = passengerFlow;
+}
+
 

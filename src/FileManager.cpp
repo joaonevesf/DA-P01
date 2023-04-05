@@ -95,6 +95,14 @@ bool FileManager::readNetworkEdges(std::string filepath) {
         this->railwayNetwork->addTrack(station_left, station_right, service, std::stod(capacity_string), cost);
     }
 
+    // Agora aqui seria então para adicionar os ditos mocks
+
+    // O que é preciso de fazer?
+    // 1. A cada aresta ver se há reverso para esse
+    // 2. Se houver coloco um intermediário entre eles
+
+
+
     return true;
 }
 
