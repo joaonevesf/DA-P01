@@ -45,7 +45,7 @@ bool BasicServicesMenu::execute() {
             }
 
             std::cout << "The maximum number of trains that can simultaneously travel between those stations is "
-                      << rm->getRailwayNetwork()->edmondsKarp(station_src, station_dest) << std::endl;
+                      << rm->getRailwayNetwork()->edmondsKarp(station_src, station_dest, false) << std::endl;
 
             return true;
         case 2:

@@ -185,6 +185,14 @@ void Station::setIsMock(bool isMock) {
     Station::isMock = isMock;
 }
 
+double Station::getPreviousFlow() const {
+    return previousFlow;
+}
+
+void Station::setPreviousFlow(double previousFlow) {
+    Station::previousFlow = previousFlow;
+}
+
 // ********************************* Track *********************************
 
 Track::Track(std::shared_ptr<Station> orig, std::shared_ptr<Station> dest, std::string service, double capacity, int cost)

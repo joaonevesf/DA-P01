@@ -136,14 +136,14 @@ void LineFailuresMenu::listAffectedStations() {
     std::vector<std::shared_ptr<Station>> affectedStations = rm->getRailwayNetwork()->mostAffectedStations(k);
 
     if(affectedStations.at(0)->getLostRatio() == 0.0) {
-        std::cout << std::endl << "There are no failures in this graph" << std::endl;
+        std::cout << std::endl << "No station was affected negatively by the failures" << std::endl;
     }
     else {
         std::cout << std::endl << "Top " << k << " most affected stations:" << std::endl;
         for (int i = 0; i < k; i++) {
             auto currStation = affectedStations.at(i);
             std::cout << i + 1 << ". " << currStation->getName() << " lost " << currStation->getLostRatio() * 100
-                      << "% of its capacity" << std::endl;
+                      << "% of its flow (Initial flow: " << currStation->getPreviousFlow() << ")" << std::endl;
         }
     }
 }

@@ -77,7 +77,7 @@ public:
      * @return Verdadeiro se encontrar um caminho por onde é possível aumentar fluxo entre uma partida e uma chegada.
      * Falso, caso contrário
      */
-    bool findAugmentingPathBFS(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    bool findAugmentingPathBFS(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest, bool ignoreIsActive);
 
     /**
      * Uma variação do Dijkstra Single Source Shortest Path para um determinado destino.
@@ -97,7 +97,7 @@ public:
      * @param station_dest
      * @return O resultado do fluxo máximo
      */
-    double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+    double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest, bool isIgnoreIsActive);
 
     /**
      *
@@ -106,8 +106,8 @@ public:
      * @param station
      * @param residual
      */
-    static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, std::shared_ptr<Track> track,
-                      const std::shared_ptr<Station>& station, double residual);
+    static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, const std::shared_ptr<Track>& track,
+                      const std::shared_ptr<Station>& station, double residual, bool ignoreIsActive);
 
     /**
      *
