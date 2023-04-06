@@ -61,6 +61,7 @@ public:
      * Utilizado para percorrer o caminho entre uma partida e uma chegada e colocar todos os pais de cada aresta
      * no atributo multiple_parents_path de cada nó.
      * Esta função é util quando se pretende reconstruir o caminho pelos pais de cada nó
+     * Complexidade temporal: O(|V| + |E|), no pior dos casos o src e o dest estão entre os nós todos
      * @param src
      * @param dest
      * @param flow_min_limit O número que serve como limite numérico para determinar se o BFS ignora ou não uma linha
@@ -83,6 +84,7 @@ public:
      * Uma variação do Dijkstra Single Source Shortest Path para um determinado destino.
      * É utilizado para encontrar um caminho por onde se pode aumentar fluxo no contexto de contrar o fluxo máximo
      * pelo custo mínimo
+     * Complexidade temporal: O(Elog(V))
      * @param station_src
      * @param station_dest
      * @return Verdadeiro se encontrar um caminho por onde é possível aumentar fluxo entre uma partida e uma chegada. Falso, caso contrário
@@ -100,8 +102,10 @@ public:
     double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest, bool isIgnoreIsActive);
 
     /**
-     *
-     * @param queue
+     * Função utilizada no contexto de encontrar um agumenting path no problema do fluxo máximo para verificar
+     * se se pode adicionar fluxo por uma aresta ou pelo reverso dela ou não
+     * Complexidade Temporal: O(1)
+     * @param queue Será uma fila para onde o testAndVisit irá carregar as estações que estarão no caminho
      * @param track
      * @param station
      * @param residual
@@ -110,7 +114,9 @@ public:
                       const std::shared_ptr<Station>& station, double residual, bool ignoreIsActive);
 
     /**
-     *
+     * Percorre um caminho encontrado pelo @augmentingPathBFS por onde foi atualizado e encontra o mínimo de capacidade
+     * restante entre todas as arestas entre o destino e partida
+     * Complexidade Temporal: O(|A|), sendo |A| o nº de arestas do caminho entre um destino e uma partida
      * @param station_src
      * @param station_dest
      * @return
@@ -118,7 +124,9 @@ public:
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
 
     /**
-     *
+     * Deve ser corrida apenas depois do @findMinResidual e do @findAugmentingPathBFS
+     * Serve para pegar no resultado do findMinResidual e atualizar o fluxo em cada aresta
+     * Complexidade temporal: O(|E|) no pior dos casos
      * @param station_src
      * @param station_dest
      * @param minRes
@@ -127,29 +135,17 @@ public:
     static int updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
     /**
-     *
+     * Cria uma mock source e liga-as a todas as outras sources individuais e corre o edmonds karp começando no mock source
+     * para encontrar o número máximo de comboios que pode chegar ao dest
+     * Complexidade temporal: O(EV^2), no pior dos casos
      * @param dest
-     * @return
+     * @return O resultado do fluxo máximo entre o mock source e o destino
      */
     double maxTrainsTo(const std::shared_ptr<Station> &dest);
 
-    /**
-     * Serve para conectar uma mock source a todos os nós que sejam sources individuais.
-     * Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos considerar as várias sources
-     * ao mesmo tempo
-     * Complexidade temporal: O(|V| + |E|), no pior dos casos
-     * @param mock_source
-     */
     void connectSourceNodesTo(Station *mock_source);
 
-    /**
-     * Serve para conectar todos os nós que sejam destinos individualmente a um destino geral que será um mock sink
-     * Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos
-     * @param mock_sink
-     */
     void connectSinkNodesTo(std::shared_ptr<Station> mock_sink);
-
-    void eraseEdgesFromMockSource(Station *mock_source);
 
     void deactivateTrack(const std::shared_ptr<Track> &track);
     void deactivateStation(const std::shared_ptr<Station> &station);
