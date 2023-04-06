@@ -8,11 +8,6 @@ bool operator<(const std::shared_ptr<Station> &s1, const std::shared_ptr<Station
     return s1->getDist() < s2->getDist();
 }
 
-
-int RailwayNetwork::getNumVertex() const {
-    return stationSet.size();
-}
-
 std::unordered_set<std::shared_ptr<Station>,StationHash,StationHashEquality> RailwayNetwork::getStationSet() const {
     return stationSet;
 }
@@ -27,17 +22,6 @@ bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_
         return false;
 
     station_src->addTrack(station_dest, service, w, cost, false);
-    return true;
-}
-
-bool RailwayNetwork::addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost) {
-    if (station_src == nullptr || station_dest == nullptr)
-        return false;
-
-    auto e1 = station_src->addTrack(station_dest, service, w, cost, false);
-    auto e2 = station_dest->addTrack(station_src, service, w, cost, false);
-    e1->setReverse(e2);
-    e2->setReverse(e1);
     return true;
 }
 
@@ -418,26 +402,6 @@ void RailwayNetwork::setPathBFS(Station *src, Station *dest, double flow_min_lim
         }
 
     }
-}
-
-void RailwayNetwork::constructPath(Track *finish_track, std::vector<std::deque<Track *>> &paths, std::deque<Track *> &current_path) {
-
-    current_path.push_front(finish_track);
-
-    if(finish_track->getOrig()->getMultipleParentsPath().empty()) {
-        if (!current_path.empty()) {
-            paths.push_back(current_path);
-            current_path.clear();
-        }
-
-        return;
-    }
-
-    for (auto &t: finish_track->getOrig()->getMultipleParentsPath()) {
-        constructPath(t, paths, current_path);
-        current_path.pop_front();
-    }
-
 }
 
 std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k) {

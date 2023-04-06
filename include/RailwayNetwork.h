@@ -27,28 +27,113 @@ struct StationHashEquality {
     }
 };
 
+/**
+ * Classe que irá guardar todas as informações e métodos para manipular o grafo que representa a rede rodoviária
+ * carregada pelo utilizador
+ */
 class RailwayNetwork {
 public:
+    /**
+     * Simplesmente insere um apontador para uma estação na tabela de dispersão que tem as estações
+     * @param station Apontador para a estação a adicionar
+     * @return Retorna sempre verdadeiro a não ser que a inserção falhe
+     */
     bool addStation(std::shared_ptr<Station> station);
 
+    /**
+     * Adiciona uma linha no vetor adj do station_src, assim como também adiciona essa mesma linha ao vetor incoming
+     * do station_dest
+     * @param station_src
+     * @param station_dest
+     * @param service "ALFA PENDULAR" ou "STANDARD"
+     * @param w A capacidade dessa linha
+     * @param cost
+     * @return Falso caso os apontadores sejam NULL. Caso contrário, retorna verdadeiro.
+     */
     bool addTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost);
-    bool addBidirectionalTrack(std::shared_ptr<Station> station_src, std::shared_ptr<Station> station_dest, std::string service, double w, int cost);
 
-    int getNumVertex() const;
+    /**
+     * Esta função não tem nada de especial, é um getter normal
+     */
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> getStationSet() const;
 
+    /**
+     * Utilizado para percorrer o caminho entre uma partida e uma chegada e colocar todos os pais de cada aresta
+     * no atributo multiple_parents_path de cada nó.
+     * Esta função é util quando se pretende reconstruir o caminho pelos pais de cada nó
+     * @param src
+     * @param dest
+     * @param flow_min_limit O número que serve como limite numérico para determinar se o BFS ignora ou não uma linha
+     * mediante o seu fluxo
+     */
     void setPathBFS(Station *src, Station *dest, double flow_min_limit);
-    void constructPath(Track *finish_track, std::vector<std::deque<Track *>> &paths, std::deque<Track *> &current_path);
 
+    /**
+     * Uma variação do BFS para encontrar o caminho mais curto de peso 1 entre um source e um destino
+     * É maioritariamente utilizada como função de pathfinding no algoritmo do edmonds karp
+     * Complexidade Temporal: O(|V| + |E|) (pior dos casos)
+     * @param station_src
+     * @param station_dest
+     * @return Verdadeiro se encontrar um caminho por onde é possível aumentar fluxo entre uma partida e uma chegada.
+     * Falso, caso contrário
+     */
     bool findAugmentingPathBFS(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+
+    /**
+     * Uma variação do Dijkstra Single Source Shortest Path para um determinado destino.
+     * É utilizado para encontrar um caminho por onde se pode aumentar fluxo no contexto de contrar o fluxo máximo
+     * pelo custo mínimo
+     * @param station_src
+     * @param station_dest
+     * @return Verdadeiro se encontrar um caminho por onde é possível aumentar fluxo entre uma partida e uma chegada. Falso, caso contrário
+     */
     bool findAugmentingPathDijkstra(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+
+    /**
+     * Aplicação sem muitas alterações do algoritmo do edmonds karp para encontrar o fluxo máximo
+     * entre uma estação de chegada e outra de partida
+     * Complexidade temporal: O(VE^2)
+     * @param station_src
+     * @param station_dest
+     * @return O resultado do fluxo máximo
+     */
     double edmondsKarp(const std::shared_ptr<Station> &station_src, const std::shared_ptr<Station> &station_dest);
+
+    /**
+     *
+     * @param queue
+     * @param track
+     * @param station
+     * @param residual
+     */
     static void testAndVisit(std::queue<std::shared_ptr<Station>> &queue, std::shared_ptr<Track> track,
                       const std::shared_ptr<Station>& station, double residual);
+
+    /**
+     *
+     * @param station_src
+     * @param station_dest
+     * @return
+     */
     static double findMinResidual(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest);
+
+    /**
+     *
+     * @param station_src
+     * @param station_dest
+     * @param minRes
+     * @return
+     */
     static int updatePath(const std::shared_ptr<Station> &station_src, std::shared_ptr<Station> station_dest, double minRes);
 
+    /**
+     *
+     * @param dest
+     * @return
+     */
     double maxTrainsTo(const std::shared_ptr<Station> &dest);
+
+
     void connectSourceNodesTo(Station *mock_source);
     void connectSinkNodesTo(std::shared_ptr<Station> mock_sink);
 
