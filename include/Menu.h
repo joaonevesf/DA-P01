@@ -12,6 +12,10 @@
 class RailwayManager;
 class Station;
 
+/**
+ * Esta classe serve de uma classe genérica com todas as funções e atributos que serão acessíveis pelo resto
+ * das implentações concretas dos menus
+ */
 class Menu {
 public:
     Menu(std::weak_ptr<RailwayManager> railwayManager);
