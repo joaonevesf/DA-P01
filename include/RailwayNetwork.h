@@ -238,12 +238,14 @@ public:
      * @return vetor com o nome das regiões com maior razão fluxo por capacidade e os respetivos fluxos e capacidades
      */
     std::vector<std::pair<std::string, std::pair<double,double>>> topRegionsByNeeds(int k, bool isDistrict);
-protected:
 
+protected:
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
     std::stack<std::shared_ptr<Track>> inactiveTracks;
+
     std::stack<std::shared_ptr<Station>> inactiveStations;
+
     std::stack<char> deletionRecord;
 };
 
