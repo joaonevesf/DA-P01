@@ -1,0 +1,60 @@
+\hypertarget{classMenu}{}\doxysection{Menu Class Reference}
+\label{classMenu}\index{Menu@{Menu}}
+Inheritance diagram for Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.089552cm]{classMenu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a44580fa8b34289996aab64cc5aa3b6af}\label{classMenu_a44580fa8b34289996aab64cc5aa3b6af}} 
+{\bfseries Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+\mbox{\Hypertarget{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}\label{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}} 
+virtual bool {\bfseries execute} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}{print\+Dashes}} (int length)
+\item 
+\mbox{\Hypertarget{classMenu_af98960bc5360621bc9c57e267119b236}\label{classMenu_af98960bc5360621bc9c57e267119b236}} 
+void {\bfseries print\+Paths} (\mbox{\hyperlink{classStation}{Station}} $\ast$dest)
+\item 
+\mbox{\Hypertarget{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}\label{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Station} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}\label{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}} 
+static bool {\bfseries get\+Numerical\+Input} (int \&selected\+Option)
+\item 
+\mbox{\Hypertarget{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}\label{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}} 
+static bool {\bfseries get\+String\+Input} (std\+::string \&s)
+\item 
+\mbox{\Hypertarget{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}\label{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}} 
+static int {\bfseries read\+Option} (int number\+Of\+Options)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a9ad82b2c98131f56605b28b7dbd01406}\label{classMenu_a9ad82b2c98131f56605b28b7dbd01406}} 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ {\bfseries railway\+Manager\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}\label{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}} 
+\index{Menu@{Menu}!printDashes@{printDashes}}
+\index{printDashes@{printDashes}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{printDashes()}{printDashes()}}
+{\footnotesize\ttfamily void Menu\+::print\+Dashes (\begin{DoxyParamCaption}\item[{int}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Used to print length dashes. It does not print any new line characters. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Menu.\+h\end{DoxyCompactItemize}

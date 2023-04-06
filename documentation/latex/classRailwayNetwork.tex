@@ -1,0 +1,115 @@
+\hypertarget{classRailwayNetwork}{}\doxysection{Railway\+Network Class Reference}
+\label{classRailwayNetwork}\index{RailwayNetwork@{RailwayNetwork}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a46f5f12d0e5e404e1c2ade4521282554}\label{classRailwayNetwork_a46f5f12d0e5e404e1c2ade4521282554}} 
+bool {\bfseries add\+Station} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a65054a6d76bcc7fb235d3da34e620467}\label{classRailwayNetwork_a65054a6d76bcc7fb235d3da34e620467}} 
+bool {\bfseries add\+Track} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest, std\+::string service, double w, int cost)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a7ac9f23bc6f5b1cf9b385ecd63523d24}\label{classRailwayNetwork_a7ac9f23bc6f5b1cf9b385ecd63523d24}} 
+bool {\bfseries add\+Bidirectional\+Track} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest, std\+::string service, double w, int cost)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a419e50aa8f1037edc896a93a8a611843}\label{classRailwayNetwork_a419e50aa8f1037edc896a93a8a611843}} 
+int {\bfseries get\+Num\+Vertex} () const
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ab775af7394f0f730cdbaefe22f2f77d8}\label{classRailwayNetwork_ab775af7394f0f730cdbaefe22f2f77d8}} 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, \mbox{\hyperlink{structStationHash}{Station\+Hash}}, \mbox{\hyperlink{structStationHashEquality}{Station\+Hash\+Equality}} $>$ {\bfseries get\+Station\+Set} () const
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a79da9abbce4b05f0ecec458059f408ea}\label{classRailwayNetwork_a79da9abbce4b05f0ecec458059f408ea}} 
+void {\bfseries set\+Path\+BFS} (\mbox{\hyperlink{classStation}{Station}} $\ast$src, \mbox{\hyperlink{classStation}{Station}} $\ast$dest, double flow\+\_\+min\+\_\+limit)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a78cdad9d46a508ba81d8f0976bc525d9}\label{classRailwayNetwork_a78cdad9d46a508ba81d8f0976bc525d9}} 
+void {\bfseries construct\+Path} (\mbox{\hyperlink{classTrack}{Track}} $\ast$finish\+\_\+track, std\+::vector$<$ std\+::deque$<$ \mbox{\hyperlink{classTrack}{Track}} $\ast$ $>$ $>$ \&paths, std\+::deque$<$ \mbox{\hyperlink{classTrack}{Track}} $\ast$ $>$ \&current\+\_\+path)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a4987acf16fb4656e673e2644079fa467}\label{classRailwayNetwork_a4987acf16fb4656e673e2644079fa467}} 
+bool {\bfseries find\+Augmenting\+Path\+BFS} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ac3c90463038c43b3efdda790a04a0eb8}\label{classRailwayNetwork_ac3c90463038c43b3efdda790a04a0eb8}} 
+bool {\bfseries find\+Augmenting\+Path\+Dijkstra} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a661877a6da5189011f72e2a0f1b989c6}\label{classRailwayNetwork_a661877a6da5189011f72e2a0f1b989c6}} 
+double {\bfseries edmonds\+Karp} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ab5b9a8d2d37bcf631a8c3dcd23477d9d}\label{classRailwayNetwork_ab5b9a8d2d37bcf631a8c3dcd23477d9d}} 
+double {\bfseries max\+Trains\+To} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ad4d18c2fe1a92ebd4a5ff5927903fb64}\label{classRailwayNetwork_ad4d18c2fe1a92ebd4a5ff5927903fb64}} 
+void {\bfseries connect\+Source\+Nodes\+To} (\mbox{\hyperlink{classStation}{Station}} $\ast$mock\+\_\+source)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a993657bdcab6e390a4d7374bf88bd411}\label{classRailwayNetwork_a993657bdcab6e390a4d7374bf88bd411}} 
+void {\bfseries connect\+Sink\+Nodes\+To} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ mock\+\_\+sink)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a36a0e832cf0e34fdb3f964e6b1f63bb6}\label{classRailwayNetwork_a36a0e832cf0e34fdb3f964e6b1f63bb6}} 
+void {\bfseries erase\+Edges\+From\+Mock\+Source} (\mbox{\hyperlink{classStation}{Station}} $\ast$mock\+\_\+source)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a6561d62fe8f7555082918df0b8e166e7}\label{classRailwayNetwork_a6561d62fe8f7555082918df0b8e166e7}} 
+void {\bfseries deactivate\+Track} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ \&track)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a4d7e2b4358df2fe75dfb83cdce7cda63}\label{classRailwayNetwork_a4d7e2b4358df2fe75dfb83cdce7cda63}} 
+void {\bfseries deactivate\+Station} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ace1ea4a52964853b4b6cd4d4de4118b6}\label{classRailwayNetwork_ace1ea4a52964853b4b6cd4d4de4118b6}} 
+void {\bfseries undo\+Last\+Deletion} ()
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ae7b58bcf4794d6dfc9614b6a2bf80fe2}\label{classRailwayNetwork_ae7b58bcf4794d6dfc9614b6a2bf80fe2}} 
+void {\bfseries undo\+All\+Deletions} ()
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a8be7fff60bde2a91593d44a0b860f946}\label{classRailwayNetwork_a8be7fff60bde2a91593d44a0b860f946}} 
+void {\bfseries clear\+Network\+Utils} ()
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_afc056f3fbc2051231c092738d7479c98}\label{classRailwayNetwork_afc056f3fbc2051231c092738d7479c98}} 
+void {\bfseries stations\+In\+Connected\+Path} (\mbox{\hyperlink{classStation}{Station}} $\ast$station\+\_\+src, \mbox{\hyperlink{classStation}{Station}} $\ast$station\+\_\+dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a8370e6591149c3ff52f12f33c9580398}\label{classRailwayNetwork_a8370e6591149c3ff52f12f33c9580398}} 
+int {\bfseries find\+Max\+Flow\+Min\+Cost} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&dest, int \&flow\+\_\+result)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a7e4173ad5d3cf73a206f990d17b0435c}\label{classRailwayNetwork_a7e4173ad5d3cf73a206f990d17b0435c}} 
+bool {\bfseries test\+And\+Visit\+Dijkstra} (std\+::queue$<$ \mbox{\hyperlink{classStation}{Station}} $\ast$ $>$ \&queue, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ track, \mbox{\hyperlink{classStation}{Station}} $\ast$u, \mbox{\hyperlink{classStation}{Station}} $\ast$v, double residual, bool is\+Dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a46cfaaee1c567e5dd737fdaf7c69f3b4}\label{classRailwayNetwork_a46cfaaee1c567e5dd737fdaf7c69f3b4}} 
+void {\bfseries reset\+Flow} ()
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ad023091aa41c91284330eae3e1e78fe1}\label{classRailwayNetwork_ad023091aa41c91284330eae3e1e78fe1}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ {\bfseries most\+Affected\+Stations} (int k)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a03b0a4ac735ed151e1e9abec87979492}\label{classRailwayNetwork_a03b0a4ac735ed151e1e9abec87979492}} 
+std\+::set$<$ std\+::pair$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ $>$ {\bfseries most\+Used\+Pairs\+Stations} ()
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_ab726771cb5d71d0c76cf4eebe51ce25d}\label{classRailwayNetwork_ab726771cb5d71d0c76cf4eebe51ce25d}} 
+std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ $>$ {\bfseries top\+Regions\+By\+Needs} (int k, bool is\+District)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a9708f91b9e0887d0a5ce8a09c3a940d0}\label{classRailwayNetwork_a9708f91b9e0887d0a5ce8a09c3a940d0}} 
+static void {\bfseries test\+And\+Visit} (std\+::queue$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ \&queue, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ track, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station, double residual)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_abb7278eb7354e5cc73cd80adf2b2ad07}\label{classRailwayNetwork_abb7278eb7354e5cc73cd80adf2b2ad07}} 
+static double {\bfseries find\+Min\+Residual} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest)
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_aa45686bc2f4a1789177e644516e0fd16}\label{classRailwayNetwork_aa45686bc2f4a1789177e644516e0fd16}} 
+static int {\bfseries update\+Path} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest, double min\+Res)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a989d1f0c6a668344820a38402da6d93f}\label{classRailwayNetwork_a989d1f0c6a668344820a38402da6d93f}} 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, \mbox{\hyperlink{structStationHash}{Station\+Hash}}, \mbox{\hyperlink{structStationHashEquality}{Station\+Hash\+Equality}} $>$ {\bfseries station\+Set}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a470a0ec05ce3c7ba03c533fe672d5953}\label{classRailwayNetwork_a470a0ec05ce3c7ba03c533fe672d5953}} 
+std\+::stack$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ $>$ {\bfseries inactive\+Tracks}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a3c4bf2d11880f91bdcc6ea79cddf8a01}\label{classRailwayNetwork_a3c4bf2d11880f91bdcc6ea79cddf8a01}} 
+std\+::stack$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ {\bfseries inactive\+Stations}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a468b2828f6a2b11c4739d5fde39c021b}\label{classRailwayNetwork_a468b2828f6a2b11c4739d5fde39c021b}} 
+std\+::stack$<$ char $>$ {\bfseries deletion\+Record}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Railway\+Network.\+h\end{DoxyCompactItemize}

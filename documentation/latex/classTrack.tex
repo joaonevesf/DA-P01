@@ -1,0 +1,97 @@
+\hypertarget{classTrack}{}\doxysection{Track Class Reference}
+\label{classTrack}\index{Track@{Track}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTrack_a1d3430f8740e7573999fbc6b87c47554}\label{classTrack_a1d3430f8740e7573999fbc6b87c47554}} 
+{\bfseries Track} (\mbox{\hyperlink{classStation}{Station}} $\ast$orig, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ dest, std\+::string service, double capacity, int cost)
+\item 
+\mbox{\Hypertarget{classTrack_ac632d42f603ddd8580be0a9ebee2be38}\label{classTrack_ac632d42f603ddd8580be0a9ebee2be38}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Dest} () const
+\item 
+\mbox{\Hypertarget{classTrack_a48bc2ccdd6c34219f31a59f4878ae998}\label{classTrack_a48bc2ccdd6c34219f31a59f4878ae998}} 
+double {\bfseries get\+Capacity} () const
+\item 
+\mbox{\Hypertarget{classTrack_a51274bba133c0690f7e7598fbd56884f}\label{classTrack_a51274bba133c0690f7e7598fbd56884f}} 
+bool {\bfseries is\+Selected} () const
+\item 
+\mbox{\Hypertarget{classTrack_a6673b81d23b317364deeaf75d8ceba7f}\label{classTrack_a6673b81d23b317364deeaf75d8ceba7f}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Orig} () const
+\item 
+\mbox{\Hypertarget{classTrack_a3b307aef4c2f01227c48d00d751e94c9}\label{classTrack_a3b307aef4c2f01227c48d00d751e94c9}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ {\bfseries get\+Reverse} () const
+\item 
+\mbox{\Hypertarget{classTrack_a003bcc14ad483caadcc88a6b16d7a8ee}\label{classTrack_a003bcc14ad483caadcc88a6b16d7a8ee}} 
+double {\bfseries get\+Flow} () const
+\item 
+\mbox{\Hypertarget{classTrack_af265a526af551c1c1b1a15f0a99630d6}\label{classTrack_af265a526af551c1c1b1a15f0a99630d6}} 
+std\+::string {\bfseries get\+Service} () const
+\item 
+\mbox{\Hypertarget{classTrack_aed0f65be05429babaabc94a08c814eb3}\label{classTrack_aed0f65be05429babaabc94a08c814eb3}} 
+void {\bfseries set\+Selected} (bool selected)
+\item 
+\mbox{\Hypertarget{classTrack_af12bfe033eac12c4e638e7ad13fdd079}\label{classTrack_af12bfe033eac12c4e638e7ad13fdd079}} 
+void {\bfseries set\+Reverse} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ reverse)
+\item 
+\mbox{\Hypertarget{classTrack_a9891862cfa0ecc71909bba78c5ce19c1}\label{classTrack_a9891862cfa0ecc71909bba78c5ce19c1}} 
+void {\bfseries set\+Flow} (double flow)
+\item 
+\mbox{\Hypertarget{classTrack_a7d299d138306b2d1965e552c33921861}\label{classTrack_a7d299d138306b2d1965e552c33921861}} 
+void {\bfseries set\+Capacity} (double capacity)
+\item 
+\mbox{\Hypertarget{classTrack_a8b9fd61aab6170fc1741a7ff6f4ce45f}\label{classTrack_a8b9fd61aab6170fc1741a7ff6f4ce45f}} 
+int {\bfseries get\+Cost} () const
+\item 
+\mbox{\Hypertarget{classTrack_aafa218a534905b13feb0e8af3e423ecb}\label{classTrack_aafa218a534905b13feb0e8af3e423ecb}} 
+void {\bfseries set\+Cost} (int cost)
+\item 
+\mbox{\Hypertarget{classTrack_a678692200bfb361094176b6cc4daf2ea}\label{classTrack_a678692200bfb361094176b6cc4daf2ea}} 
+bool {\bfseries is\+Active} () const
+\item 
+\mbox{\Hypertarget{classTrack_ae87b0296cfceb99d4d207f88284d815f}\label{classTrack_ae87b0296cfceb99d4d207f88284d815f}} 
+void {\bfseries set\+Active} (bool active)
+\item 
+\mbox{\Hypertarget{classTrack_af5ecca3d6a4a55745cb0cdf078c8df4f}\label{classTrack_af5ecca3d6a4a55745cb0cdf078c8df4f}} 
+bool {\bfseries is\+Visited} () const
+\item 
+\mbox{\Hypertarget{classTrack_a49ec4265b9cd6250debb5b316e9e6bc1}\label{classTrack_a49ec4265b9cd6250debb5b316e9e6bc1}} 
+void {\bfseries set\+Visited} (bool visited)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTrack_a1ba7561f89639d0249b2bdbd1a6b7608}\label{classTrack_a1ba7561f89639d0249b2bdbd1a6b7608}} 
+std\+::string {\bfseries service}
+\item 
+\mbox{\Hypertarget{classTrack_ad2dfb9f03eb9943cef003f58fc278b14}\label{classTrack_ad2dfb9f03eb9943cef003f58fc278b14}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries dest}
+\item 
+\mbox{\Hypertarget{classTrack_a4243b2dca8db217e5c7786b43bf65684}\label{classTrack_a4243b2dca8db217e5c7786b43bf65684}} 
+double {\bfseries capacity}
+\item 
+\mbox{\Hypertarget{classTrack_a9ac8224f664a29c9c741d2ecc02a30a2}\label{classTrack_a9ac8224f664a29c9c741d2ecc02a30a2}} 
+int {\bfseries cost}
+\item 
+\mbox{\Hypertarget{classTrack_ad89e0925ca752fe364da7ab100143511}\label{classTrack_ad89e0925ca752fe364da7ab100143511}} 
+bool {\bfseries selected} = false
+\item 
+\mbox{\Hypertarget{classTrack_ae59a90106908b90e170cde5c81070e5a}\label{classTrack_ae59a90106908b90e170cde5c81070e5a}} 
+bool {\bfseries active} = true
+\item 
+\mbox{\Hypertarget{classTrack_a81a94c81b10e9eed065fe16f3a8cf8fd}\label{classTrack_a81a94c81b10e9eed065fe16f3a8cf8fd}} 
+bool {\bfseries visited} = false
+\item 
+\mbox{\Hypertarget{classTrack_a45ddfe90c104c83f2f2d0c98d8597df5}\label{classTrack_a45ddfe90c104c83f2f2d0c98d8597df5}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries orig}
+\item 
+\mbox{\Hypertarget{classTrack_aa7b27a13d78d628a9576a887b8fe09d4}\label{classTrack_aa7b27a13d78d628a9576a887b8fe09d4}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ {\bfseries reverse} = nullptr
+\item 
+\mbox{\Hypertarget{classTrack_aae82604e684c6d41588b93cd9324f481}\label{classTrack_aae82604e684c6d41588b93cd9324f481}} 
+double {\bfseries flow}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Station\+Track.\+h\end{DoxyCompactItemize}

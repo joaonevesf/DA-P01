@@ -1,0 +1,167 @@
+\hypertarget{StationTrack_8h_source}{}\doxysection{Station\+Track.\+h}
+\label{StationTrack_8h_source}\index{/home/tomaspalma/DA-\/P01/include/StationTrack.h@{/home/tomaspalma/DA-\/P01/include/StationTrack.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STATION\_TRACK}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STATION\_TRACK}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTrack}{Track}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ INF\ std::numeric\_limits<double>::max()}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ *********************************\ Station\ *********************************}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classStation}{Station}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classStation}{Station}}(std::string\ name,\ std::string\ district,\ std::string\ municipality,\ std::string\ township,\ std::string\ line);}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classStation}{Station}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator<(\textcolor{keyword}{const}\ \mbox{\hyperlink{classStation}{Station}}\ \&s2)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>dist\ <\ s2.getDist();}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ std::vector<std::shared\_ptr<Track>>\ getAdj()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ isVisited()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{double}\ getDist()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ std::shared\_ptr<Track>getPath()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \ \ std::vector<std::shared\_ptr<Track>>\ getIncoming()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ queueIndex;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ setVisited(\textcolor{keywordtype}{bool}\ visited);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ setDist(\textcolor{keywordtype}{double}\ dist);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ setPath(std::shared\_ptr<Track>\ path);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ std::shared\_ptr<Track>\ addTrack(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\&\ dest,\ \textcolor{keyword}{const}\ std::string\&\ service,\ \textcolor{keywordtype}{double}\ w,\ \textcolor{keywordtype}{int}\ cost,\ \textcolor{keywordtype}{bool}\ noIncoming);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ removeTrack(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\&\ station\_dest);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&getName()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ setName(\textcolor{keyword}{const}\ std::string\ \&name);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&getDistrict()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ setDistrict(\textcolor{keyword}{const}\ std::string\ \&district);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&getMunicipality()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ setMunicipality(\textcolor{keyword}{const}\ std::string\ \&municipality);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&getTownship()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ setTownship(\textcolor{keyword}{const}\ std::string\ \&township);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&getLine()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ setLine(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ isActive()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ setActive(\textcolor{keywordtype}{bool}\ active);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ [[nodiscard]]\ std::vector<Track\ *>\ getMultipleParentsPath()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ clearMultipleParentsPath();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ getTotalCapacity()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ setTotalCapacity(\textcolor{keywordtype}{int}\ totalCapacity);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ getLostRatio()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ setLostRatio(\textcolor{keywordtype}{double}\ lostRatio);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ removeTrackAdj(\mbox{\hyperlink{classTrack}{Track}}*\ track);}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ removeTrackIncoming(\mbox{\hyperlink{classTrack}{Track}}\ *track);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ addToMultipleParents(\mbox{\hyperlink{classTrack}{Track}}\ *t);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ clearAdj();}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ isInPath()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ setIsInPath(\textcolor{keywordtype}{bool}\ isInPath);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{bool}\ isMock1()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ setIsMock(\textcolor{keywordtype}{bool}\ isMock);}
+\DoxyCodeLine{00085\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00086\ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00087\ \ \ \ \ std::string\ district;}
+\DoxyCodeLine{00088\ \ \ \ \ std::string\ municipality;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ std::string\ township;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00093\ \ \ \ \ std::vector<std::shared\_ptr<Track>>\ adj;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ std::vector<std::shared\_ptr<Track>>\ incoming;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{double}\ dist\ =\ 0;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ isMock\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{double}\ lostRatio;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ std::shared\_ptr<Track>parent\_path\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ std::vector<Track\ *>\ multiple\_parents\_path;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ inPath\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ visited\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ active\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00109\ \};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{comment}{//\ *********************************\ Track\ *********************************}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTrack}{Track}}\ \{}
+\DoxyCodeLine{00114\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classTrack}{Track}}(\mbox{\hyperlink{classStation}{Station}}*\ orig,\ std::shared\_ptr<Station>\ dest,\ std::string\ service,\ \textcolor{keywordtype}{double}\ capacity,\ \textcolor{keywordtype}{int}\ cost);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ std::shared\_ptr<Station>\ getDest()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{double}\ getCapacity()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{bool}\ isSelected()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00120\ \ \ \ \ std::shared\_ptr<Station>\ getOrig()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00121\ \ \ \ \ std::shared\_ptr<Track>\ getReverse()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{double}\ getFlow()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00123\ \ \ \ \ std::string\ getService()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ setSelected(\textcolor{keywordtype}{bool}\ selected);}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ setReverse(std::shared\_ptr<Track>\ reverse);}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ setFlow(\textcolor{keywordtype}{double}\ flow);}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ setCapacity(\textcolor{keywordtype}{double}\ capacity);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{int}\ getCost()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ setCost(\textcolor{keywordtype}{int}\ cost);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{bool}\ isActive()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ setActive(\textcolor{keywordtype}{bool}\ active);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00138\ \ \ \ \ std::string\ service;}
+\DoxyCodeLine{00139\ \ \ \ \ std::shared\_ptr<Station>\ dest;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{double}\ capacity;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{int}\ cost;}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{bool}\ selected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ active\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{bool}\ visited\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00147\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{bool}\ isVisited()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ setVisited(\textcolor{keywordtype}{bool}\ visited);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ used\ for\ bidirectional\ edges}}
+\DoxyCodeLine{00155\ \ \ \ \ std::shared\_ptr<Station>\ orig;}
+\DoxyCodeLine{00156\ \ \ \ \ std::shared\_ptr<Track>\ reverse\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{double}\ flow;}
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

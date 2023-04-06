@@ -27,7 +27,7 @@ protected:
     static int readOption(int numberOfOptions);
 
 
-    void printPaths(Station *dest);
+    std::string printPaths(Station *dest);
 
     std::shared_ptr<Station> getStation(const std::string& name);
 };

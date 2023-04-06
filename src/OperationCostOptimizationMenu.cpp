@@ -48,7 +48,10 @@ bool OperationCostOptimizationMenu::execute() {
     }
 
     int total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, flow_result);
+    std::string non_passenger_path = printPaths(station_dest.get());
+
     int passenger_total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, passenger_flow_result, true);
+    std::string passenger_path = printPaths(station_dest.get());
 
     this->printDashes(100);
     std::cout << std:: endl << "Results: " << std::endl;
@@ -72,7 +75,14 @@ bool OperationCostOptimizationMenu::execute() {
         int option = this->readOption(2);
 
         std::cout << std::endl;
-        if(option == 1) printPaths(station_dest.get());
+        if(option == 1) {
+            this->printDashes(20); std::cout << "Non passenger context" << std::endl;
+            std::cout << non_passenger_path;
+
+            this->printDashes(20); std::cout << "Passenger context" << std::endl;
+            std::cout << passenger_path;
+        }
+
         std::cout << std::endl;
     }
 

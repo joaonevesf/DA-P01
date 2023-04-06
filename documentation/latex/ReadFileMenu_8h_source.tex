@@ -1,0 +1,30 @@
+\hypertarget{ReadFileMenu_8h_source}{}\doxysection{Read\+File\+Menu.\+h}
+\label{ReadFileMenu_8h_source}\index{/home/tomaspalma/DA-\/P01/include/ReadFileMenu.h@{/home/tomaspalma/DA-\/P01/include/ReadFileMenu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ P1\_READFILEMENU\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ P1\_READFILEMENU\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ FILES\_FOLDER\ "{}../Project1Data/"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Menu.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}FileManager.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classReadFileMenu}{ReadFileMenu}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classMenu}{Menu}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classReadFileMenu}{ReadFileMenu}}(std::weak\_ptr<RailwayManager>\ railwayManager);}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ execute()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ showFileReadOptions(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ chooseFiles(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ chooseEdgesFile(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ chooseStationsFile(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,96 @@
+\hypertarget{classMainMenu}{}\doxysection{Main\+Menu Class Reference}
+\label{classMainMenu}\index{MainMenu@{MainMenu}}
+Inheritance diagram for Main\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classMainMenu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMainMenu_ae0ce021da0616a0decabc29b484514f8}\label{classMainMenu_ae0ce021da0616a0decabc29b484514f8}} 
+{\bfseries Main\+Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+bool \mbox{\hyperlink{classMainMenu_ac6f70622ae65878b8289bf98302fd2f8}{execute}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classReadFileMenu}{Read\+File\+Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReadFileMenu_a16a7dcf8a923f5513e673109822aff21}\label{classReadFileMenu_a16a7dcf8a923f5513e673109822aff21}} 
+{\bfseries Read\+File\+Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+bool \mbox{\hyperlink{classReadFileMenu_ac33707aaeda9dbaa5cffae4991424826}{execute}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a44580fa8b34289996aab64cc5aa3b6af}\label{classMenu_a44580fa8b34289996aab64cc5aa3b6af}} 
+{\bfseries Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+\mbox{\Hypertarget{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}\label{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}} 
+virtual bool {\bfseries execute} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classReadFileMenu}{Read\+File\+Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReadFileMenu_a2016158bb8ab167b915db51fd509faa4}\label{classReadFileMenu_a2016158bb8ab167b915db51fd509faa4}} 
+bool {\bfseries show\+File\+Read\+Options} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\item 
+\mbox{\Hypertarget{classReadFileMenu_ada0aedf8f91ec529ac8253dfc7a5c21a}\label{classReadFileMenu_ada0aedf8f91ec529ac8253dfc7a5c21a}} 
+bool {\bfseries choose\+Files} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\item 
+\mbox{\Hypertarget{classReadFileMenu_a91c0f33a02c45ffd21786551ec28c59e}\label{classReadFileMenu_a91c0f33a02c45ffd21786551ec28c59e}} 
+bool {\bfseries choose\+Edges\+File} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\item 
+\mbox{\Hypertarget{classReadFileMenu_a020b30638cc98d9f24b4f3f95a51c728}\label{classReadFileMenu_a020b30638cc98d9f24b4f3f95a51c728}} 
+bool {\bfseries choose\+Stations\+File} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}{print\+Dashes}} (int length)
+\item 
+\mbox{\Hypertarget{classMenu_af98960bc5360621bc9c57e267119b236}\label{classMenu_af98960bc5360621bc9c57e267119b236}} 
+void {\bfseries print\+Paths} (\mbox{\hyperlink{classStation}{Station}} $\ast$dest)
+\item 
+\mbox{\Hypertarget{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}\label{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Station} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}\label{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}} 
+static bool {\bfseries get\+Numerical\+Input} (int \&selected\+Option)
+\item 
+\mbox{\Hypertarget{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}\label{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}} 
+static bool {\bfseries get\+String\+Input} (std\+::string \&s)
+\item 
+\mbox{\Hypertarget{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}\label{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}} 
+static int {\bfseries read\+Option} (int number\+Of\+Options)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a9ad82b2c98131f56605b28b7dbd01406}\label{classMenu_a9ad82b2c98131f56605b28b7dbd01406}} 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ {\bfseries railway\+Manager\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMainMenu_ac6f70622ae65878b8289bf98302fd2f8}\label{classMainMenu_ac6f70622ae65878b8289bf98302fd2f8}} 
+\index{MainMenu@{MainMenu}!execute@{execute}}
+\index{execute@{execute}!MainMenu@{MainMenu}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily bool Main\+Menu\+::execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classMenu}{Menu}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Main\+Menu.\+h\end{DoxyCompactItemize}

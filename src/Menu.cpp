@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <utility>
+#include <sstream>
 
 Menu::Menu(std::weak_ptr<RailwayManager> railwayManager) : railwayManager_(std::move(railwayManager)){}
 
@@ -21,7 +22,9 @@ bool Menu::getNumericalInput(int &selectedOption) {
     return true;
 }
 
-void Menu::printPaths(Station *dest) {
+std::string Menu::printPaths(Station *dest) {
+    std::ostringstream oss;
+
     std::queue<Station *> stations;
     stations.push(dest);
 
@@ -42,11 +45,11 @@ void Menu::printPaths(Station *dest) {
                 stations.push(v);
             }
 
-            std::cout << t->getOrig()->getName() << "-" << t->getFlow() << "->" << t->getDest()->getName();
-            if(t->hasPassengerFlow()) std::cout << " (Passenger context)";
-            std::cout << std::endl;
+            oss << t->getOrig()->getName() << "-" << t->getFlow() << "->" << t->getDest()->getName() << std::endl;
         }
     }
+
+    return oss.str();
 }
 
 void Menu::printDashes(int length) {

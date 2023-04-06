@@ -1,0 +1,88 @@
+\hypertarget{classLineFailuresMenu}{}\doxysection{Line\+Failures\+Menu Class Reference}
+\label{classLineFailuresMenu}\index{LineFailuresMenu@{LineFailuresMenu}}
+Inheritance diagram for Line\+Failures\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLineFailuresMenu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLineFailuresMenu_aec7c0125785640948e3f8af0bce10304}\label{classLineFailuresMenu_aec7c0125785640948e3f8af0bce10304}} 
+{\bfseries Line\+Failures\+Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+bool \mbox{\hyperlink{classLineFailuresMenu_a0c66f10fc1b4ea94731912395135ed25}{execute}} () override
+\item 
+\mbox{\Hypertarget{classLineFailuresMenu_a2737dabbcf9e2c28e324a2741cc91956}\label{classLineFailuresMenu_a2737dabbcf9e2c28e324a2741cc91956}} 
+bool {\bfseries delete\+Track\+Station\+Menu} ()
+\item 
+\mbox{\Hypertarget{classLineFailuresMenu_aa069c8f90518c7b6267454c8006c7e06}\label{classLineFailuresMenu_aa069c8f90518c7b6267454c8006c7e06}} 
+void {\bfseries delete\+Track} ()
+\item 
+\mbox{\Hypertarget{classLineFailuresMenu_a917124126fd13db6cec3f70c78aff57f}\label{classLineFailuresMenu_a917124126fd13db6cec3f70c78aff57f}} 
+void {\bfseries delete\+Station} ()
+\item 
+\mbox{\Hypertarget{classLineFailuresMenu_aab2df0e81532862990df3dbfd103f492}\label{classLineFailuresMenu_aab2df0e81532862990df3dbfd103f492}} 
+void {\bfseries list\+Affected\+Stations} ()
+\item 
+\mbox{\Hypertarget{classLineFailuresMenu_a434c62bb7330ac91cbba6497d631b646}\label{classLineFailuresMenu_a434c62bb7330ac91cbba6497d631b646}} 
+bool {\bfseries undo\+Actions\+Menu} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a44580fa8b34289996aab64cc5aa3b6af}\label{classMenu_a44580fa8b34289996aab64cc5aa3b6af}} 
+{\bfseries Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+\mbox{\Hypertarget{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}\label{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}} 
+virtual bool {\bfseries execute} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}{print\+Dashes}} (int length)
+\item 
+\mbox{\Hypertarget{classMenu_af98960bc5360621bc9c57e267119b236}\label{classMenu_af98960bc5360621bc9c57e267119b236}} 
+void {\bfseries print\+Paths} (\mbox{\hyperlink{classStation}{Station}} $\ast$dest)
+\item 
+\mbox{\Hypertarget{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}\label{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Station} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}\label{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}} 
+static bool {\bfseries get\+Numerical\+Input} (int \&selected\+Option)
+\item 
+\mbox{\Hypertarget{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}\label{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}} 
+static bool {\bfseries get\+String\+Input} (std\+::string \&s)
+\item 
+\mbox{\Hypertarget{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}\label{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}} 
+static int {\bfseries read\+Option} (int number\+Of\+Options)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a9ad82b2c98131f56605b28b7dbd01406}\label{classMenu_a9ad82b2c98131f56605b28b7dbd01406}} 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ {\bfseries railway\+Manager\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLineFailuresMenu_a0c66f10fc1b4ea94731912395135ed25}\label{classLineFailuresMenu_a0c66f10fc1b4ea94731912395135ed25}} 
+\index{LineFailuresMenu@{LineFailuresMenu}!execute@{execute}}
+\index{execute@{execute}!LineFailuresMenu@{LineFailuresMenu}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily bool Line\+Failures\+Menu\+::execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classMenu}{Menu}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Line\+Failures\+Menu.\+h\end{DoxyCompactItemize}

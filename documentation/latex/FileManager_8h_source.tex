@@ -1,0 +1,27 @@
+\hypertarget{FileManager_8h_source}{}\doxysection{File\+Manager.\+h}
+\label{FileManager_8h_source}\index{/home/tomaspalma/DA-\/P01/include/FileManager.h@{/home/tomaspalma/DA-\/P01/include/FileManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ P1\_FILEMANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ P1\_FILEMANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}RailwayNetwork.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFileManager}{FileManager}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classFileManager}{FileManager}}(std::shared\_ptr<RailwayNetwork>\ railwayNetwork);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ readStations(std::string\ filepath);}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ readNetworkEdges(std::string\ filepath);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ readAll(std::string\ stations\_file,\ std::string\ network\_file);}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ std::shared\_ptr<RailwayNetwork>\ railwayNetwork;}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
