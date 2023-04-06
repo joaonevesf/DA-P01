@@ -411,6 +411,7 @@ void RailwayNetwork::setPathBFS(Station *src, Station *dest, double flow_min_lim
 }
 
 std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k) {
+    if (k > stationSet.size()) throw std::logic_error("k is greater than stationSet");
     std::priority_queue<std::shared_ptr<Station>,std::vector<std::shared_ptr<Station>>,CompareByLostRatio> queue;
     std::shared_ptr<Station> mock_source = std::make_shared<Station>();
     std::shared_ptr<Station> mock_sink = std::make_shared<Station>();
@@ -420,7 +421,7 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
     connectSourceNodesTo(mock_source.get());
     connectSinkNodesTo(mock_sink);
 
-    double maxflow = edmondsKarp(mock_source, mock_sink, true);
+    edmondsKarp(mock_source, mock_sink, true);
 
     for (const auto& station: stationSet) {
         if (station->isActive()) {
