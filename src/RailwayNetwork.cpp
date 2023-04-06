@@ -25,15 +25,17 @@ bool RailwayNetwork::addTrack(std::shared_ptr<Station> station_src, std::shared_
     return true;
 }
 
-void RailwayNetwork::testAndVisit(std::queue<std::shared_ptr<Station>> &queue,std::shared_ptr<Track> track, const std::shared_ptr<Station>& station, double residual) {
-    if(!station->isVisited() && residual > 0 && track->isActive() && station->isActive()) {
+void RailwayNetwork::testAndVisit(std::queue<std::shared_ptr<Station>> &queue,const std::shared_ptr<Track>& track, const std::shared_ptr<Station>& station, double residual, bool ignoreIsActive) {
+    bool isTrackActive = ignoreIsActive || track->isActive();
+    bool isStationActive = ignoreIsActive || station->isActive();
+    if(!station->isVisited() && residual > 0 && isTrackActive && isStationActive) {
         station->setVisited(true);
         station->setPath(track);
         queue.push(station);
     }
 }
 
-bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
+bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest, bool ignoreIsActive) {
     for(const auto& station : stationSet) {
         station->setVisited(false);
     }
@@ -47,11 +49,11 @@ bool RailwayNetwork::findAugmentingPathBFS(const std::shared_ptr<Station>& stati
         queue.pop();
 
         for(const auto& track : currStation->getAdj()) {
-            testAndVisit(queue, track, track->getDest(), track->getCapacity() - track->getFlow());
+            testAndVisit(queue, track, track->getDest(), track->getCapacity() - track->getFlow(), ignoreIsActive);
         }
 
         for(const auto& track : currStation->getIncoming()){
-            testAndVisit(queue, track, track->getOrig(), track->getFlow());
+            testAndVisit(queue, track, track->getOrig(), track->getFlow(), ignoreIsActive);
         }
     }
 
@@ -193,15 +195,16 @@ void RailwayNetwork::resetFlow() {
     }
 }
 
-double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest) {
-    if(station_src == nullptr || station_dest == nullptr || station_src == station_dest || !station_src->isActive() || !station_dest->isActive()) {
+double RailwayNetwork::edmondsKarp(const std::shared_ptr<Station>& station_src, const std::shared_ptr<Station>& station_dest, bool ignoreIsActive) {
+    bool isAnyUnactive = !ignoreIsActive && (!station_src->isActive() || !station_dest->isActive());
+    if(station_src == nullptr || station_dest == nullptr || station_src == station_dest || isAnyUnactive) {
         throw std::logic_error("Invalid source and/or target station");
     }
 
     this->resetFlow();
 
 
-    while(findAugmentingPathBFS(station_src, station_dest)) {
+    while(findAugmentingPathBFS(station_src, station_dest, ignoreIsActive)) {
         double minRes = findMinResidual(station_src, station_dest);
         updatePath(station_src, station_dest, minRes);
     }
@@ -278,7 +281,7 @@ double RailwayNetwork::maxTrainsTo(const std::shared_ptr<Station> &dest) {
     std::shared_ptr<Station> real_dest = *(this->stationSet.find(dest));
 
     connectSourceNodesTo(mockSource.get());
-    result = edmondsKarp(mockSource, real_dest);
+    result = edmondsKarp(mockSource, real_dest, false);
 
     return result;
 }
@@ -340,8 +343,8 @@ void RailwayNetwork::undoLastDeletion() {
     if(deletionRecord.empty()) return;
 
     if(deletionRecord.top()) {
-        inactiveStations.pop();
         inactiveStations.top()->setActive(true);
+        inactiveStations.pop();
     }
     else {
         inactiveTracks.top()->setActive(true);
@@ -370,6 +373,9 @@ class CompareByLostRatio {
 public:
     bool operator()(const std::shared_ptr<Station>& a, const std::shared_ptr<Station>& b)
     {
+        if(a->getLostRatio() == b->getLostRatio()) {
+            return a->getPreviousFlow() > b->getPreviousFlow();
+        }
         return a->getLostRatio() > b->getLostRatio();
     }
 };
@@ -406,30 +412,42 @@ void RailwayNetwork::setPathBFS(Station *src, Station *dest, double flow_min_lim
 
 std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k) {
     std::priority_queue<std::shared_ptr<Station>,std::vector<std::shared_ptr<Station>>,CompareByLostRatio> queue;
+    std::shared_ptr<Station> mock_source = std::make_shared<Station>();
+    std::shared_ptr<Station> mock_sink = std::make_shared<Station>();
+    mock_source->setIsMock(true);
+    mock_sink->setIsMock(true);
+
+    connectSourceNodesTo(mock_source.get());
+    connectSinkNodesTo(mock_sink);
+
+    //double maxflow = edmondsKarp(mock_source, mock_sink, true);
+    for (const auto& station: stationSet) {
+        if (station->isActive()) {
+            double totalFlow = 0;
+            for (const auto& track : station->getAdj()) {
+                totalFlow += track->getFlow();
+            }
+            station->setPreviousFlow(totalFlow);
+        }
+    }
+    edmondsKarp(mock_source,mock_sink,false);
     for (const auto& station : stationSet) {
-        if(station->isActive()) {
-            double lostCapacity = 0;
-            double totalCapacity = 0;
-            for (const auto& edge : station->getAdj()) {
-                totalCapacity += edge->getCapacity();
-                if(!edge->isActive() || !edge->getDest()->isActive())
-                    lostCapacity += edge->getCapacity();
+        if (station->isActive()) {
+            double remainingFlow = 0;
+            if(station->getPreviousFlow() == 0) continue;
+            for (const auto &track: station->getAdj()) {
+                remainingFlow += track->getFlow();
             }
-            for (const auto& edge : station->getIncoming()) {
-                totalCapacity += edge->getCapacity();
-                if(!edge->isActive() || !edge->getOrig()->isActive())
-                    lostCapacity += edge->getCapacity();
-            }
-            station->setLostRatio(lostCapacity/totalCapacity);
-            if(queue.size() < k) {
+            station->setLostRatio((station->getPreviousFlow() - remainingFlow) / station->getPreviousFlow());
+            if (queue.size() < k) {
                 queue.push(station);
-            }
-            else if (queue.top()->getLostRatio() < station->getLostRatio()) {
+            } else if (queue.top()->getLostRatio() < station->getLostRatio()) {
                 queue.pop();
                 queue.push(station);
             }
         }
     }
+
     std::vector<std::shared_ptr<Station>> res(k);
     for(int i = 0; i < k; i++) {
         res[k - i - 1] = queue.top();
@@ -450,7 +468,7 @@ std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> RailwayN
                 continue;
 
             std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>> stationPair {stationA, stationB};
-            double currentFlow = edmondsKarp(stationA, stationB);
+            double currentFlow = edmondsKarp(stationA, stationB, false);
             if (currentFlow > maxFlow) {
                 maxFlow = currentFlow;
                 res.clear();
@@ -485,7 +503,7 @@ std::vector<std::pair<std::string, std::pair<double,double>>> RailwayNetwork::to
     connectSourceNodesTo(mock_source.get());
     connectSinkNodesTo(mock_sink);
 
-    edmondsKarp(mock_source, mock_sink);
+    edmondsKarp(mock_source, mock_sink, false);
 
     for (const auto &station : stationSet) {
         for(const auto &track : station->getAdj()) {

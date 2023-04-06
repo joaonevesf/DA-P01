@@ -106,6 +106,12 @@ protected:
     bool inPath = false;
     bool visited = false;
     bool active = true;
+
+    double previousFlow;
+public:
+    double getPreviousFlow() const;
+
+    void setPreviousFlow(double previousFlow);
 };
 
 // ********************************* Track *********************************

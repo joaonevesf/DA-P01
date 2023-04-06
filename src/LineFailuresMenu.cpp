@@ -143,7 +143,7 @@ void LineFailuresMenu::listAffectedStations() {
         for (int i = 0; i < k; i++) {
             auto currStation = affectedStations.at(i);
             std::cout << i + 1 << ". " << currStation->getName() << " lost " << currStation->getLostRatio() * 100
-                      << "% of its capacity" << std::endl;
+                      << "% of its flow (Initial flow: " << currStation->getPreviousFlow() << ")" << std::endl;
         }
     }
 }
