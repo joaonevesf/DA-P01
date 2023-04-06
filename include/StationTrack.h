@@ -161,7 +161,7 @@ protected:
     std::weak_ptr<Station> orig;
     std::shared_ptr<Track> reverse = nullptr;
 
-    double flow;
+    double flow = 0;
 };
 
 #endif

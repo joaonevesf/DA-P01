@@ -324,7 +324,7 @@ bool RailwayNetwork::testAndVisitDijkstra(std::queue<Station*> &queue, std::shar
 void RailwayNetwork::connectSinkNodesTo(std::shared_ptr<Station> mock_sink) {
     for (auto station : this->stationSet) {
         if (station->getAdj().size() == 0) {
-            station->addTrack(mock_sink, "", std::numeric_limits<double>::max(), 0,true);
+            station->addTrack(mock_sink, "", std::numeric_limits<double>::max(), 0,false);
         }
     }
 }
@@ -420,7 +420,8 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
     connectSourceNodesTo(mock_source.get());
     connectSinkNodesTo(mock_sink);
 
-    //double maxflow = edmondsKarp(mock_source, mock_sink, true);
+    double maxflow = edmondsKarp(mock_source, mock_sink, true);
+
     for (const auto& station: stationSet) {
         if (station->isActive()) {
             double totalFlow = 0;
@@ -429,6 +430,12 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
             }
             station->setPreviousFlow(totalFlow);
         }
+    }
+    for (const auto& edge : mock_source->getAdj()) {
+        edge->setFlow(0);
+    }
+    for (const auto& edge : mock_sink->getIncoming()) {
+        edge->setFlow(0);
     }
     edmondsKarp(mock_source,mock_sink,false);
     for (const auto& station : stationSet) {
@@ -447,7 +454,9 @@ std::vector<std::shared_ptr<Station>> RailwayNetwork::mostAffectedStations(int k
             }
         }
     }
-
+    for (const auto& edge : mock_sink->getIncoming()) {
+        edge->getOrig()->removeTrackAdj(edge.get());
+    }
     std::vector<std::shared_ptr<Station>> res(k);
     for(int i = 0; i < k; i++) {
         res[k - i - 1] = queue.top();
