@@ -70,6 +70,5 @@ bool OperationCostOptimizationMenu::execute() {
     }
 
     this->railwayManager_.lock()->setMenu(std::make_shared<MainMenu>(railwayManager_));
-
     return true;
 }

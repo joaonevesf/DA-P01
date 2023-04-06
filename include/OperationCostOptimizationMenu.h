@@ -16,8 +16,7 @@ public:
      * de partida e uma de destino e ver qual é o caminho com o menor custo que dê o máximo fluxo possível.
      * É mais no contexto de transporte de mercadorias sendo que não tem em consideração que o máximo nº de arestas
      * deve estar ocupado se fosse no contexto de passangeiros
-     * @return Falso quando o menu fechar. O railwayManager tem um menu e mostra o menu até o menu retornar falso,
-     * depois mostra outro que este menu irá carregar para o RailwayManager
+     * @return true
      */
     bool execute() override;
 };

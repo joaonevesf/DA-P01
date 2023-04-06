@@ -143,26 +143,100 @@ public:
      */
     double maxTrainsTo(const std::shared_ptr<Station> &dest);
 
+    /**
+     * Conecta o mock_source a todas as estações que não têm arestas incoming ou às que têm apenas uma aresta incoming que é reverse de uma das arestas outgoing dessa estação
+     * Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos considerar as várias sources
+     * ao mesmo tempo
+     * Complexidade temporal: O(|V| + |E|), no pior dos casos
+     * @param mock_source
+     */
     void connectSourceNodesTo(Station *mock_source);
-
+    /**
+     * Conecta o mock_sink a todas as estações que não têm arestas outgoing
+     * Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos
+     * Complexidade temporal: O(V), onde V é o número de estações
+     * @param mock_sink
+     */
     void connectSinkNodesTo(std::shared_ptr<Station> mock_sink);
 
+    /**
+     * Desativa uma track, adiciona essa track à stack inactiveTracks e adiciona ??
+     * Dá throw a uma exceção std::logic_error caso track seja nullptr
+     * Complexidade temporal: O(1)
+     * @param track
+     */
     void deactivateTrack(const std::shared_ptr<Track> &track);
+    /**
+     * Desativa uma track, adiciona essa track à stack inactiveStations e adiciona ??
+     * Dá throw a uma exceção std::logic_error caso station seja nullptr
+     * Complexidade temporal: O(1)
+     * @param station
+     */
     void deactivateStation(const std::shared_ptr<Station> &station);
+    /**
+     * Reativa o último elemento desativado se este existir
+     * Complexidade temporal: O(1)
+     */
     void undoLastDeletion();
+    /**
+     * Reativa todos os elementos desativados
+     * Complexidade temporal: O(V + E), onde V é o número de estações desativadas e E é o número de tracks desativadas
+     */
     void undoAllDeletions();
 
+    /**
+     * Repõe os valores padrão dos boleanos utilitários de todas as estações e tracks no grafo
+     * Complexidade temporal: O(V * N + E), onde V é o número de estações, N é o tamanho do vetor e E é o número de arestas
+     */
     void clearNetworkUtils();
 
-    void stationsInConnectedPath(Station *station_src, Station *station_dest);
+    /**
+     * Encontra o fluxo máximo com o menor custo possível com uma variante do Edmonds-Karp que em vez de usar BFS, usa uma variante do Dijkstra
+     * Complexidade temporal: O((Elog(V)) * E), onde V é o número de estações e E é o número de arestas
+     * @param src
+     * @param dest
+     * @param flow_result
+     * @return cost
+     */
     int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result);
+    /**
+     * Serve para ser utilizado no findAugmentingDijkstraPath para verificar se um determinado caminho é possível de ser adicionado á priority queue utilizada pelo dijkstra
+     * @param queue
+     * @param track
+     * @param v
+     * @param residual
+     * @param isDest
+     * @return false quando não podemos passar fluxo pela estação, true caso contrário
+     */
+    bool testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* v, double residual, bool isDest);
 
-    bool testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* u, Station* v, double residual, bool isDest);
-
+    /**
+     * Atribui o valor zero ao flow de todas as arestas do grafo
+     * Complexidade temporal: O(V + E), onde V é o número de estações e E é o número de arestas
+     */
     void resetFlow();
 
+    /**
+     * Determina quais estações têm mais fluxo perdido
+     * Complexidade temporal: O(VE^2), onde V é o número de estações e E é o número de arestas
+     * @param k
+     * @return vetor com as k estações mais afetadas
+     */
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
+    /**
+     * Determina os pares de estações pelos quais passam mais fluxo
+     * Complexidade temporal: O(2^V * VE^2), onde V é o número de estações e E é o número de arestas
+     * @return set com os pares de estações pelos quais passam mais fluxo
+     */
     std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> mostUsedPairsStations();
+    /**
+     * Determina os concelhos ou distritos (dependendo do valor do parâmetro isDistrict) com a maior razão fluxo por capacidade, em que o fluxo
+     * é a soma dos fluxos das arestas nessa região e a capacidade é a soma das capacidades das arestas nessa região
+     * Complexidade temporal: O(VE^2), onde V é o número de estações e E é o número de arestas
+     * @param k
+     * @param isDistrict
+     * @return vetor com o nome das regiões com maior razão fluxo por capacidade e os respetivos fluxos e capacidades
+     */
     std::vector<std::pair<std::string, std::pair<double,double>>> topRegionsByNeeds(int k, bool isDistrict);
 protected:
 

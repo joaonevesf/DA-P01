@@ -93,7 +93,7 @@ bool RailwayNetwork::findAugmentingPathDijkstra(const std::shared_ptr<Station> &
         stations.pop();
 
         for (const auto &track: currStation->getAdj()) {
-            if (testAndVisitDijkstra(stations, track, currStation, track->getDest().get(),
+            if (testAndVisitDijkstra(stations, track, track->getDest().get(),
                                      track->getCapacity() - track->getFlow(), track->getDest().get() == station_dest.get())) {
                 stations_per_dist.insert(track->getDest().get());
                 track->getDest().get()->setIsInPath(true);
@@ -101,7 +101,7 @@ bool RailwayNetwork::findAugmentingPathDijkstra(const std::shared_ptr<Station> &
         }
 
         for (const auto &track: currStation->getIncoming()) {
-            if (testAndVisitDijkstra(stations, track, currStation, track->getOrig().get(), track->getFlow(), track->getOrig().get() == station_dest.get())) {
+            if (testAndVisitDijkstra(stations, track, track->getOrig().get(), track->getFlow(), track->getOrig().get() == station_dest.get())) {
                 stations_per_dist.insert(track->getOrig().get());
                 track->getOrig()->setIsInPath(true);
             }
@@ -305,7 +305,7 @@ void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
     }
 }
 
-bool RailwayNetwork::testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* u, Station* v, double residual, bool isDest) {
+bool RailwayNetwork::testAndVisitDijkstra(std::queue<Station*> &queue, std::shared_ptr<Track> track, Station* v, double residual, bool isDest) {
 
     if((!v->isVisited() && !v->isInPath() && residual > 0 && track->isActive())) {
         queue.push(v);
