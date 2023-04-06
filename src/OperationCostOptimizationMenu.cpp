@@ -48,11 +48,6 @@ bool OperationCostOptimizationMenu::execute() {
 
     int total_cost = this->railwayManager_.lock()->getRailwayNetwork()->findMaxFlowMinCost(station_src, station_dest, flow_result);
 
-    /*for(auto &t: station_dest->getMultipleParentsPath()) {
-        current_path.clear();
-        this->railwayManager_.lock()->getRailwayNetwork()->constructPath(t, paths, current_path);
-    }*/
-
     this->printDashes(100);
     std::cout << std:: endl << "Results: " << std::endl;
 
@@ -74,7 +69,7 @@ bool OperationCostOptimizationMenu::execute() {
         if(option == 1) printPaths(station_dest.get());
     }
 
-
     this->railwayManager_.lock()->setMenu(std::make_shared<MainMenu>(railwayManager_));
+
     return true;
 }

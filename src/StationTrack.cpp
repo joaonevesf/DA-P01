@@ -260,5 +260,3 @@ bool Track::isVisited() const {
 void Track::setVisited(bool visited) {
     Track::visited = visited;
 }
-
-

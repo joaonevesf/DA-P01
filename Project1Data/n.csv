@@ -1,7 +1,12 @@
 Station_A,Station_B,Capacity,Service
-Casa Branca,Monte das Flores,15,STANDARD
-Casa Branca,Funcheira,4,STANDARD
-Monte das Flores,Porto Campanhã,6,STANDARD
-Monte das Flores,Funcheira,30,STANDARD
-Funcheira,Monte das Flores,30,STANDARD
-Funcheira,Porto Campanhã,8,STANDARD
+Casa Branca,Grândola,4,STANDARD
+Casa Branca,Monte das Flores,4,ALFA PENDULAR
+Casa Branca,Porto Campanhã,4,STANDARD
+Monte das Flores,Porto Campanhã,4,ALFA PENDULAR
+Porto Campanhã,Chelas,4,STANDARD
+Monte das Flores,Funcheira,4,STANDARD
+Grândola,Funcheira,4,STANDARD
+Funcheira,Oronhe,4,STANDARD
+Chelas,Oronhe,4,STANDARD
+Funcheira,Grândola,4,STANDARD
+Grândola,Casa Branca,4,STANDARD

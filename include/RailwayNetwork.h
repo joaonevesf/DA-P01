@@ -133,8 +133,20 @@ public:
      */
     double maxTrainsTo(const std::shared_ptr<Station> &dest);
 
-
+    /**
+     * Serve para conectar uma mock source a todos os nós que sejam sources individuais.
+     * Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos considerar as várias sources
+     * ao mesmo tempo
+     * Complexidade temporal: O(|V| + |E|), no pior dos casos
+     * @param mock_source
+     */
     void connectSourceNodesTo(Station *mock_source);
+
+    /**
+     * Serve para conectar todos os nós que sejam destinos individualmente a um destino geral que será um mock sink
+     * Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos
+     * @param mock_sink
+     */
     void connectSinkNodesTo(std::shared_ptr<Station> mock_sink);
 
     void eraseEdgesFromMockSource(Station *mock_source);
