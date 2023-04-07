@@ -1,0 +1,144 @@
+\hypertarget{classReadFileMenu}{}\doxysection{Read\+File\+Menu Class Reference}
+\label{classReadFileMenu}\index{ReadFileMenu@{ReadFileMenu}}
+
+
+{\ttfamily \#include $<$Read\+File\+Menu.\+h$>$}
+
+Inheritance diagram for Read\+File\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classReadFileMenu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classReadFileMenu_a16a7dcf8a923f5513e673109822aff21}\label{classReadFileMenu_a16a7dcf8a923f5513e673109822aff21}} 
+{\bfseries Read\+File\+Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+bool \mbox{\hyperlink{classReadFileMenu_ac33707aaeda9dbaa5cffae4991424826}{execute}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a44580fa8b34289996aab64cc5aa3b6af}\label{classMenu_a44580fa8b34289996aab64cc5aa3b6af}} 
+{\bfseries Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+virtual bool \mbox{\hyperlink{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}{execute}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classReadFileMenu_a2016158bb8ab167b915db51fd509faa4}{show\+File\+Read\+Options}} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\item 
+bool \mbox{\hyperlink{classReadFileMenu_ada0aedf8f91ec529ac8253dfc7a5c21a}{choose\+Files}} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\item 
+bool \mbox{\hyperlink{classReadFileMenu_a91c0f33a02c45ffd21786551ec28c59e}{choose\+Edges\+File}} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\item 
+bool \mbox{\hyperlink{classReadFileMenu_a020b30638cc98d9f24b4f3f95a51c728}{choose\+Stations\+File}} (\mbox{\hyperlink{classFileManager}{File\+Manager}} \&fm)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}{print\+Dashes}} (int length)
+\item 
+void \mbox{\hyperlink{classMenu_af98960bc5360621bc9c57e267119b236}{print\+Paths}} (\mbox{\hyperlink{classStation}{Station}} $\ast$dest)
+\item 
+\mbox{\Hypertarget{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}\label{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Station} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}{get\+Numerical\+Input}} (int \&selected\+Option)
+\item 
+static bool \mbox{\hyperlink{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}{get\+String\+Input}} (std\+::string \&s)
+\item 
+static int \mbox{\hyperlink{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}{read\+Option}} (int number\+Of\+Options)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ \mbox{\hyperlink{classMenu_a9ad82b2c98131f56605b28b7dbd01406}{railway\+Manager\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Este menu é para servir como interface para o utilizador conseguir escolher os ficheiros de onde el@ pretende carregar a informação sobre a rede 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classReadFileMenu_a91c0f33a02c45ffd21786551ec28c59e}\label{classReadFileMenu_a91c0f33a02c45ffd21786551ec28c59e}} 
+\index{ReadFileMenu@{ReadFileMenu}!chooseEdgesFile@{chooseEdgesFile}}
+\index{chooseEdgesFile@{chooseEdgesFile}!ReadFileMenu@{ReadFileMenu}}
+\doxysubsubsection{\texorpdfstring{chooseEdgesFile()}{chooseEdgesFile()}}
+{\footnotesize\ttfamily bool Read\+File\+Menu\+::choose\+Edges\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFileManager}{File\+Manager}} \&}]{fm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Pede ao utilizador para ler o ficheiro por onde iremos carregar as linhas e chama as respetivas funções do \mbox{\hyperlink{classFileManager}{File\+Manager}} que interagem com a \mbox{\hyperlink{classRailwayNetwork}{Railway\+Network}} para adicionar essas arestas 
+\begin{DoxyParams}{Parameters}
+{\em fm} & O file manager será a classe que irá manipular diretamente os ficheiros e carregar na rede o que \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se conseguir ler o ficheiro com sucesso. Caso não consiga, estará sempre a repetir o pedido 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReadFileMenu_ada0aedf8f91ec529ac8253dfc7a5c21a}\label{classReadFileMenu_ada0aedf8f91ec529ac8253dfc7a5c21a}} 
+\index{ReadFileMenu@{ReadFileMenu}!chooseFiles@{chooseFiles}}
+\index{chooseFiles@{chooseFiles}!ReadFileMenu@{ReadFileMenu}}
+\doxysubsubsection{\texorpdfstring{chooseFiles()}{chooseFiles()}}
+{\footnotesize\ttfamily bool Read\+File\+Menu\+::choose\+Files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFileManager}{File\+Manager}} \&}]{fm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Vai agir como middleman entre o show\+File\+Read\+Options e o choose\+Files e choose\+Edges\+File, chamando estes dois últimos métodos 
+\begin{DoxyParams}{Parameters}
+{\em fm} & O file manager será a classe que irá manipular diretamente os ficheiros e carregar na rede o que \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se as leituras foram feitas com sucesso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReadFileMenu_a020b30638cc98d9f24b4f3f95a51c728}\label{classReadFileMenu_a020b30638cc98d9f24b4f3f95a51c728}} 
+\index{ReadFileMenu@{ReadFileMenu}!chooseStationsFile@{chooseStationsFile}}
+\index{chooseStationsFile@{chooseStationsFile}!ReadFileMenu@{ReadFileMenu}}
+\doxysubsubsection{\texorpdfstring{chooseStationsFile()}{chooseStationsFile()}}
+{\footnotesize\ttfamily bool Read\+File\+Menu\+::choose\+Stations\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFileManager}{File\+Manager}} \&}]{fm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Pede ao utilizador para ler o ficheiro de onde iremos carregar as estaçõe ee chama as respetivas funções do \mbox{\hyperlink{classFileManager}{File\+Manager}} que interagem com a \mbox{\hyperlink{classRailwayNetwork}{Railway\+Network}} para adicionar essas estaçãos ao station\+Set. 
+\begin{DoxyParams}{Parameters}
+{\em fm} & O file manager será a classe que irá manipular diretamente os ficheiros e carregar na rede o que \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se conseguir ler o ficheiro com sucesso. Caso não consiga, estará sempre a repetir o pedido 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReadFileMenu_ac33707aaeda9dbaa5cffae4991424826}\label{classReadFileMenu_ac33707aaeda9dbaa5cffae4991424826}} 
+\index{ReadFileMenu@{ReadFileMenu}!execute@{execute}}
+\index{execute@{execute}!ReadFileMenu@{ReadFileMenu}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily bool Read\+File\+Menu\+::execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Vai criar uma interface de texto no terminal por onde o utilizador poderá escolher os ficheiros que poderá carregar. \begin{DoxyReturn}{Returns}
+Falso quando o menu fechar. O railway\+Manager tem um menu e mostra o menu até o menu retornar falso, depois mostra outro que este menu irá carregar para o \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classMenu}{Menu}}.
+
+\mbox{\Hypertarget{classReadFileMenu_a2016158bb8ab167b915db51fd509faa4}\label{classReadFileMenu_a2016158bb8ab167b915db51fd509faa4}} 
+\index{ReadFileMenu@{ReadFileMenu}!showFileReadOptions@{showFileReadOptions}}
+\index{showFileReadOptions@{showFileReadOptions}!ReadFileMenu@{ReadFileMenu}}
+\doxysubsubsection{\texorpdfstring{showFileReadOptions()}{showFileReadOptions()}}
+{\footnotesize\ttfamily bool Read\+File\+Menu\+::show\+File\+Read\+Options (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFileManager}{File\+Manager}} \&}]{fm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Serve para dar informação ao utilizador sobre os ficheiros que pode carregar e invoca os métodos para efetivamentne ler esses ficheiros 
+\begin{DoxyParams}{Parameters}
+{\em fm} & O file manager será a classe que irá manipular diretamente os ficheiros e carregar na rede o que for necessário \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se a escolha dos ficheiros para ler as estações e as linhas forem válidas 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Read\+File\+Menu.\+h\end{DoxyCompactItemize}

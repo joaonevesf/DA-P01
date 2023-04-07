@@ -1,0 +1,27 @@
+\hypertarget{FileManager_8h_source}{}\doxysection{File\+Manager.\+h}
+\label{FileManager_8h_source}\index{/home/tomaspalma/DA-\/P01/include/FileManager.h@{/home/tomaspalma/DA-\/P01/include/FileManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ P1\_FILEMANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ P1\_FILEMANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}RailwayNetwork.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFileManager}{FileManager}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{classFileManager}{FileManager}}(std::shared\_ptr<RailwayNetwork>\ railwayNetwork);}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFileManager_a58e59c5554b4cea955ed0ad2e242ed28}{readStations}}(std::string\ filepath);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFileManager_abbd231f1a6fe820a190a77b10156457d}{readNetworkEdges}}(std::string\ filepath);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ std::shared\_ptr<RailwayNetwork>\ railwayNetwork;}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\hypertarget{classTrack}{}\doxysection{Track Class Reference}
+\label{classTrack}\index{Track@{Track}}
+
+
+{\ttfamily \#include $<$Station\+Track.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTrack_a0ab93efa56e64d59ead9a9543b9dba7d}\label{classTrack_a0ab93efa56e64d59ead9a9543b9dba7d}} 
+{\bfseries Track} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ orig, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ dest, std\+::string \mbox{\hyperlink{classTrack_a1ba7561f89639d0249b2bdbd1a6b7608}{service}}, double capacity, int \mbox{\hyperlink{classTrack_a9ac8224f664a29c9c741d2ecc02a30a2}{cost}})
+\item 
+\mbox{\Hypertarget{classTrack_ac632d42f603ddd8580be0a9ebee2be38}\label{classTrack_ac632d42f603ddd8580be0a9ebee2be38}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Dest} () const
+\item 
+\mbox{\Hypertarget{classTrack_a48bc2ccdd6c34219f31a59f4878ae998}\label{classTrack_a48bc2ccdd6c34219f31a59f4878ae998}} 
+double {\bfseries get\+Capacity} () const
+\item 
+\mbox{\Hypertarget{classTrack_a6673b81d23b317364deeaf75d8ceba7f}\label{classTrack_a6673b81d23b317364deeaf75d8ceba7f}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Orig} () const
+\item 
+\mbox{\Hypertarget{classTrack_a003bcc14ad483caadcc88a6b16d7a8ee}\label{classTrack_a003bcc14ad483caadcc88a6b16d7a8ee}} 
+double {\bfseries get\+Flow} () const
+\item 
+\mbox{\Hypertarget{classTrack_a9891862cfa0ecc71909bba78c5ce19c1}\label{classTrack_a9891862cfa0ecc71909bba78c5ce19c1}} 
+void {\bfseries set\+Flow} (double flow)
+\item 
+\mbox{\Hypertarget{classTrack_a8b9fd61aab6170fc1741a7ff6f4ce45f}\label{classTrack_a8b9fd61aab6170fc1741a7ff6f4ce45f}} 
+int {\bfseries get\+Cost} () const
+\item 
+\mbox{\Hypertarget{classTrack_a678692200bfb361094176b6cc4daf2ea}\label{classTrack_a678692200bfb361094176b6cc4daf2ea}} 
+bool {\bfseries is\+Active} () const
+\item 
+\mbox{\Hypertarget{classTrack_ae87b0296cfceb99d4d207f88284d815f}\label{classTrack_ae87b0296cfceb99d4d207f88284d815f}} 
+void {\bfseries set\+Active} (bool active)
+\item 
+\mbox{\Hypertarget{classTrack_af5ecca3d6a4a55745cb0cdf078c8df4f}\label{classTrack_af5ecca3d6a4a55745cb0cdf078c8df4f}} 
+bool {\bfseries is\+Visited} () const
+\item 
+\mbox{\Hypertarget{classTrack_a49ec4265b9cd6250debb5b316e9e6bc1}\label{classTrack_a49ec4265b9cd6250debb5b316e9e6bc1}} 
+void {\bfseries set\+Visited} (bool visited)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classTrack_a1ba7561f89639d0249b2bdbd1a6b7608}{service}}
+\item 
+\mbox{\Hypertarget{classTrack_a2921c1264cf4ca2853457bf27912ddac}\label{classTrack_a2921c1264cf4ca2853457bf27912ddac}} 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries dest}
+\item 
+\mbox{\Hypertarget{classTrack_a4243b2dca8db217e5c7786b43bf65684}\label{classTrack_a4243b2dca8db217e5c7786b43bf65684}} 
+double {\bfseries capacity}
+\item 
+int \mbox{\hyperlink{classTrack_a9ac8224f664a29c9c741d2ecc02a30a2}{cost}}
+\item 
+\mbox{\Hypertarget{classTrack_ae59a90106908b90e170cde5c81070e5a}\label{classTrack_ae59a90106908b90e170cde5c81070e5a}} 
+bool {\bfseries active} = true
+\item 
+\mbox{\Hypertarget{classTrack_a81a94c81b10e9eed065fe16f3a8cf8fd}\label{classTrack_a81a94c81b10e9eed065fe16f3a8cf8fd}} 
+bool {\bfseries visited} = false
+\item 
+\mbox{\Hypertarget{classTrack_aedb77039fe2f3e389e0cc4506bf77d55}\label{classTrack_aedb77039fe2f3e389e0cc4506bf77d55}} 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries orig}
+\item 
+\mbox{\Hypertarget{classTrack_aa7b27a13d78d628a9576a887b8fe09d4}\label{classTrack_aa7b27a13d78d628a9576a887b8fe09d4}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ {\bfseries reverse} = nullptr
+\item 
+\mbox{\Hypertarget{classTrack_aae82604e684c6d41588b93cd9324f481}\label{classTrack_aae82604e684c6d41588b93cd9324f481}} 
+double {\bfseries flow} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe representante de uma linha de comboios. Une duas estações e tem um certo serviço com custo associado e uma certa capacidade de comboios ao mesmo tempo 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTrack_a9ac8224f664a29c9c741d2ecc02a30a2}\label{classTrack_a9ac8224f664a29c9c741d2ecc02a30a2}} 
+\index{Track@{Track}!cost@{cost}}
+\index{cost@{cost}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{cost}{cost}}
+{\footnotesize\ttfamily int Track\+::cost\hspace{0.3cm}{\ttfamily [protected]}}
+
+2 para serviço \char`\"{}\+STANDARD\char`\"{} e 4 para serviço \char`\"{}\+ALFA PENDULAR\char`\"{} \mbox{\Hypertarget{classTrack_a1ba7561f89639d0249b2bdbd1a6b7608}\label{classTrack_a1ba7561f89639d0249b2bdbd1a6b7608}} 
+\index{Track@{Track}!service@{service}}
+\index{service@{service}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{service}{service}}
+{\footnotesize\ttfamily std\+::string Track\+::service\hspace{0.3cm}{\ttfamily [protected]}}
+
+\char`\"{}\+STANDARD\char`\"{} ou \char`\"{}\+ALFA PENDULAR\char`\"{} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Station\+Track.\+h\end{DoxyCompactItemize}

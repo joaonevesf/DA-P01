@@ -1,0 +1,224 @@
+\hypertarget{classStation}{}\doxysection{Station Class Reference}
+\label{classStation}\index{Station@{Station}}
+Inheritance diagram for Station\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classStation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classStation_ab7f34f62cb4075fd88400a5678300a14}\label{classStation_ab7f34f62cb4075fd88400a5678300a14}} 
+{\bfseries Station} (std\+::string name, std\+::string district, std\+::string municipality, std\+::string township, std\+::string line)
+\item 
+\mbox{\Hypertarget{classStation_a0a5aa02f3120d3d6784b62efeb32b850}\label{classStation_a0a5aa02f3120d3d6784b62efeb32b850}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{classStation}{Station}} \&s2) const
+\item 
+\mbox{\Hypertarget{classStation_a12e90a13011cf028676810f9525331d8}\label{classStation_a12e90a13011cf028676810f9525331d8}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ $>$ {\bfseries get\+Adj} () const
+\item 
+\mbox{\Hypertarget{classStation_a3eee49988559a4a26fa715f3fc44beac}\label{classStation_a3eee49988559a4a26fa715f3fc44beac}} 
+bool {\bfseries is\+Visited} () const
+\item 
+\mbox{\Hypertarget{classStation_abdca19f1dbb2d576e2f988156c728f1f}\label{classStation_abdca19f1dbb2d576e2f988156c728f1f}} 
+double {\bfseries get\+Dist} () const
+\item 
+\mbox{\Hypertarget{classStation_a398bda4f4bada4832a018d6a27a54980}\label{classStation_a398bda4f4bada4832a018d6a27a54980}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ {\bfseries get\+Path} () const
+\item 
+\mbox{\Hypertarget{classStation_a5ed86c455505a26e4b14530fb2b80bc6}\label{classStation_a5ed86c455505a26e4b14530fb2b80bc6}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ $>$ {\bfseries get\+Incoming} () const
+\item 
+\mbox{\Hypertarget{classStation_a17bb35a315d323921b0841dd949f73e4}\label{classStation_a17bb35a315d323921b0841dd949f73e4}} 
+void {\bfseries set\+Visited} (bool visited)
+\item 
+\mbox{\Hypertarget{classStation_ad8232273bbaf2bca266d94767e0183f9}\label{classStation_ad8232273bbaf2bca266d94767e0183f9}} 
+void {\bfseries set\+Dist} (double dist)
+\item 
+\mbox{\Hypertarget{classStation_af4447bfbebd18633e6acddd656033756}\label{classStation_af4447bfbebd18633e6acddd656033756}} 
+void {\bfseries set\+Path} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ path)
+\item 
+void \mbox{\hyperlink{classStation_aab8e158a2c584e4f2afe0d5926d2d88d}{add\+Track}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&dest, const std\+::string \&service, double w, int cost, bool no\+Incoming)
+\item 
+\mbox{\Hypertarget{classStation_a67a42e3b29edb826b50cdb4a0db2bef1}\label{classStation_a67a42e3b29edb826b50cdb4a0db2bef1}} 
+const std\+::string \& {\bfseries get\+Name} () const
+\item 
+\mbox{\Hypertarget{classStation_a7d18fdf93442c151368d0d0132f2cc2e}\label{classStation_a7d18fdf93442c151368d0d0132f2cc2e}} 
+const std\+::string \& {\bfseries get\+District} () const
+\item 
+\mbox{\Hypertarget{classStation_a264b78e89fef2f60c8d0d5f9fcd058fa}\label{classStation_a264b78e89fef2f60c8d0d5f9fcd058fa}} 
+const std\+::string \& {\bfseries get\+Municipality} () const
+\item 
+\mbox{\Hypertarget{classStation_a395b0107c629fd77f921a9e352413789}\label{classStation_a395b0107c629fd77f921a9e352413789}} 
+bool {\bfseries is\+Active} () const
+\item 
+\mbox{\Hypertarget{classStation_a262a2a1bd0b27c0a162e880b00b69a96}\label{classStation_a262a2a1bd0b27c0a162e880b00b69a96}} 
+void {\bfseries set\+Active} (bool active)
+\item 
+\mbox{\Hypertarget{classStation_a960354954779b71820bddaebd5a515fc}\label{classStation_a960354954779b71820bddaebd5a515fc}} 
+std\+::vector$<$ \mbox{\hyperlink{classTrack}{Track}} $\ast$ $>$ {\bfseries get\+Multiple\+Parents\+Path} () const
+\item 
+void \mbox{\hyperlink{classStation_a38abca8d5c8b3990960442bf386ea839}{clear\+Multiple\+Parents\+Path}} ()
+\item 
+\mbox{\Hypertarget{classStation_a621622084b589539053bbe6bfef4548b}\label{classStation_a621622084b589539053bbe6bfef4548b}} 
+double {\bfseries get\+Lost\+Ratio} () const
+\item 
+\mbox{\Hypertarget{classStation_a41395483decd5bbef7f7306793897b8f}\label{classStation_a41395483decd5bbef7f7306793897b8f}} 
+void {\bfseries set\+Lost\+Ratio} (double lost\+Ratio)
+\item 
+void \mbox{\hyperlink{classStation_af4e196c81fa7d9226dd90db6f180d462}{remove\+Track\+Adj}} (\mbox{\hyperlink{classTrack}{Track}} $\ast$track)
+\item 
+void \mbox{\hyperlink{classStation_a36f5c1c99e4b63a7229b692f39266d60}{remove\+Track\+Incoming}} (\mbox{\hyperlink{classTrack}{Track}} $\ast$track)
+\item 
+void \mbox{\hyperlink{classStation_a04c40bf7c5ef2547e7ef8362d7deac1e}{add\+To\+Multiple\+Parents}} (\mbox{\hyperlink{classTrack}{Track}} $\ast$t)
+\item 
+\mbox{\Hypertarget{classStation_ac51e06e083322cedfd6d9bd0f1e2d40f}\label{classStation_ac51e06e083322cedfd6d9bd0f1e2d40f}} 
+bool {\bfseries is\+In\+Path} () const
+\item 
+\mbox{\Hypertarget{classStation_a23071acfb9e874aeeb6a24f5c5126534}\label{classStation_a23071acfb9e874aeeb6a24f5c5126534}} 
+void {\bfseries set\+Is\+In\+Path} (bool is\+In\+Path)
+\item 
+\mbox{\Hypertarget{classStation_a0d2eda8ef2eb32e7777557a142a03b16}\label{classStation_a0d2eda8ef2eb32e7777557a142a03b16}} 
+bool {\bfseries is\+Mock1} () const
+\item 
+\mbox{\Hypertarget{classStation_a4b86c7963a8e799019289850c9d9a7fe}\label{classStation_a4b86c7963a8e799019289850c9d9a7fe}} 
+void {\bfseries set\+Is\+Mock} (bool is\+Mock)
+\item 
+\mbox{\Hypertarget{classStation_a4c199997a290cdcf5c730bf7df8c300d}\label{classStation_a4c199997a290cdcf5c730bf7df8c300d}} 
+double {\bfseries get\+Previous\+Flow} () const
+\item 
+\mbox{\Hypertarget{classStation_a4a34d08a027f052dcf89ac5dd6ba531b}\label{classStation_a4a34d08a027f052dcf89ac5dd6ba531b}} 
+void {\bfseries set\+Previous\+Flow} (double previous\+Flow)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{classStation_a02ed03c9504e1266d4eb64c377200e51}{queue\+Index}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classStation_a683cec6eec5fd580717ee57a2e1644fb}\label{classStation_a683cec6eec5fd580717ee57a2e1644fb}} 
+std\+::string {\bfseries name}
+\item 
+\mbox{\Hypertarget{classStation_a0d07e5afc43d0a34ad02bc0801914de7}\label{classStation_a0d07e5afc43d0a34ad02bc0801914de7}} 
+std\+::string {\bfseries district}
+\item 
+\mbox{\Hypertarget{classStation_afc7ced847bb4273f9154ee3259265d79}\label{classStation_afc7ced847bb4273f9154ee3259265d79}} 
+std\+::string {\bfseries municipality}
+\item 
+\mbox{\Hypertarget{classStation_a79086b6cb880819f035d721834242f28}\label{classStation_a79086b6cb880819f035d721834242f28}} 
+std\+::string {\bfseries township}
+\item 
+\mbox{\Hypertarget{classStation_abd2ae3f8f28f8b10513929ed0cc4b211}\label{classStation_abd2ae3f8f28f8b10513929ed0cc4b211}} 
+std\+::string {\bfseries line}
+\item 
+\mbox{\Hypertarget{classStation_ad83e2abd1ea2f28286bac5444d33ff76}\label{classStation_ad83e2abd1ea2f28286bac5444d33ff76}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ $>$ {\bfseries adj}
+\item 
+\mbox{\Hypertarget{classStation_a09d6842078c098e0ed677d73690fe883}\label{classStation_a09d6842078c098e0ed677d73690fe883}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ $>$ {\bfseries incoming}
+\item 
+\mbox{\Hypertarget{classStation_a057e81c90b9ed722a111cf069a2a2190}\label{classStation_a057e81c90b9ed722a111cf069a2a2190}} 
+double {\bfseries dist} = 0
+\item 
+\mbox{\Hypertarget{classStation_a1e92fa06ada3fe5ccfe7fce5839cb37d}\label{classStation_a1e92fa06ada3fe5ccfe7fce5839cb37d}} 
+bool {\bfseries is\+Mock} = false
+\item 
+\mbox{\Hypertarget{classStation_a7cde4b5c99cb526fc6ba885bc6bfc21a}\label{classStation_a7cde4b5c99cb526fc6ba885bc6bfc21a}} 
+double {\bfseries lost\+Ratio} = 0
+\item 
+\mbox{\Hypertarget{classStation_a1210a86e1aaa46da0c2dc2ab7a1d3f69}\label{classStation_a1210a86e1aaa46da0c2dc2ab7a1d3f69}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ {\bfseries parent\+\_\+path} = nullptr
+\item 
+\mbox{\Hypertarget{classStation_a786c142b848d053df0c79f3e8eb5c5af}\label{classStation_a786c142b848d053df0c79f3e8eb5c5af}} 
+std\+::vector$<$ \mbox{\hyperlink{classTrack}{Track}} $\ast$ $>$ {\bfseries multiple\+\_\+parents\+\_\+path}
+\item 
+\mbox{\Hypertarget{classStation_af881a5e10d925080b16b98d2fb8492e5}\label{classStation_af881a5e10d925080b16b98d2fb8492e5}} 
+bool {\bfseries in\+Path} = false
+\item 
+\mbox{\Hypertarget{classStation_a5c1636c3bc53579499c97bf41e02a3c5}\label{classStation_a5c1636c3bc53579499c97bf41e02a3c5}} 
+bool {\bfseries visited} = false
+\item 
+\mbox{\Hypertarget{classStation_aab9526520d0f03cb1da7b76c5d37e37e}\label{classStation_aab9526520d0f03cb1da7b76c5d37e37e}} 
+bool {\bfseries active} = true
+\item 
+\mbox{\Hypertarget{classStation_a46f779aa367a3b79cbc7e9e385052b6b}\label{classStation_a46f779aa367a3b79cbc7e9e385052b6b}} 
+double {\bfseries previous\+Flow} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classStation_a04c40bf7c5ef2547e7ef8362d7deac1e}\label{classStation_a04c40bf7c5ef2547e7ef8362d7deac1e}} 
+\index{Station@{Station}!addToMultipleParents@{addToMultipleParents}}
+\index{addToMultipleParents@{addToMultipleParents}!Station@{Station}}
+\doxysubsubsection{\texorpdfstring{addToMultipleParents()}{addToMultipleParents()}}
+{\footnotesize\ttfamily void Station\+::add\+To\+Multiple\+Parents (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTrack}{Track}} $\ast$}]{t }\end{DoxyParamCaption})}
+
+Adiciona a linha @t ao vetor multiple\+\_\+parents\+\_\+path Complexidade temporal\+: O(n), em que n é o tamanho do vetor multiple\+\_\+parents\+\_\+path, se precisar de alocar nova memória, O(1) se não for necessário 
+\begin{DoxyParams}{Parameters}
+{\em t} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classStation_aab8e158a2c584e4f2afe0d5926d2d88d}\label{classStation_aab8e158a2c584e4f2afe0d5926d2d88d}} 
+\index{Station@{Station}!addTrack@{addTrack}}
+\index{addTrack@{addTrack}!Station@{Station}}
+\doxysubsubsection{\texorpdfstring{addTrack()}{addTrack()}}
+{\footnotesize\ttfamily void Station\+::add\+Track (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{dest,  }\item[{const std\+::string \&}]{service,  }\item[{double}]{w,  }\item[{int}]{cost,  }\item[{bool}]{no\+Incoming }\end{DoxyParamCaption})}
+
+Adiciona uma linha com destino @dest ao vetor adj e, se o @no\+Incoming estiver falso, adiciona também essa linha ao vetor incoming do @dest 
+\begin{DoxyParams}{Parameters}
+{\em dest} & estação de destino \\
+\hline
+{\em service} & \char`\"{}\+ALFA PENDULAR\char`\"{} ou \char`\"{}\+STANDARD\char`\"{} \\
+\hline
+{\em w} & capacidade da linha \\
+\hline
+{\em cost} & \\
+\hline
+{\em no\+Incoming} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classStation_a38abca8d5c8b3990960442bf386ea839}\label{classStation_a38abca8d5c8b3990960442bf386ea839}} 
+\index{Station@{Station}!clearMultipleParentsPath@{clearMultipleParentsPath}}
+\index{clearMultipleParentsPath@{clearMultipleParentsPath}!Station@{Station}}
+\doxysubsubsection{\texorpdfstring{clearMultipleParentsPath()}{clearMultipleParentsPath()}}
+{\footnotesize\ttfamily void Station\+::clear\+Multiple\+Parents\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Dá clear ao vetor multiple\+\_\+parents\+\_\+path Complexidade temporal\+: O(n), em que \textbackslash{}i n é o tamanho do vetor multiple\+\_\+parents\+\_\+path \mbox{\Hypertarget{classStation_af4e196c81fa7d9226dd90db6f180d462}\label{classStation_af4e196c81fa7d9226dd90db6f180d462}} 
+\index{Station@{Station}!removeTrackAdj@{removeTrackAdj}}
+\index{removeTrackAdj@{removeTrackAdj}!Station@{Station}}
+\doxysubsubsection{\texorpdfstring{removeTrackAdj()}{removeTrackAdj()}}
+{\footnotesize\ttfamily void Station\+::remove\+Track\+Adj (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTrack}{Track}} $\ast$}]{track }\end{DoxyParamCaption})}
+
+Remove a linha @track do vetor adj Complexidade temporal\+: O(n), em que \textbackslash{}i n é o tamanho do vetor adj 
+\begin{DoxyParams}{Parameters}
+{\em track} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classStation_a36f5c1c99e4b63a7229b692f39266d60}\label{classStation_a36f5c1c99e4b63a7229b692f39266d60}} 
+\index{Station@{Station}!removeTrackIncoming@{removeTrackIncoming}}
+\index{removeTrackIncoming@{removeTrackIncoming}!Station@{Station}}
+\doxysubsubsection{\texorpdfstring{removeTrackIncoming()}{removeTrackIncoming()}}
+{\footnotesize\ttfamily void Station\+::remove\+Track\+Incoming (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTrack}{Track}} $\ast$}]{track }\end{DoxyParamCaption})}
+
+Remove a linha @track do vetor incoming Complexidade temporal\+: O(n), em que \textbackslash{}i n é o tamanho do vetor incoming 
+\begin{DoxyParams}{Parameters}
+{\em track} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classStation_a02ed03c9504e1266d4eb64c377200e51}\label{classStation_a02ed03c9504e1266d4eb64c377200e51}} 
+\index{Station@{Station}!queueIndex@{queueIndex}}
+\index{queueIndex@{queueIndex}!Station@{Station}}
+\doxysubsubsection{\texorpdfstring{queueIndex}{queueIndex}}
+{\footnotesize\ttfamily unsigned int Station\+::queue\+Index = 0}
+
+Index da \mbox{\hyperlink{classMutablePriorityQueue}{Mutable\+Priority\+Queue}} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Station\+Track.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,32 @@
+\hypertarget{ReadFileMenu_8h_source}{}\doxysection{Read\+File\+Menu.\+h}
+\label{ReadFileMenu_8h_source}\index{/home/tomaspalma/DA-\/P01/include/ReadFileMenu.h@{/home/tomaspalma/DA-\/P01/include/ReadFileMenu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ P1\_READFILEMENU\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ P1\_READFILEMENU\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ FILES\_FOLDER\ "{}../Project1Data/"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Menu.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}FileManager.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classReadFileMenu}{ReadFileMenu}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classMenu}{Menu}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classReadFileMenu}{ReadFileMenu}}(std::weak\_ptr<RailwayManager>\ railwayManager);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classReadFileMenu_ac33707aaeda9dbaa5cffae4991424826}{execute}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00026\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classReadFileMenu_a2016158bb8ab167b915db51fd509faa4}{showFileReadOptions}}(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classReadFileMenu_ada0aedf8f91ec529ac8253dfc7a5c21a}{chooseFiles}}(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classReadFileMenu_a91c0f33a02c45ffd21786551ec28c59e}{chooseEdgesFile}}(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classReadFileMenu_a020b30638cc98d9f24b4f3f95a51c728}{chooseStationsFile}}(\mbox{\hyperlink{classFileManager}{FileManager}}\ \&fm);}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

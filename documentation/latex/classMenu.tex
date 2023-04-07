@@ -1,0 +1,138 @@
+\hypertarget{classMenu}{}\doxysection{Menu Class Reference}
+\label{classMenu}\index{Menu@{Menu}}
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+Inheritance diagram for Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.089552cm]{classMenu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a44580fa8b34289996aab64cc5aa3b6af}\label{classMenu_a44580fa8b34289996aab64cc5aa3b6af}} 
+{\bfseries Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+virtual bool \mbox{\hyperlink{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}{execute}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}{print\+Dashes}} (int length)
+\item 
+void \mbox{\hyperlink{classMenu_af98960bc5360621bc9c57e267119b236}{print\+Paths}} (\mbox{\hyperlink{classStation}{Station}} $\ast$dest)
+\item 
+\mbox{\Hypertarget{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}\label{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Station} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}{get\+Numerical\+Input}} (int \&selected\+Option)
+\item 
+static bool \mbox{\hyperlink{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}{get\+String\+Input}} (std\+::string \&s)
+\item 
+static int \mbox{\hyperlink{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}{read\+Option}} (int number\+Of\+Options)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ \mbox{\hyperlink{classMenu_a9ad82b2c98131f56605b28b7dbd01406}{railway\+Manager\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Esta classe serve de uma classe genérica com todas as funções e atributos que serão acessíveis pelo resto das implentações concretas dos menus 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}\label{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}} 
+\index{Menu@{Menu}!execute@{execute}}
+\index{execute@{execute}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily virtual bool Menu\+::execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classBasicServicesMenu_adb6b57c721ac0d4fa6def9aa9def9586}{Basic\+Services\+Menu}}, \mbox{\hyperlink{classLineFailuresMenu_a0c66f10fc1b4ea94731912395135ed25}{Line\+Failures\+Menu}}, \mbox{\hyperlink{classMainMenu_ac6f70622ae65878b8289bf98302fd2f8}{Main\+Menu}}, \mbox{\hyperlink{classOperationCostOptimizationMenu_afadca2c145aad6650272ab38718e5329}{Operation\+Cost\+Optimization\+Menu}}, and \mbox{\hyperlink{classReadFileMenu_ac33707aaeda9dbaa5cffae4991424826}{Read\+File\+Menu}}.
+
+\mbox{\Hypertarget{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}\label{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}} 
+\index{Menu@{Menu}!getNumericalInput@{getNumericalInput}}
+\index{getNumericalInput@{getNumericalInput}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getNumericalInput()}{getNumericalInput()}}
+{\footnotesize\ttfamily static bool Menu\+::get\+Numerical\+Input (\begin{DoxyParamCaption}\item[{int \&}]{selected\+Option }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Serve como uma função para pedir ao utilizador para inserir um valor numérico. É por isso um wrapper para o std\+::cin 
+\begin{DoxyParams}{Parameters}
+{\em selected\+Option} & A variável para onde vai ficar guardado o número inserido pelo utilizador. Só deve ser utilizado se a função retornar verdadeiro \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se o valor inserido é valido numericamente e falso caso contrário 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}\label{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}} 
+\index{Menu@{Menu}!getStringInput@{getStringInput}}
+\index{getStringInput@{getStringInput}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getStringInput()}{getStringInput()}}
+{\footnotesize\ttfamily static bool Menu\+::get\+String\+Input (\begin{DoxyParamCaption}\item[{std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Obtém um input do utilizador utilizando o std\+::getline 
+\begin{DoxyParams}{Parameters}
+{\em s} & A string que se deve passar para ficar com o valor inserido pelo utilizador \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Só retornará falso em ocasiões muito especiais quando por algum motivo ler uma string do utilizador invoca um erro no std\+::getline 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}\label{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}} 
+\index{Menu@{Menu}!printDashes@{printDashes}}
+\index{printDashes@{printDashes}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{printDashes()}{printDashes()}}
+{\footnotesize\ttfamily void Menu\+::print\+Dashes (\begin{DoxyParamCaption}\item[{int}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Imprime length traços. Não imprime nenhum tipo de caratér de quebra de linha 
+\begin{DoxyParams}{Parameters}
+{\em length} & number of dashes to print \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMenu_af98960bc5360621bc9c57e267119b236}\label{classMenu_af98960bc5360621bc9c57e267119b236}} 
+\index{Menu@{Menu}!printPaths@{printPaths}}
+\index{printPaths@{printPaths}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{printPaths()}{printPaths()}}
+{\footnotesize\ttfamily void Menu\+::print\+Paths (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStation}{Station}} $\ast$}]{dest }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+A partir de uma estação de destino vai percorrer os pais dele e das arestas adjacentes recursivamente imprimindo cada uma das arestas Complexidade temporal\+: O($\vert$\+V$\vert$ + $\vert$\+E$\vert$), sendo V o nº de estações e E o nº de linhas. No pior dos casos é um caminho em que liga todos os nós 
+\begin{DoxyParams}{Parameters}
+{\em dest} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}\label{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}} 
+\index{Menu@{Menu}!readOption@{readOption}}
+\index{readOption@{readOption}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{readOption()}{readOption()}}
+{\footnotesize\ttfamily static int Menu\+::read\+Option (\begin{DoxyParamCaption}\item[{int}]{number\+Of\+Options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Serve para pedir ao utilizador para inserir um número e não termina até o utilizador inserir um número entre 1 e number\+Of\+Options 
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Options} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O número inserido pelo utilizador que deve ser inferior a number\+Of\+Options 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMenu_a9ad82b2c98131f56605b28b7dbd01406}\label{classMenu_a9ad82b2c98131f56605b28b7dbd01406}} 
+\index{Menu@{Menu}!railwayManager\_@{railwayManager\_}}
+\index{railwayManager\_@{railwayManager\_}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{railwayManager\_}{railwayManager\_}}
+{\footnotesize\ttfamily std\+::weak\+\_\+ptr$<$\mbox{\hyperlink{classRailwayManager}{Railway\+Manager}}$>$ Menu\+::railway\+Manager\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Este atributo é utilizado uma vez que o \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} vai ter uma \mbox{\hyperlink{classRailwayNetwork}{Railway\+Network}} válida que terá de ser manipulada ou simplesmente visitada pelos menus à medida que o utiliziador pede informações ou altera a rede 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Menu.\+h\end{DoxyCompactItemize}

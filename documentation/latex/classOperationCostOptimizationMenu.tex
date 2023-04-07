@@ -1,0 +1,77 @@
+\hypertarget{classOperationCostOptimizationMenu}{}\doxysection{Operation\+Cost\+Optimization\+Menu Class Reference}
+\label{classOperationCostOptimizationMenu}\index{OperationCostOptimizationMenu@{OperationCostOptimizationMenu}}
+
+
+{\ttfamily \#include $<$Operation\+Cost\+Optimization\+Menu.\+h$>$}
+
+Inheritance diagram for Operation\+Cost\+Optimization\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classOperationCostOptimizationMenu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classOperationCostOptimizationMenu_afe251c3a7dde6357aa7ba7cfda95e2fa}\label{classOperationCostOptimizationMenu_afe251c3a7dde6357aa7ba7cfda95e2fa}} 
+{\bfseries Operation\+Cost\+Optimization\+Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+bool \mbox{\hyperlink{classOperationCostOptimizationMenu_afadca2c145aad6650272ab38718e5329}{execute}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_a44580fa8b34289996aab64cc5aa3b6af}\label{classMenu_a44580fa8b34289996aab64cc5aa3b6af}} 
+{\bfseries Menu} (std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ railway\+Manager)
+\item 
+virtual bool \mbox{\hyperlink{classMenu_aa4b75a45dbde846fa2cfcc58f9582aed}{execute}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMenu_ab09abb3cd5f404bc3cd0ac6b49c1e9d7}{print\+Dashes}} (int length)
+\item 
+void \mbox{\hyperlink{classMenu_af98960bc5360621bc9c57e267119b236}{print\+Paths}} (\mbox{\hyperlink{classStation}{Station}} $\ast$dest)
+\item 
+\mbox{\Hypertarget{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}\label{classMenu_a5b5d878eb08d56de3ebe2beeeaa2ae32}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ {\bfseries get\+Station} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classMenu_a14f1dd714a37d7d05c01f30ada7f23f2}{get\+Numerical\+Input}} (int \&selected\+Option)
+\item 
+static bool \mbox{\hyperlink{classMenu_a7c55e323a22eadfd2b42d5f5c9160db1}{get\+String\+Input}} (std\+::string \&s)
+\item 
+static int \mbox{\hyperlink{classMenu_af592e3e4f22049dc148edf4ef1aa7f3c}{read\+Option}} (int number\+Of\+Options)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classMenu}{Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayManager}{Railway\+Manager}} $>$ \mbox{\hyperlink{classMenu_a9ad82b2c98131f56605b28b7dbd01406}{railway\+Manager\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classMenu}{Menu}} onde o utilizador poderá escolher uma estação de partida e de chegada e ver o caminho com o menor custo possível que resulte no maior número possível de comboios 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classOperationCostOptimizationMenu_afadca2c145aad6650272ab38718e5329}\label{classOperationCostOptimizationMenu_afadca2c145aad6650272ab38718e5329}} 
+\index{OperationCostOptimizationMenu@{OperationCostOptimizationMenu}!execute@{execute}}
+\index{execute@{execute}!OperationCostOptimizationMenu@{OperationCostOptimizationMenu}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily bool Operation\+Cost\+Optimization\+Menu\+::execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Vai criar uma interface de texto no terminal onde o utilizador vai ter a opção de escolher uma estação de partida e uma de destino e ver qual é o caminho com o menor custo que dê o máximo fluxo possível. É mais no contexto de transporte de mercadorias sendo que não tem em consideração que o máximo nº de arestas deve estar ocupado se fosse no contexto de passangeiros \begin{DoxyReturn}{Returns}
+true 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classMenu}{Menu}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Operation\+Cost\+Optimization\+Menu.\+h\end{DoxyCompactItemize}

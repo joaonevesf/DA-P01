@@ -1,0 +1,55 @@
+\hypertarget{classFileManager}{}\doxysection{File\+Manager Class Reference}
+\label{classFileManager}\index{FileManager@{FileManager}}
+
+
+{\ttfamily \#include $<$File\+Manager.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFileManager_af50df5ccc5591efa33b1fedc2612efda}\label{classFileManager_af50df5ccc5591efa33b1fedc2612efda}} 
+{\bfseries File\+Manager} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classRailwayNetwork}{Railway\+Network}} $>$ railway\+Network)
+\item 
+bool \mbox{\hyperlink{classFileManager_a58e59c5554b4cea955ed0ad2e242ed28}{read\+Stations}} (std\+::string filepath)
+\item 
+bool \mbox{\hyperlink{classFileManager_abbd231f1a6fe820a190a77b10156457d}{read\+Network\+Edges}} (std\+::string filepath)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Esta classe é usada como middleman para acedermos a ficheiros e manipular a @railway\+Network a partir dos dados desses mesmos ficheiros 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFileManager_abbd231f1a6fe820a190a77b10156457d}\label{classFileManager_abbd231f1a6fe820a190a77b10156457d}} 
+\index{FileManager@{FileManager}!readNetworkEdges@{readNetworkEdges}}
+\index{readNetworkEdges@{readNetworkEdges}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{readNetworkEdges()}{readNetworkEdges()}}
+{\footnotesize\ttfamily bool File\+Manager\+::read\+Network\+Edges (\begin{DoxyParamCaption}\item[{std\+::string}]{filepath }\end{DoxyParamCaption})}
+
+Vai ao ficheiro indicado por @filepath para o tentar abrir e depois popula os vetores de adjacências e de incomings das estações do \mbox{\hyperlink{classRailwayNetwork}{Railway\+Network}} que lhe foi atribuído. Para usar corretamente esta função é necessário que as conexões entre as estações estejam organizadas por linhas com o seguinte formato Station\+\_\+A,Station\+\_\+B,Capacity,Service 
+\begin{DoxyParams}{Parameters}
+{\em filepath} & Ficheiro para abrir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Falso caso a abertura do ficheiro falhe de alguma forma 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFileManager_a58e59c5554b4cea955ed0ad2e242ed28}\label{classFileManager_a58e59c5554b4cea955ed0ad2e242ed28}} 
+\index{FileManager@{FileManager}!readStations@{readStations}}
+\index{readStations@{readStations}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{readStations()}{readStations()}}
+{\footnotesize\ttfamily bool File\+Manager\+::read\+Stations (\begin{DoxyParamCaption}\item[{std\+::string}]{filepath }\end{DoxyParamCaption})}
+
+Vai ao ficheiro indicado por @filepath para o tentar abrir e depois popula o station\+Set do \mbox{\hyperlink{classRailwayNetwork}{Railway\+Network}} que lhe foi atribuído. Para usar corretamente esta função é necessário que as estações estejam organizadas por linhas com o seguinte formato Name,District,Municipality,Township,Line 
+\begin{DoxyParams}{Parameters}
+{\em filepath} & Ficheiro para abrir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Falso caso a abertura do ficheiro falhe de alguma forma 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/File\+Manager.\+h\end{DoxyCompactItemize}
