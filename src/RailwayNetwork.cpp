@@ -298,7 +298,7 @@ double RailwayNetwork::maxTrainsTo(const std::shared_ptr<Station> &dest) {
 
 void RailwayNetwork::connectSourceNodesTo(Station *mock_source) {
     for (const auto &station: this->stationSet) {
-        if (station->getIncoming().size() == 0) {
+        if (station->getIncoming().size() == 0 && station->getAdj().size() != 0) {
             mock_source->addTrack(station, "", std::numeric_limits<double>::max(), 0, true);
             continue;
         }
