@@ -16,11 +16,9 @@ class RailwayManager {
 public:
     RailwayManager() = default;
 
-    const std::shared_ptr<RailwayNetwork> &getRailwayNetwork() const;
+    [[nodiscard]] const std::shared_ptr<RailwayNetwork> &getRailwayNetwork() const;
 
     void setRailwayNetwork(const std::shared_ptr<RailwayNetwork> &railwayNetwork);
-
-    const std::shared_ptr<Menu> &getMenu() const;
 
     void setMenu(const std::shared_ptr<Menu> &menu);
 
