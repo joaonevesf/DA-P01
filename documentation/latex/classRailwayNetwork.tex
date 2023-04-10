@@ -1,0 +1,403 @@
+\hypertarget{classRailwayNetwork}{}\doxysection{Railway\+Network Class Reference}
+\label{classRailwayNetwork}\index{RailwayNetwork@{RailwayNetwork}}
+
+
+{\ttfamily \#include $<$Railway\+Network.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classRailwayNetwork_a46f5f12d0e5e404e1c2ade4521282554}{add\+Station}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station)
+\item 
+bool \mbox{\hyperlink{classRailwayNetwork_a65054a6d76bcc7fb235d3da34e620467}{add\+Track}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest, std\+::string service, double w, int cost)
+\item 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, \mbox{\hyperlink{structStationHash}{Station\+Hash}}, \mbox{\hyperlink{structStationHashEquality}{Station\+Hash\+Equality}} $>$ \mbox{\hyperlink{classRailwayNetwork_ab775af7394f0f730cdbaefe22f2f77d8}{get\+Station\+Set}} () const
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_a79da9abbce4b05f0ecec458059f408ea}{set\+Path\+BFS}} (\mbox{\hyperlink{classStation}{Station}} $\ast$src, \mbox{\hyperlink{classStation}{Station}} $\ast$dest, double flow\+\_\+min\+\_\+limit)
+\item 
+bool \mbox{\hyperlink{classRailwayNetwork_a7ca59a083b084a6efbb1955ee67d4dbd}{find\+Augmenting\+Path\+BFS}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+dest, bool ignore\+Is\+Active)
+\item 
+bool \mbox{\hyperlink{classRailwayNetwork_ac3c90463038c43b3efdda790a04a0eb8}{find\+Augmenting\+Path\+Dijkstra}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+dest)
+\item 
+double \mbox{\hyperlink{classRailwayNetwork_ae64b30792ced7608720f26addbbdd2b5}{edmonds\+Karp}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+dest, bool is\+Ignore\+Is\+Active)
+\item 
+double \mbox{\hyperlink{classRailwayNetwork_ab5b9a8d2d37bcf631a8c3dcd23477d9d}{max\+Trains\+To}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&dest)
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_ad4d18c2fe1a92ebd4a5ff5927903fb64}{connect\+Source\+Nodes\+To}} (\mbox{\hyperlink{classStation}{Station}} $\ast$mock\+\_\+source)
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_a993657bdcab6e390a4d7374bf88bd411}{connect\+Sink\+Nodes\+To}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ mock\+\_\+sink)
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_a6561d62fe8f7555082918df0b8e166e7}{deactivate\+Track}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ \&track)
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_a4d7e2b4358df2fe75dfb83cdce7cda63}{deactivate\+Station}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station)
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_ace1ea4a52964853b4b6cd4d4de4118b6}{undo\+Last\+Deletion}} ()
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_ae7b58bcf4794d6dfc9614b6a2bf80fe2}{undo\+All\+Deletions}} ()
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_a8be7fff60bde2a91593d44a0b860f946}{clear\+Network\+Utils}} ()
+\item 
+int \mbox{\hyperlink{classRailwayNetwork_a8370e6591149c3ff52f12f33c9580398}{find\+Max\+Flow\+Min\+Cost}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&src, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&dest, int \&flow\+\_\+result)
+\item 
+bool \mbox{\hyperlink{classRailwayNetwork_a954d38aa8894e03a4d8f69cb5705fdbb}{test\+And\+Visit\+Dijkstra}} (std\+::queue$<$ \mbox{\hyperlink{classStation}{Station}} $\ast$ $>$ \&queue, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ track, \mbox{\hyperlink{classStation}{Station}} $\ast$v, double residual, bool is\+Dest)
+\item 
+void \mbox{\hyperlink{classRailwayNetwork_a46cfaaee1c567e5dd737fdaf7c69f3b4}{reset\+Flow}} ()
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ \mbox{\hyperlink{classRailwayNetwork_ad023091aa41c91284330eae3e1e78fe1}{most\+Affected\+Stations}} (int k)
+\item 
+std\+::set$<$ std\+::pair$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ $>$ \mbox{\hyperlink{classRailwayNetwork_a03b0a4ac735ed151e1e9abec87979492}{most\+Used\+Pairs\+Stations}} ()
+\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ $>$ \mbox{\hyperlink{classRailwayNetwork_ab726771cb5d71d0c76cf4eebe51ce25d}{top\+Regions\+By\+Needs}} (int k, bool is\+District)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classRailwayNetwork_aaf8d62dfafe080109bc4e48a754ff884}{test\+And\+Visit}} (std\+::queue$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ \&queue, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ \&track, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station, double residual, bool ignore\+Is\+Active)
+\item 
+static double \mbox{\hyperlink{classRailwayNetwork_abb7278eb7354e5cc73cd80adf2b2ad07}{find\+Min\+Residual}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest)
+\item 
+static int \mbox{\hyperlink{classRailwayNetwork_aa45686bc2f4a1789177e644516e0fd16}{update\+Path}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&station\+\_\+src, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ station\+\_\+dest, double min\+Res)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a989d1f0c6a668344820a38402da6d93f}\label{classRailwayNetwork_a989d1f0c6a668344820a38402da6d93f}} 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, \mbox{\hyperlink{structStationHash}{Station\+Hash}}, \mbox{\hyperlink{structStationHashEquality}{Station\+Hash\+Equality}} $>$ {\bfseries station\+Set}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a470a0ec05ce3c7ba03c533fe672d5953}\label{classRailwayNetwork_a470a0ec05ce3c7ba03c533fe672d5953}} 
+std\+::stack$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ $>$ {\bfseries inactive\+Tracks}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a3c4bf2d11880f91bdcc6ea79cddf8a01}\label{classRailwayNetwork_a3c4bf2d11880f91bdcc6ea79cddf8a01}} 
+std\+::stack$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ {\bfseries inactive\+Stations}
+\item 
+\mbox{\Hypertarget{classRailwayNetwork_a468b2828f6a2b11c4739d5fde39c021b}\label{classRailwayNetwork_a468b2828f6a2b11c4739d5fde39c021b}} 
+std\+::stack$<$ char $>$ {\bfseries deletion\+Record}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe que irá guardar todas as informações e métodos para manipular o grafo que representa a rede rodoviária carregada pelo utilizador 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRailwayNetwork_a46f5f12d0e5e404e1c2ade4521282554}\label{classRailwayNetwork_a46f5f12d0e5e404e1c2ade4521282554}} 
+\index{RailwayNetwork@{RailwayNetwork}!addStation@{addStation}}
+\index{addStation@{addStation}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{addStation()}{addStation()}}
+{\footnotesize\ttfamily bool Railway\+Network\+::add\+Station (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$}]{station }\end{DoxyParamCaption})}
+
+Simplesmente insere um apontador para uma estação na tabela de dispersão que tem as estações 
+\begin{DoxyParams}{Parameters}
+{\em station} & Apontador para a estação a adicionar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retorna sempre verdadeiro a não ser que a inserção falhe 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_a65054a6d76bcc7fb235d3da34e620467}\label{classRailwayNetwork_a65054a6d76bcc7fb235d3da34e620467}} 
+\index{RailwayNetwork@{RailwayNetwork}!addTrack@{addTrack}}
+\index{addTrack@{addTrack}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{addTrack()}{addTrack()}}
+{\footnotesize\ttfamily bool Railway\+Network\+::add\+Track (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$}]{station\+\_\+src,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$}]{station\+\_\+dest,  }\item[{std\+::string}]{service,  }\item[{double}]{w,  }\item[{int}]{cost }\end{DoxyParamCaption})}
+
+Adiciona uma linha no vetor adj do station\+\_\+src, assim como também adiciona essa mesma linha ao vetor incoming do station\+\_\+dest 
+\begin{DoxyParams}{Parameters}
+{\em station\+\_\+src} & \\
+\hline
+{\em station\+\_\+dest} & \\
+\hline
+{\em service} & \char`\"{}\+ALFA PENDULAR\char`\"{} ou \char`\"{}\+STANDARD\char`\"{} \\
+\hline
+{\em w} & A capacidade dessa linha \\
+\hline
+{\em cost} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Falso caso os apontadores sejam NULL. Caso contrário, retorna verdadeiro. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_a8be7fff60bde2a91593d44a0b860f946}\label{classRailwayNetwork_a8be7fff60bde2a91593d44a0b860f946}} 
+\index{RailwayNetwork@{RailwayNetwork}!clearNetworkUtils@{clearNetworkUtils}}
+\index{clearNetworkUtils@{clearNetworkUtils}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{clearNetworkUtils()}{clearNetworkUtils()}}
+{\footnotesize\ttfamily void Railway\+Network\+::clear\+Network\+Utils (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Repõe os valores padrão dos boleanos utilitários de todas as estações e tracks no grafo Complexidade temporal\+: O(V $\ast$ N + E), onde V é o número de estações, N é o tamanho do vetor e E é o número de arestas \mbox{\Hypertarget{classRailwayNetwork_a993657bdcab6e390a4d7374bf88bd411}\label{classRailwayNetwork_a993657bdcab6e390a4d7374bf88bd411}} 
+\index{RailwayNetwork@{RailwayNetwork}!connectSinkNodesTo@{connectSinkNodesTo}}
+\index{connectSinkNodesTo@{connectSinkNodesTo}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{connectSinkNodesTo()}{connectSinkNodesTo()}}
+{\footnotesize\ttfamily void Railway\+Network\+::connect\+Sink\+Nodes\+To (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$}]{mock\+\_\+sink }\end{DoxyParamCaption})}
+
+Conecta o mock\+\_\+sink a todas as estações que não têm arestas outgoing Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos Complexidade temporal\+: O(\+V), onde V é o número de estações 
+\begin{DoxyParams}{Parameters}
+{\em mock\+\_\+sink} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRailwayNetwork_ad4d18c2fe1a92ebd4a5ff5927903fb64}\label{classRailwayNetwork_ad4d18c2fe1a92ebd4a5ff5927903fb64}} 
+\index{RailwayNetwork@{RailwayNetwork}!connectSourceNodesTo@{connectSourceNodesTo}}
+\index{connectSourceNodesTo@{connectSourceNodesTo}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{connectSourceNodesTo()}{connectSourceNodesTo()}}
+{\footnotesize\ttfamily void Railway\+Network\+::connect\+Source\+Nodes\+To (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStation}{Station}} $\ast$}]{mock\+\_\+source }\end{DoxyParamCaption})}
+
+Conecta o mock\+\_\+source a todas as estações que não têm arestas incoming ou às que têm apenas uma aresta incoming que é reverse de uma das arestas outgoing dessa estação Isto é usado para os algoritmos de cálculo de fluxo máximo onde queremos considerar as várias sources ao mesmo tempo Complexidade temporal\+: O($\vert$\+V$\vert$ + $\vert$\+E$\vert$), no pior dos casos 
+\begin{DoxyParams}{Parameters}
+{\em mock\+\_\+source} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRailwayNetwork_a4d7e2b4358df2fe75dfb83cdce7cda63}\label{classRailwayNetwork_a4d7e2b4358df2fe75dfb83cdce7cda63}} 
+\index{RailwayNetwork@{RailwayNetwork}!deactivateStation@{deactivateStation}}
+\index{deactivateStation@{deactivateStation}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{deactivateStation()}{deactivateStation()}}
+{\footnotesize\ttfamily void Railway\+Network\+::deactivate\+Station (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station }\end{DoxyParamCaption})}
+
+Desativa uma track, adiciona essa track à stack inactive\+Stations e adiciona ?? Dá throw a uma exceção std\+::logic\+\_\+error caso station seja nullptr Complexidade temporal\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em station} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRailwayNetwork_a6561d62fe8f7555082918df0b8e166e7}\label{classRailwayNetwork_a6561d62fe8f7555082918df0b8e166e7}} 
+\index{RailwayNetwork@{RailwayNetwork}!deactivateTrack@{deactivateTrack}}
+\index{deactivateTrack@{deactivateTrack}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{deactivateTrack()}{deactivateTrack()}}
+{\footnotesize\ttfamily void Railway\+Network\+::deactivate\+Track (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ \&}]{track }\end{DoxyParamCaption})}
+
+Desativa uma track, adiciona essa track à stack inactive\+Tracks e adiciona ?? Dá throw a uma exceção std\+::logic\+\_\+error caso track seja nullptr Complexidade temporal\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em track} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRailwayNetwork_ae64b30792ced7608720f26addbbdd2b5}\label{classRailwayNetwork_ae64b30792ced7608720f26addbbdd2b5}} 
+\index{RailwayNetwork@{RailwayNetwork}!edmondsKarp@{edmondsKarp}}
+\index{edmondsKarp@{edmondsKarp}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{edmondsKarp()}{edmondsKarp()}}
+{\footnotesize\ttfamily double Railway\+Network\+::edmonds\+Karp (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+src,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+dest,  }\item[{bool}]{is\+Ignore\+Is\+Active }\end{DoxyParamCaption})}
+
+Aplicação sem muitas alterações do algoritmo do edmonds karp para encontrar o fluxo máximo entre uma estação de chegada e outra de partida Complexidade temporal\+: O(\+VE$^\wedge$2) 
+\begin{DoxyParams}{Parameters}
+{\em station\+\_\+src} & \\
+\hline
+{\em station\+\_\+dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O resultado do fluxo máximo 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_a7ca59a083b084a6efbb1955ee67d4dbd}\label{classRailwayNetwork_a7ca59a083b084a6efbb1955ee67d4dbd}} 
+\index{RailwayNetwork@{RailwayNetwork}!findAugmentingPathBFS@{findAugmentingPathBFS}}
+\index{findAugmentingPathBFS@{findAugmentingPathBFS}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPathBFS()}{findAugmentingPathBFS()}}
+{\footnotesize\ttfamily bool Railway\+Network\+::find\+Augmenting\+Path\+BFS (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+src,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+dest,  }\item[{bool}]{ignore\+Is\+Active }\end{DoxyParamCaption})}
+
+Uma variação do BFS para encontrar o caminho mais curto de peso 1 entre um source e um destino É maioritariamente utilizada como função de pathfinding no algoritmo do edmonds karp Complexidade Temporal\+: O($\vert$\+V$\vert$ + $\vert$\+E$\vert$) (pior dos casos) 
+\begin{DoxyParams}{Parameters}
+{\em station\+\_\+src} & \\
+\hline
+{\em station\+\_\+dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se encontrar um caminho por onde é possível aumentar fluxo entre uma partida e uma chegada. Falso, caso contrário 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_ac3c90463038c43b3efdda790a04a0eb8}\label{classRailwayNetwork_ac3c90463038c43b3efdda790a04a0eb8}} 
+\index{RailwayNetwork@{RailwayNetwork}!findAugmentingPathDijkstra@{findAugmentingPathDijkstra}}
+\index{findAugmentingPathDijkstra@{findAugmentingPathDijkstra}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPathDijkstra()}{findAugmentingPathDijkstra()}}
+{\footnotesize\ttfamily bool Railway\+Network\+::find\+Augmenting\+Path\+Dijkstra (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+src,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+dest }\end{DoxyParamCaption})}
+
+Uma variação do Dijkstra Single Source Shortest Path para um determinado destino. É utilizado para encontrar um caminho por onde se pode aumentar fluxo no contexto de contrar o fluxo máximo pelo custo mínimo Complexidade temporal\+: O(\+Elog(\+V)) 
+\begin{DoxyParams}{Parameters}
+{\em station\+\_\+src} & \\
+\hline
+{\em station\+\_\+dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se encontrar um caminho por onde é possível aumentar fluxo entre uma partida e uma chegada. Falso, caso contrário 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_a8370e6591149c3ff52f12f33c9580398}\label{classRailwayNetwork_a8370e6591149c3ff52f12f33c9580398}} 
+\index{RailwayNetwork@{RailwayNetwork}!findMaxFlowMinCost@{findMaxFlowMinCost}}
+\index{findMaxFlowMinCost@{findMaxFlowMinCost}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{findMaxFlowMinCost()}{findMaxFlowMinCost()}}
+{\footnotesize\ttfamily int Railway\+Network\+::find\+Max\+Flow\+Min\+Cost (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{src,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{dest,  }\item[{int \&}]{flow\+\_\+result }\end{DoxyParamCaption})}
+
+Encontra o fluxo máximo com o menor custo possível com uma variante do Edmonds-\/\+Karp que em vez de usar BFS, usa uma variante do Dijkstra Complexidade temporal\+: O((Elog(\+V)) $\ast$ E), onde V é o número de estações e E é o número de arestas 
+\begin{DoxyParams}{Parameters}
+{\em src} & \\
+\hline
+{\em dest} & \\
+\hline
+{\em flow\+\_\+result} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cost 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_abb7278eb7354e5cc73cd80adf2b2ad07}\label{classRailwayNetwork_abb7278eb7354e5cc73cd80adf2b2ad07}} 
+\index{RailwayNetwork@{RailwayNetwork}!findMinResidual@{findMinResidual}}
+\index{findMinResidual@{findMinResidual}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{findMinResidual()}{findMinResidual()}}
+{\footnotesize\ttfamily static double Railway\+Network\+::find\+Min\+Residual (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+src,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$}]{station\+\_\+dest }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Percorre um caminho encontrado pelo @augmenting\+Path\+BFS por onde foi atualizado e encontra o mínimo de capacidade restante entre todas as arestas entre o destino e partida Complexidade Temporal\+: O($\vert$\+A$\vert$), sendo $\vert$\+A$\vert$ o nº de arestas do caminho entre um destino e uma partida 
+\begin{DoxyParams}{Parameters}
+{\em station\+\_\+src} & \\
+\hline
+{\em station\+\_\+dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_ab775af7394f0f730cdbaefe22f2f77d8}\label{classRailwayNetwork_ab775af7394f0f730cdbaefe22f2f77d8}} 
+\index{RailwayNetwork@{RailwayNetwork}!getStationSet@{getStationSet}}
+\index{getStationSet@{getStationSet}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{getStationSet()}{getStationSet()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, \mbox{\hyperlink{structStationHash}{Station\+Hash}}, \mbox{\hyperlink{structStationHashEquality}{Station\+Hash\+Equality}} $>$ Railway\+Network\+::get\+Station\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Esta função não tem nada de especial, é um getter normal \mbox{\Hypertarget{classRailwayNetwork_ab5b9a8d2d37bcf631a8c3dcd23477d9d}\label{classRailwayNetwork_ab5b9a8d2d37bcf631a8c3dcd23477d9d}} 
+\index{RailwayNetwork@{RailwayNetwork}!maxTrainsTo@{maxTrainsTo}}
+\index{maxTrainsTo@{maxTrainsTo}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{maxTrainsTo()}{maxTrainsTo()}}
+{\footnotesize\ttfamily double Railway\+Network\+::max\+Trains\+To (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{dest }\end{DoxyParamCaption})}
+
+Cria uma mock source e liga-\/as a todas as outras sources individuais e corre o edmonds karp começando no mock source para encontrar o número máximo de comboios que pode chegar ao dest Complexidade temporal\+: O(\+EV$^\wedge$2), no pior dos casos 
+\begin{DoxyParams}{Parameters}
+{\em dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O resultado do fluxo máximo entre o mock source e o destino 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_ad023091aa41c91284330eae3e1e78fe1}\label{classRailwayNetwork_ad023091aa41c91284330eae3e1e78fe1}} 
+\index{RailwayNetwork@{RailwayNetwork}!mostAffectedStations@{mostAffectedStations}}
+\index{mostAffectedStations@{mostAffectedStations}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{mostAffectedStations()}{mostAffectedStations()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ Railway\+Network\+::most\+Affected\+Stations (\begin{DoxyParamCaption}\item[{int}]{k }\end{DoxyParamCaption})}
+
+Determina quais estações têm mais fluxo perdido Complexidade temporal\+: O(\+VE$^\wedge$2), onde V é o número de estações e E é o número de arestas 
+\begin{DoxyParams}{Parameters}
+{\em k} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vetor com as k estações mais afetadas 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_a03b0a4ac735ed151e1e9abec87979492}\label{classRailwayNetwork_a03b0a4ac735ed151e1e9abec87979492}} 
+\index{RailwayNetwork@{RailwayNetwork}!mostUsedPairsStations@{mostUsedPairsStations}}
+\index{mostUsedPairsStations@{mostUsedPairsStations}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{mostUsedPairsStations()}{mostUsedPairsStations()}}
+{\footnotesize\ttfamily std\+::set$<$ std\+::pair$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ $>$ Railway\+Network\+::most\+Used\+Pairs\+Stations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Determina os pares de estações pelos quais passam mais fluxo Complexidade temporal\+: O(2$^\wedge$\+V $\ast$ VE$^\wedge$2), onde V é o número de estações e E é o número de arestas \begin{DoxyReturn}{Returns}
+set com os pares de estações pelos quais passam mais fluxo 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_a46cfaaee1c567e5dd737fdaf7c69f3b4}\label{classRailwayNetwork_a46cfaaee1c567e5dd737fdaf7c69f3b4}} 
+\index{RailwayNetwork@{RailwayNetwork}!resetFlow@{resetFlow}}
+\index{resetFlow@{resetFlow}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{resetFlow()}{resetFlow()}}
+{\footnotesize\ttfamily void Railway\+Network\+::reset\+Flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Atribui o valor zero ao flow de todas as arestas do grafo Complexidade temporal\+: O(V + E), onde V é o número de estações e E é o número de arestas \mbox{\Hypertarget{classRailwayNetwork_a79da9abbce4b05f0ecec458059f408ea}\label{classRailwayNetwork_a79da9abbce4b05f0ecec458059f408ea}} 
+\index{RailwayNetwork@{RailwayNetwork}!setPathBFS@{setPathBFS}}
+\index{setPathBFS@{setPathBFS}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{setPathBFS()}{setPathBFS()}}
+{\footnotesize\ttfamily void Railway\+Network\+::set\+Path\+BFS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStation}{Station}} $\ast$}]{src,  }\item[{\mbox{\hyperlink{classStation}{Station}} $\ast$}]{dest,  }\item[{double}]{flow\+\_\+min\+\_\+limit }\end{DoxyParamCaption})}
+
+Utilizado para percorrer o caminho entre uma partida e uma chegada e colocar todos os pais de cada aresta no atributo multiple\+\_\+parents\+\_\+path de cada nó. Esta função é util quando se pretende reconstruir o caminho pelos pais de cada nó Complexidade temporal\+: O($\vert$\+V$\vert$ + $\vert$\+E$\vert$), no pior dos casos o src e o dest estão entre os nós todos 
+\begin{DoxyParams}{Parameters}
+{\em src} & \\
+\hline
+{\em dest} & \\
+\hline
+{\em flow\+\_\+min\+\_\+limit} & O número que serve como limite numérico para determinar se o BFS ignora ou não uma linha mediante o seu fluxo \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRailwayNetwork_aaf8d62dfafe080109bc4e48a754ff884}\label{classRailwayNetwork_aaf8d62dfafe080109bc4e48a754ff884}} 
+\index{RailwayNetwork@{RailwayNetwork}!testAndVisit@{testAndVisit}}
+\index{testAndVisit@{testAndVisit}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{testAndVisit()}{testAndVisit()}}
+{\footnotesize\ttfamily static void Railway\+Network\+::test\+And\+Visit (\begin{DoxyParamCaption}\item[{std\+::queue$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ $>$ \&}]{queue,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$ \&}]{track,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station,  }\item[{double}]{residual,  }\item[{bool}]{ignore\+Is\+Active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Função utilizada no contexto de encontrar um agumenting path no problema do fluxo máximo para verificar se se pode adicionar fluxo por uma aresta ou pelo reverso dela ou não Complexidade Temporal\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em queue} & Será uma fila para onde o test\+And\+Visit irá carregar as estações que estarão no caminho \\
+\hline
+{\em track} & \\
+\hline
+{\em station} & \\
+\hline
+{\em residual} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRailwayNetwork_a954d38aa8894e03a4d8f69cb5705fdbb}\label{classRailwayNetwork_a954d38aa8894e03a4d8f69cb5705fdbb}} 
+\index{RailwayNetwork@{RailwayNetwork}!testAndVisitDijkstra@{testAndVisitDijkstra}}
+\index{testAndVisitDijkstra@{testAndVisitDijkstra}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{testAndVisitDijkstra()}{testAndVisitDijkstra()}}
+{\footnotesize\ttfamily bool Railway\+Network\+::test\+And\+Visit\+Dijkstra (\begin{DoxyParamCaption}\item[{std\+::queue$<$ \mbox{\hyperlink{classStation}{Station}} $\ast$ $>$ \&}]{queue,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTrack}{Track}} $>$}]{track,  }\item[{\mbox{\hyperlink{classStation}{Station}} $\ast$}]{v,  }\item[{double}]{residual,  }\item[{bool}]{is\+Dest }\end{DoxyParamCaption})}
+
+Serve para ser utilizado no find\+Augmenting\+Dijkstra\+Path para verificar se um determinado caminho é possível de ser adicionado á priority queue utilizada pelo dijkstra 
+\begin{DoxyParams}{Parameters}
+{\em queue} & \\
+\hline
+{\em track} & \\
+\hline
+{\em v} & \\
+\hline
+{\em residual} & \\
+\hline
+{\em is\+Dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false quando não podemos passar fluxo pela estação, true caso contrário 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_ab726771cb5d71d0c76cf4eebe51ce25d}\label{classRailwayNetwork_ab726771cb5d71d0c76cf4eebe51ce25d}} 
+\index{RailwayNetwork@{RailwayNetwork}!topRegionsByNeeds@{topRegionsByNeeds}}
+\index{topRegionsByNeeds@{topRegionsByNeeds}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{topRegionsByNeeds()}{topRegionsByNeeds()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ $>$ Railway\+Network\+::top\+Regions\+By\+Needs (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{bool}]{is\+District }\end{DoxyParamCaption})}
+
+Determina os concelhos ou distritos (dependendo do valor do parâmetro is\+District) com a maior razão fluxo por capacidade, em que o fluxo é a soma dos fluxos das arestas nessa região e a capacidade é a soma das capacidades das arestas nessa região Complexidade temporal\+: O(\+VE$^\wedge$2), onde V é o número de estações e E é o número de arestas 
+\begin{DoxyParams}{Parameters}
+{\em k} & \\
+\hline
+{\em is\+District} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vetor com o nome das regiões com maior razão fluxo por capacidade e os respetivos fluxos e capacidades 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRailwayNetwork_ae7b58bcf4794d6dfc9614b6a2bf80fe2}\label{classRailwayNetwork_ae7b58bcf4794d6dfc9614b6a2bf80fe2}} 
+\index{RailwayNetwork@{RailwayNetwork}!undoAllDeletions@{undoAllDeletions}}
+\index{undoAllDeletions@{undoAllDeletions}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{undoAllDeletions()}{undoAllDeletions()}}
+{\footnotesize\ttfamily void Railway\+Network\+::undo\+All\+Deletions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Reativa todos os elementos desativados Complexidade temporal\+: O(V + E), onde V é o número de estações desativadas e E é o número de tracks desativadas \mbox{\Hypertarget{classRailwayNetwork_ace1ea4a52964853b4b6cd4d4de4118b6}\label{classRailwayNetwork_ace1ea4a52964853b4b6cd4d4de4118b6}} 
+\index{RailwayNetwork@{RailwayNetwork}!undoLastDeletion@{undoLastDeletion}}
+\index{undoLastDeletion@{undoLastDeletion}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{undoLastDeletion()}{undoLastDeletion()}}
+{\footnotesize\ttfamily void Railway\+Network\+::undo\+Last\+Deletion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Reativa o último elemento desativado se este existir Complexidade temporal\+: O(1) \mbox{\Hypertarget{classRailwayNetwork_aa45686bc2f4a1789177e644516e0fd16}\label{classRailwayNetwork_aa45686bc2f4a1789177e644516e0fd16}} 
+\index{RailwayNetwork@{RailwayNetwork}!updatePath@{updatePath}}
+\index{updatePath@{updatePath}!RailwayNetwork@{RailwayNetwork}}
+\doxysubsubsection{\texorpdfstring{updatePath()}{updatePath()}}
+{\footnotesize\ttfamily static int Railway\+Network\+::update\+Path (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{station\+\_\+src,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classStation}{Station}} $>$}]{station\+\_\+dest,  }\item[{double}]{min\+Res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Deve ser corrida apenas depois do @find\+Min\+Residual e do @find\+Augmenting\+Path\+BFS Serve para pegar no resultado do find\+Min\+Residual e atualizar o fluxo em cada aresta Complexidade temporal\+: O($\vert$\+E$\vert$) no pior dos casos 
+\begin{DoxyParams}{Parameters}
+{\em station\+\_\+src} & \\
+\hline
+{\em station\+\_\+dest} & \\
+\hline
+{\em min\+Res} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/tomaspalma/\+DA-\/\+P01/include/Railway\+Network.\+h\end{DoxyCompactItemize}

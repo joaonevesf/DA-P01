@@ -199,6 +199,7 @@ public:
      * @return cost
      */
     int findMaxFlowMinCost(const std::shared_ptr<Station> &src, const std::shared_ptr<Station> &dest, int &flow_result);
+
     /**
      * Serve para ser utilizado no findAugmentingDijkstraPath para verificar se um determinado caminho é possível de ser adicionado á priority queue utilizada pelo dijkstra
      * @param queue
@@ -223,12 +224,14 @@ public:
      * @return vetor com as k estações mais afetadas
      */
     std::vector<std::shared_ptr<Station>> mostAffectedStations(int k);
+
     /**
      * Determina os pares de estações pelos quais passam mais fluxo
      * Complexidade temporal: O(2^V * VE^2), onde V é o número de estações e E é o número de arestas
      * @return set com os pares de estações pelos quais passam mais fluxo
      */
     std::set<std::pair<std::shared_ptr<Station>, std::shared_ptr<Station>>> mostUsedPairsStations();
+
     /**
      * Determina os concelhos ou distritos (dependendo do valor do parâmetro isDistrict) com a maior razão fluxo por capacidade, em que o fluxo
      * é a soma dos fluxos das arestas nessa região e a capacidade é a soma das capacidades das arestas nessa região
@@ -238,12 +241,14 @@ public:
      * @return vetor com o nome das regiões com maior razão fluxo por capacidade e os respetivos fluxos e capacidades
      */
     std::vector<std::pair<std::string, std::pair<double,double>>> topRegionsByNeeds(int k, bool isDistrict);
-protected:
 
+protected:
     std::unordered_set<std::shared_ptr<Station>, StationHash, StationHashEquality> stationSet;
 
     std::stack<std::shared_ptr<Track>> inactiveTracks;
+
     std::stack<std::shared_ptr<Station>> inactiveStations;
+
     std::stack<char> deletionRecord;
 };
 

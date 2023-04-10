@@ -97,11 +97,3 @@ bool FileManager::readNetworkEdges(std::string filepath) {
 
     return true;
 }
-
-bool FileManager::readAll(std::string stations_file, std::string network_file) {
-    if(stations_file.empty() || network_file.empty()) {
-        return false;
-    }
-
-    return readStations(stations_file) && readNetworkEdges(network_file);
-}

@@ -1,0 +1,93 @@
+\hypertarget{RailwayNetwork_8h_source}{}\doxysection{Railway\+Network.\+h}
+\label{RailwayNetwork_8h_source}\index{/home/tomaspalma/DA-\/P01/include/RailwayNetwork.h@{/home/tomaspalma/DA-\/P01/include/RailwayNetwork.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RAILWAY\_NETWORK}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RAILWAY\_NETWORK}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}StationTrack.h"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structStationHash}{StationHash}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ std::size\_t\ operator()(std::shared\_ptr<Station>\ \textcolor{keyword}{const}\&\ station)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::hash<std::string>()(station-\/>getName());}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structStationHashEquality}{StationHashEquality}}\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()\ (std::shared\_ptr<Station>\ \textcolor{keyword}{const}\&\ s1,\ std::shared\_ptr<Station>\ \textcolor{keyword}{const}\&\ s2)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ s1-\/>getName()\ ==\ s2-\/>getName();}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRailwayNetwork}{RailwayNetwork}}\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRailwayNetwork_a46f5f12d0e5e404e1c2ade4521282554}{addStation}}(std::shared\_ptr<Station>\ station);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRailwayNetwork_a65054a6d76bcc7fb235d3da34e620467}{addTrack}}(std::shared\_ptr<Station>\ station\_src,\ std::shared\_ptr<Station>\ station\_dest,\ std::string\ service,\ \textcolor{keywordtype}{double}\ w,\ \textcolor{keywordtype}{int}\ cost);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00058\ \ \ \ \ std::unordered\_set<std::shared\_ptr<Station>,\ \mbox{\hyperlink{structStationHash}{StationHash}},\ \mbox{\hyperlink{structStationHashEquality}{StationHashEquality}}>\ \mbox{\hyperlink{classRailwayNetwork_ab775af7394f0f730cdbaefe22f2f77d8}{getStationSet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_a79da9abbce4b05f0ecec458059f408ea}{setPathBFS}}(\mbox{\hyperlink{classStation}{Station}}\ *src,\ \mbox{\hyperlink{classStation}{Station}}\ *dest,\ \textcolor{keywordtype}{double}\ flow\_min\_limit);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRailwayNetwork_a7ca59a083b084a6efbb1955ee67d4dbd}{findAugmentingPathBFS}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_src,\ \textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_dest,\ \textcolor{keywordtype}{bool}\ ignoreIsActive);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRailwayNetwork_ac3c90463038c43b3efdda790a04a0eb8}{findAugmentingPathDijkstra}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_src,\ \textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_dest);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRailwayNetwork_ae64b30792ced7608720f26addbbdd2b5}{edmondsKarp}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_src,\ \textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_dest,\ \textcolor{keywordtype}{bool}\ isIgnoreIsActive);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_aaf8d62dfafe080109bc4e48a754ff884}{testAndVisit}}(std::queue<std::shared\_ptr<Station>>\ \&queue,\ \textcolor{keyword}{const}\ std::shared\_ptr<Track>\&\ track,}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::shared\_ptr<Station>\&\ station,\ \textcolor{keywordtype}{double}\ residual,\ \textcolor{keywordtype}{bool}\ ignoreIsActive);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRailwayNetwork_abb7278eb7354e5cc73cd80adf2b2ad07}{findMinResidual}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_src,\ std::shared\_ptr<Station>\ station\_dest);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRailwayNetwork_aa45686bc2f4a1789177e644516e0fd16}{updatePath}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station\_src,\ std::shared\_ptr<Station>\ station\_dest,\ \textcolor{keywordtype}{double}\ minRes);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRailwayNetwork_ab5b9a8d2d37bcf631a8c3dcd23477d9d}{maxTrainsTo}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&dest);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_ad4d18c2fe1a92ebd4a5ff5927903fb64}{connectSourceNodesTo}}(\mbox{\hyperlink{classStation}{Station}}\ *mock\_source);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_a993657bdcab6e390a4d7374bf88bd411}{connectSinkNodesTo}}(std::shared\_ptr<Station>\ mock\_sink);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_a6561d62fe8f7555082918df0b8e166e7}{deactivateTrack}}(\textcolor{keyword}{const}\ std::shared\_ptr<Track>\ \&track);}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_a4d7e2b4358df2fe75dfb83cdce7cda63}{deactivateStation}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&station);}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_ace1ea4a52964853b4b6cd4d4de4118b6}{undoLastDeletion}}();}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_ae7b58bcf4794d6dfc9614b6a2bf80fe2}{undoAllDeletions}}();}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_a8be7fff60bde2a91593d44a0b860f946}{clearNetworkUtils}}();}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRailwayNetwork_a8370e6591149c3ff52f12f33c9580398}{findMaxFlowMinCost}}(\textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&src,\ \textcolor{keyword}{const}\ std::shared\_ptr<Station>\ \&dest,\ \textcolor{keywordtype}{int}\ \&flow\_result);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRailwayNetwork_a954d38aa8894e03a4d8f69cb5705fdbb}{testAndVisitDijkstra}}(std::queue<Station*>\ \&queue,\ std::shared\_ptr<Track>\ track,\ \mbox{\hyperlink{classStation}{Station}}*\ v,\ \textcolor{keywordtype}{double}\ residual,\ \textcolor{keywordtype}{bool}\ isDest);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRailwayNetwork_a46cfaaee1c567e5dd737fdaf7c69f3b4}{resetFlow}}();}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00226\ \ \ \ \ std::vector<std::shared\_ptr<Station>>\ \mbox{\hyperlink{classRailwayNetwork_ad023091aa41c91284330eae3e1e78fe1}{mostAffectedStations}}(\textcolor{keywordtype}{int}\ k);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00233\ \ \ \ \ std::set<std::pair<std::shared\_ptr<Station>,\ std::shared\_ptr<Station>>>\ \mbox{\hyperlink{classRailwayNetwork_a03b0a4ac735ed151e1e9abec87979492}{mostUsedPairsStations}}();}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00243\ \ \ \ \ std::vector<std::pair<std::string,\ std::pair<double,double>>>\ \mbox{\hyperlink{classRailwayNetwork_ab726771cb5d71d0c76cf4eebe51ce25d}{topRegionsByNeeds}}(\textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{bool}\ isDistrict);}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00246\ \ \ \ \ std::unordered\_set<std::shared\_ptr<Station>,\ \mbox{\hyperlink{structStationHash}{StationHash}},\ \mbox{\hyperlink{structStationHashEquality}{StationHashEquality}}>\ stationSet;}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ std::stack<std::shared\_ptr<Track>>\ inactiveTracks;}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ std::stack<std::shared\_ptr<Station>>\ inactiveStations;}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ std::stack<char>\ deletionRecord;}
+\DoxyCodeLine{00253\ \};}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

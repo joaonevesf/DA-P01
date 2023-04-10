@@ -30,8 +30,9 @@ bool LineFailuresMenu::execute() {
             return true;
         case 4:
             rm->setMenu(std::make_shared<MainMenu>(rm));
-        default:
             return true;
+        default:
+            return false;
     }
 }
 
@@ -124,12 +125,17 @@ void LineFailuresMenu::listAffectedStations() {
     std::cout << std::endl << "Please input the number of stations you want to see" << std::endl;
 
     int k;
+    int stationsActive = 0;
+
+    for(const auto& station : railwayManager_.lock()->getRailwayNetwork()->getStationSet()) {
+        if(station->isActive()) stationsActive++;
+    }
 
     while (true) {
         if(!getNumericalInput(k)) break;
 
-        if(k > 0) break;
-        std::cout << "Number must be equal or greater than zero" << std::endl;
+        if(k >= 0 && k <= stationsActive) break;
+        std::cout << "Number must be between 0 and the total number of active stations (" << stationsActive << ")" << std::endl;
     }
 
     auto rm = railwayManager_.lock();

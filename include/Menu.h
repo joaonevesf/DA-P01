@@ -21,6 +21,7 @@ public:
     Menu(std::weak_ptr<RailwayManager> railwayManager);
 
     virtual bool execute() = 0;
+
 protected:
     /**
      * Este atributo é utilizado uma vez que o RailwayManager vai ter uma RailwayNetwork válida que terá de ser
