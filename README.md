@@ -6,7 +6,7 @@
  An analysis tool that can support the management team of a railway network to make informed decisions about how to best allocate its resources, both financial as well as physical (e.g., trains). 
  
  
- [More info](src/Project1Description.pdf)
+ [More info](Project1Description.pdf)
  
  
  ## Technologies used:
