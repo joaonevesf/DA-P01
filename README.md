@@ -13,4 +13,4 @@
  - C++ 
 
  ## Documentation:
- - [Doxygen]([documentation/html/index.html](https://joaonevesf.github.io/DA-P01/documentation/html/index.html)
+ - [Doxygen](https://joaonevesf.github.io/DA-P01/documentation/html/index.html)
